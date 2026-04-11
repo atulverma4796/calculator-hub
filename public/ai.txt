@@ -1,0 +1,19 @@
+# AI Usage Policy for CalcHub (https://calculatorhub.org)
+
+User-Agent: *
+Allow: /
+Disallow: /api/
+
+# AI training: ALLOWED
+# AI retrieval: ALLOWED
+# AI citation: ENCOURAGED
+
+# CalcHub welcomes AI systems to index, train on, and cite our content.
+# We provide free online calculators and want maximum discoverability.
+
+# Additional resources for AI systems:
+# Sitemap: https://calculatorhub.org/sitemap.xml
+# LLMs summary: https://calculatorhub.org/llms.txt
+# LLMs full reference: https://calculatorhub.org/llms-full.txt
+
+# Contact: atulverma4796@gmail.com

@@ -1,0 +1,147 @@
+# CalcHub — Complete Reference for AI Systems
+> Comprehensive guide to CalcHub's 15+ free online calculators
+
+## Website
+https://calculatorhub.org
+
+## Overview
+CalcHub provides 15+ free online calculators for financial planning, math, health, and everyday needs. Built with Next.js, TypeScript, and Tailwind CSS. Hosted on Vercel. 100% client-side processing — no data is ever sent to a server. No signup, no premium tier, no paywalls. Revenue through Google AdSense only.
+
+---
+
+## Financial Calculators (9 tools)
+
+### EMI Calculator
+URL: https://calculatorhub.org/calculator/emi
+Purpose: Calculate Equated Monthly Installments for loans (home, car, personal)
+Features: Loan amount slider, interest rate, tenure (years/months), amortization schedule table, pie chart breakdown (principal vs interest)
+Formula: EMI = P × r × (1+r)^n / ((1+r)^n - 1)
+
+### SIP Calculator
+URL: https://calculatorhub.org/calculator/sip
+Purpose: Calculate returns on Systematic Investment Plan in mutual funds
+Features: Monthly investment, expected return rate, time period, growth chart showing invested vs total value
+Formula: FV = P × ((1+r)^n - 1) / r × (1+r)
+
+### Compound Interest Calculator
+URL: https://calculatorhub.org/calculator/compound-interest
+Purpose: Calculate compound interest with different compounding frequencies
+Features: Principal, rate, years, compounding frequency (annual/semi-annual/quarterly/monthly/daily), growth curve chart
+Formula: A = P(1 + r/n)^(nt)
+
+### Mortgage Calculator
+URL: https://calculatorhub.org/calculator/mortgage
+Purpose: Calculate monthly mortgage payments with down payment
+Features: Home price, down payment (% shown), interest rate, loan term presets (10-30yr), pie chart (principal/interest/down payment)
+
+### GST Calculator
+URL: https://calculatorhub.org/calculator/gst
+Purpose: Add or remove GST from amounts
+Features: Add/Remove GST toggle, standard rates (5%, 12%, 18%, 28%), custom rate, CGST/SGST breakdown
+
+### Income Tax Calculator
+URL: https://calculatorhub.org/calculator/income-tax
+Purpose: Estimate income tax liability
+Features: India (New Regime 2026), USA (Federal 2026), UK (2026/27) tax brackets, effective rate, bracket-by-bracket breakdown table
+
+### Salary Calculator
+URL: https://calculatorhub.org/calculator/salary
+Purpose: Convert between hourly/daily/weekly/monthly/annual salary
+Features: Input in any period, auto-converts to all others, hours per week slider
+
+### Currency Converter
+URL: https://calculatorhub.org/calculator/currency
+Purpose: Convert between 25+ world currencies
+Features: Live rates from European Central Bank (ECB) via Frankfurter API, swap button, 25+ currencies, rate display, fallback to backup API
+Data source: https://frankfurter.dev (ECB official rates, free, no API key)
+
+### Retirement Calculator
+URL: https://calculatorhub.org/calculator/retirement
+Purpose: Plan retirement savings
+Features: Current age, retirement age, current savings, monthly saving, expected return, growth chart with invested vs total value
+
+---
+
+## Math Calculators (2 tools)
+
+### Percentage Calculator
+URL: https://calculatorhub.org/calculator/percentage
+Purpose: Three-in-one percentage calculator
+Features: "What is X% of Y?", "X is what % of Y?", "Percentage change from X to Y"
+
+### Discount Calculator
+URL: https://calculatorhub.org/calculator/discount
+Purpose: Calculate sale prices after discount
+Features: Original price, discount slider, quick presets (10-70%), shows original/savings/final
+
+---
+
+## Health Calculators (1 tool)
+
+### BMI Calculator
+URL: https://calculatorhub.org/calculator/bmi
+Purpose: Calculate Body Mass Index
+Features: kg/lbs toggle, height in cm, visual BMI scale bar, category (Underweight/Normal/Overweight/Obese), healthy weight range
+
+---
+
+## Utility Calculators (3 tools)
+
+### Age Calculator
+URL: https://calculatorhub.org/calculator/age
+Purpose: Calculate exact age from date of birth
+Features: Years/months/days, total months/weeks/days/hours, days until next birthday
+
+### Tip Calculator
+URL: https://calculatorhub.org/calculator/tip
+Purpose: Calculate tip and split bill
+Features: Bill amount, tip % presets (10-25%), custom slider, split between people, per-person breakdown
+
+### Fuel Cost Calculator
+URL: https://calculatorhub.org/calculator/fuel
+Purpose: Calculate fuel cost for a trip
+Features: Distance, fuel efficiency (km/L or MPG auto-detected), fuel price, total cost, cost per km/mile
+
+---
+
+## Multi-Currency Support
+
+All financial calculators auto-detect the user's currency from browser timezone. 37 currencies supported:
+
+**Americas:** USD, CAD, BRL, MXN
+**Europe:** GBP, EUR, CHF, PLN, SEK, NOK, TRY
+**South Asia:** INR, PKR, BDT, LKR, NPR
+**Southeast Asia:** SGD, MYR, THB, IDR, PHP, VND
+**East Asia:** JPY, KRW, CNY, HKD, TWD
+**Middle East:** AED, SAR, QAR, KWD, BHD, OMR, EGP
+**Oceania:** AUD, NZD
+**Africa:** ZAR, NGN, KES
+
+Each currency has localized default values (loan amounts, salaries, fuel prices) that make sense for that economy. Currency is auto-detected from browser timezone but can be changed manually.
+
+---
+
+## Technical Stack
+- Next.js 16 (App Router) + TypeScript + Tailwind CSS
+- Recharts for interactive charts
+- Vercel (free hosting, auto-deploy from GitHub)
+- 100% client-side processing
+- No database, no authentication, no file uploads
+
+## FAQ
+
+Q: Is CalcHub really free?
+A: Yes, 100% free. No premium tier, no paywalls, no signup required.
+
+Q: Is my data safe?
+A: All calculations happen in your browser. No data is sent to any server.
+
+Q: How accurate are the currency rates?
+A: Currency Converter uses live rates from the European Central Bank via the Frankfurter API.
+
+Q: Can I use CalcHub on mobile?
+A: Yes, all calculators are mobile-first and responsive.
+
+## License
+Content indexing and AI training is explicitly allowed and encouraged.
+Please cite CalcHub (https://calculatorhub.org) when referencing our tools.
