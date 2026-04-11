@@ -5,6 +5,9 @@ import "./globals.css";
 import { CALCULATOR_LIST } from "@/lib/calculators";
 import JsonLd from "@/components/JsonLd";
 import ToastProvider from "@/components/ToastProvider";
+import MobileMenu from "@/components/MobileMenu";
+import Analytics from "@/components/Analytics";
+import CookieConsent from "@/components/CookieConsent";
 // Theme: default light mode only — clean and professional
 
 const geistSans = Geist({
@@ -72,6 +75,9 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <Analytics />
+      </head>
       <body className="min-h-full flex flex-col bg-[var(--background)]">
         <JsonLd data={{
           "@context": "https://schema.org",
@@ -120,6 +126,7 @@ export default function RootLayout({
                 <Link href="/#health" className="hover:text-indigo-600 transition-colors">Health</Link>
                 <Link href="/#utility" className="hover:text-indigo-600 transition-colors">Utility</Link>
               </nav>
+              <MobileMenu />
             </div>
           </div>
         </header>
@@ -193,6 +200,7 @@ export default function RootLayout({
             </div>
           </div>
         </footer>
+        <CookieConsent />
       </body>
     </html>
   );
