@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { CALCULATOR_LIST } from "@/lib/calculators";
+import { VARIANT_LIST } from "@/lib/calculatorVariants";
 
 const SITE_URL = "https://calculatorhub.org";
 
@@ -11,6 +12,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
+  const variantPages = VARIANT_LIST.map((v) => ({
+    url: `${SITE_URL}/calculator/${v.slug}/${v.variant}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
   return [
     {
       url: SITE_URL,
@@ -19,6 +27,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     ...calculatorPages,
+    ...variantPages,
+    {
+      url: `${SITE_URL}/embed`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
     {
       url: `${SITE_URL}/about`,
       lastModified: new Date(),

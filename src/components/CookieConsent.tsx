@@ -56,7 +56,7 @@ export default function CookieConsent() {
       aria-labelledby="cookie-title"
       aria-describedby="cookie-description"
     >
-      <div className="bg-white border border-gray-200 rounded-2xl shadow-2xl p-5">
+      <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-2xl p-5">
         <div className="flex items-start gap-3 mb-3">
           <div className="w-9 h-9 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center shrink-0">
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -67,10 +67,10 @@ export default function CookieConsent() {
             </svg>
           </div>
           <div className="flex-1 min-w-0">
-            <h3 id="cookie-title" className="text-sm font-bold text-gray-900 mb-1">
+            <h3 id="cookie-title" className="text-sm font-bold text-gray-900 dark:text-gray-100 mb-1">
               We value your privacy
             </h3>
-            <p id="cookie-description" className="text-xs text-gray-600 leading-relaxed">
+            <p id="cookie-description" className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
               We use cookies for analytics and to improve CalcHub. Your calculation data stays in
               your browser — we never store it.{" "}
               <a href="/privacy" className="text-indigo-600 hover:underline">
@@ -92,7 +92,7 @@ export default function CookieConsent() {
           <button
             type="button"
             onClick={reject}
-            className="flex-1 px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors"
+            className="flex-1 px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors"
           >
             Reject
           </button>

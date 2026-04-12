@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "CalcHub — Free Online Calculators",
     short_name: "CalcHub",
     description:
-      "15+ free online calculators for EMI, SIP, compound interest, mortgage, GST, income tax, BMI, percentage, and more. Interactive charts, multi-currency support. No signup.",
+      "30+ free online calculators for EMI, SIP, compound interest, mortgage, GST, income tax, BMI, calorie, body fat, scientific, and more. Interactive charts, multi-currency support. No signup.",
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",

@@ -67,7 +67,7 @@ export default function CurrencySelector({ selected, onChange, accentColor = "in
             className={`px-2.5 py-1.5 rounded-lg text-xs font-semibold border-2 transition-all ${
               selected === c.code
                 ? `${borderActive} ${bgActive} ${textActive}`
-                : "border-gray-200 text-gray-500 hover:border-gray-300"
+                : "border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 hover:border-gray-300 dark:hover:border-gray-600"
             }`}
           >
             {c.symbol} {c.code}
@@ -82,7 +82,7 @@ export default function CurrencySelector({ selected, onChange, accentColor = "in
             className={`px-2.5 py-1.5 rounded-lg text-xs font-semibold border-2 transition-all ${
               !POPULAR_CODES.includes(selected)
                 ? `${borderActive} ${bgActive} ${textActive}`
-                : "border-dashed border-gray-300 text-gray-500 hover:border-gray-400"
+                : "border-dashed border-gray-300 dark:border-gray-600 text-gray-500 dark:text-gray-400 hover:border-gray-400"
             }`}
           >
             {!POPULAR_CODES.includes(selected) && selectedConfig
@@ -95,34 +95,34 @@ export default function CurrencySelector({ selected, onChange, accentColor = "in
 
           {/* Dropdown */}
           {open && (
-            <div className="absolute top-full left-0 mt-1 w-64 bg-white border border-gray-200 rounded-xl shadow-xl z-50 overflow-hidden">
+            <div className="absolute top-full left-0 mt-1 w-64 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl shadow-xl z-50 overflow-hidden">
               {/* Search */}
-              <div className="p-2 border-b border-gray-100">
+              <div className="p-2 border-b border-gray-100 dark:border-gray-800">
                 <input
                   ref={inputRef}
                   type="text"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Search currency..."
-                  className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  className="w-full px-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-lg dark:bg-gray-800 dark:text-white dark:placeholder-gray-500 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />
               </div>
 
               {/* Currency list */}
               <div className="max-h-56 overflow-y-auto">
                 {filtered.length === 0 ? (
-                  <p className="px-4 py-3 text-xs text-gray-400 text-center">No currency found</p>
+                  <p className="px-4 py-3 text-xs text-gray-400 dark:text-gray-500 text-center">No currency found</p>
                 ) : (
                   filtered.map((c) => (
                     <button
                       key={c.code}
                       type="button"
                       onClick={() => handleSelect(c)}
-                      className={`w-full flex items-center gap-3 px-4 py-2.5 text-left text-sm hover:bg-gray-50 transition-colors ${
-                        selected === c.code ? "bg-indigo-50 text-indigo-700 font-semibold" : "text-gray-700"
+                      className={`w-full flex items-center gap-3 px-4 py-2.5 text-left text-sm hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors ${
+                        selected === c.code ? "bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 font-semibold" : "text-gray-700 dark:text-gray-300"
                       }`}
                     >
-                      <span className="w-8 text-center font-medium text-gray-500">{c.symbol}</span>
+                      <span className="w-8 text-center font-medium text-gray-500 dark:text-gray-400">{c.symbol}</span>
                       <span className="font-semibold">{c.code}</span>
                       <span className="text-xs text-gray-400 truncate">{c.name}</span>
                       {selected === c.code && (

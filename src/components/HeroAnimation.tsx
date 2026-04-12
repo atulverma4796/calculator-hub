@@ -16,44 +16,44 @@ export default function HeroAnimation() {
 
       {/* Orbiting icons — outer ring */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-orbit">
-        <div className="w-12 h-12 rounded-xl bg-white border border-gray-200 shadow-lg flex items-center justify-center text-lg hover:scale-110 transition-transform">
+        <div className="w-12 h-12 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg flex items-center justify-center text-lg hover:scale-110 transition-transform">
           🏠
         </div>
       </div>
 
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-orbit" style={{ animationDelay: "-5s" }}>
-        <div className="w-12 h-12 rounded-xl bg-white border border-gray-200 shadow-lg flex items-center justify-center text-lg hover:scale-110 transition-transform">
+        <div className="w-12 h-12 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg flex items-center justify-center text-lg hover:scale-110 transition-transform">
           📈
         </div>
       </div>
 
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-orbit" style={{ animationDelay: "-10s" }}>
-        <div className="w-12 h-12 rounded-xl bg-white border border-gray-200 shadow-lg flex items-center justify-center text-lg hover:scale-110 transition-transform">
+        <div className="w-12 h-12 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg flex items-center justify-center text-lg hover:scale-110 transition-transform">
           💱
         </div>
       </div>
 
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-orbit" style={{ animationDelay: "-15s" }}>
-        <div className="w-12 h-12 rounded-xl bg-white border border-gray-200 shadow-lg flex items-center justify-center text-lg hover:scale-110 transition-transform">
+        <div className="w-12 h-12 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg flex items-center justify-center text-lg hover:scale-110 transition-transform">
           🧾
         </div>
       </div>
 
       {/* Inner orbit — reverse direction */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-orbit-reverse">
-        <div className="w-10 h-10 rounded-lg bg-white border border-gray-200 shadow-md flex items-center justify-center text-sm">
+        <div className="w-10 h-10 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-md flex items-center justify-center text-sm">
           %
         </div>
       </div>
 
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-orbit-reverse" style={{ animationDelay: "-5s" }}>
-        <div className="w-10 h-10 rounded-lg bg-white border border-gray-200 shadow-md flex items-center justify-center text-sm">
+        <div className="w-10 h-10 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-md flex items-center justify-center text-sm">
           ⚖️
         </div>
       </div>
 
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-orbit-reverse" style={{ animationDelay: "-10s" }}>
-        <div className="w-10 h-10 rounded-lg bg-white border border-gray-200 shadow-md flex items-center justify-center text-sm">
+        <div className="w-10 h-10 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-md flex items-center justify-center text-sm">
           🎂
         </div>
       </div>

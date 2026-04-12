@@ -1,6 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import VoiceInputButton from "@/components/VoiceInputButton";
+import { CALCULATOR_CONTENT } from "@/lib/calculatorContent";
+import CalculatorEducation from "@/components/CalculatorEducation";
+import ActionButtons from "@/components/ActionButtons";
+import CalculationHistory from "@/components/CalculationHistory";
+import InsightCard from "@/components/InsightCard";
+import { useShareableURL, useInitialParams } from "@/hooks/useShareableURL";
+import { useCalcHistory } from "@/hooks/useCalcHistory";
 
 const CURRENCY_INFO: Record<string, { name: string; symbol: string }> = {
   USD: { name: "US Dollar", symbol: "$" },
@@ -34,13 +42,16 @@ const CURRENCY_INFO: Record<string, { name: string; symbol: string }> = {
 const CURRENCIES = Object.keys(CURRENCY_INFO);
 
 export default function CurrencyConverter() {
-  const [amount, setAmount] = useState(1000);
-  const [from, setFrom] = useState("USD");
-  const [to, setTo] = useState("INR");
+  const { getString, getNumber } = useInitialParams();
+  const [amount, setAmount] = useState(getNumber("amount", 1000));
+  const [from, setFrom] = useState(getString("from", "USD"));
+  const [to, setTo] = useState(getString("to", "EUR"));
   const [rates, setRates] = useState<Record<string, number> | null>(null);
   const [loading, setLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState("");
   const [error, setError] = useState("");
+
+  useShareableURL({ amount, from, to });
 
   // Fetch real-time rates from Frankfurter API — powered by European Central Bank (ECB)
   // Official government source, free, no API key, no limits
@@ -93,6 +104,8 @@ export default function CurrencyConverter() {
   const rate1 = convert(1, from, to);
   const rateReverse = convert(1, to, from);
 
+  useCalcHistory("currency", { amount, from, to }, `${amount} ${from} = ${converted.toLocaleString(undefined, { maximumFractionDigits: 2 })} ${to}`);
+
   const swap = () => { setFrom(to); setTo(from); };
 
   const getSymbol = (code: string) => CURRENCY_INFO[code]?.symbol ?? code;
@@ -104,7 +117,7 @@ export default function CurrencyConverter() {
     return (
       <div className="max-w-2xl mx-auto text-center py-20">
         <div className="w-10 h-10 border-4 border-lime-600 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-        <p className="text-sm text-gray-500">Fetching live rates from European Central Bank...</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400">Fetching live rates from European Central Bank...</p>
       </div>
     );
   }
@@ -112,30 +125,50 @@ export default function CurrencyConverter() {
   if (!rates) {
     return (
       <div className="max-w-2xl mx-auto text-center py-20">
-        <p className="text-lg font-bold text-gray-800 mb-2">Could not load exchange rates</p>
-        <p className="text-sm text-gray-500">Please check your internet connection and refresh the page.</p>
+        <p className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-2">Could not load exchange rates</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400">Please check your internet connection and refresh the page.</p>
       </div>
     );
   }
 
   return (
     <div className="max-w-2xl mx-auto space-y-8">
+
+      <ActionButtons onReset={() => {
+        setAmount(1000);
+        setFrom("USD");
+        setTo("EUR");
+      }} pdfData={{
+        calculatorName: "Currency Converter",
+        inputs: [
+          { label: "Amount", value: `${amount.toLocaleString()} ${from}` },
+          { label: "From", value: from },
+          { label: "To", value: to },
+        ],
+        results: [
+          { label: "Converted", value: `${converted.toLocaleString(undefined, { maximumFractionDigits: 2 })} ${to}` },
+          { label: "Rate", value: `1 ${from} = ${rate1.toLocaleString(undefined, { maximumFractionDigits: 4 })} ${to}` },
+        ],
+        generatedAt: new Date().toLocaleDateString(),
+        url: typeof window !== "undefined" ? window.location.href : "",
+      }} />
       {error && (
         <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-xs text-amber-800">
           {error}
         </div>
       )}
 
-      <div className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+      <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
         {/* From */}
         <div>
-          <label className="text-sm font-semibold text-gray-700 mb-2 block">Amount</label>
+          <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 block">Amount</label>
           <div className="flex gap-3">
             <div className="relative flex-1">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">{getSymbol(from)}</span>
-              <input type="number" value={amount} onChange={(e) => setAmount(Number(e.target.value) || 0)} className="w-full pl-8 pr-3 py-3 border border-gray-300 rounded-xl text-xl font-bold text-gray-800 focus:ring-2 focus:ring-lime-500 focus:border-transparent" />
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 text-sm">{getSymbol(from)}</span>
+              <input type="number" value={amount} onChange={(e) => setAmount(Number(e.target.value) || 0)} className="w-full pl-8 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-xl text-xl font-bold text-gray-800 dark:text-white dark:bg-gray-800 focus:ring-2 focus:ring-lime-500 focus:border-transparent" />
             </div>
-            <select value={from} onChange={(e) => setFrom(e.target.value)} className="px-4 py-3 border border-gray-300 rounded-xl text-sm font-semibold text-gray-700 focus:ring-2 focus:ring-lime-500 bg-white min-w-[130px]">
+            <VoiceInputButton onResult={(v) => setAmount(v)} />
+            <select value={from} onChange={(e) => setFrom(e.target.value)} className="px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl text-sm font-semibold text-gray-700 dark:text-gray-300 focus:ring-2 focus:ring-lime-500 bg-white dark:bg-gray-800 dark:text-white min-w-[130px]">
               {availableCurrencies.map((c) => <option key={c} value={c}>{c} — {CURRENCY_INFO[c]?.name ?? c}</option>)}
             </select>
           </div>
@@ -152,15 +185,15 @@ export default function CurrencyConverter() {
 
         {/* To */}
         <div>
-          <label className="text-sm font-semibold text-gray-700 mb-2 block">Converted To</label>
+          <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 block">Converted To</label>
           <div className="flex gap-3">
             <div className="relative flex-1">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">{getSymbol(to)}</span>
-              <div className="w-full pl-8 pr-3 py-3 border border-gray-200 rounded-xl text-xl font-extrabold text-lime-700 bg-lime-50">
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 text-sm">{getSymbol(to)}</span>
+              <div className="w-full pl-8 pr-3 py-3 border border-gray-200 dark:border-gray-700 rounded-xl text-xl font-extrabold text-lime-700 bg-lime-50">
                 {converted.toLocaleString(undefined, { maximumFractionDigits: 2 })}
               </div>
             </div>
-            <select value={to} onChange={(e) => setTo(e.target.value)} className="px-4 py-3 border border-gray-300 rounded-xl text-sm font-semibold text-gray-700 focus:ring-2 focus:ring-lime-500 bg-white min-w-[130px]">
+            <select value={to} onChange={(e) => setTo(e.target.value)} className="px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl text-sm font-semibold text-gray-700 dark:text-gray-300 focus:ring-2 focus:ring-lime-500 bg-white dark:bg-gray-800 dark:text-white min-w-[130px]">
               {availableCurrencies.map((c) => <option key={c} value={c}>{c} — {CURRENCY_INFO[c]?.name ?? c}</option>)}
             </select>
           </div>
@@ -187,6 +220,38 @@ export default function CurrencyConverter() {
           </p>
         </div>
       </div>
+
+
+      {rates && (
+        <InsightCard
+          icon="💱"
+          title="Exchange Insight"
+          color="blue"
+          insight={`${getSymbol(from)} ${amount.toLocaleString()} ${from} = ${getSymbol(to)} ${converted.toLocaleString(undefined, { maximumFractionDigits: 2 })} ${to} at the ECB mid-market rate.`}
+          tip={rate1 > 100 ? `1 ${from} buys over ${Math.floor(rate1)} ${to} — the ${from} is much stronger.` : rate1 < 0.01 ? `1 ${from} is worth very little in ${to} — the ${to} is much stronger.` : undefined}
+        />
+      )}
+
+      <CalculationHistory
+        calculator="currency"
+        onLoad={(inputs) => {
+          setAmount(Number(inputs.amount));
+          setFrom(String(inputs.from));
+          setTo(String(inputs.to));
+        }}
+      />
+
+      {CALCULATOR_CONTENT.currency && (
+        <CalculatorEducation
+          data={CALCULATOR_CONTENT.currency}
+          calculatorName="Currency Converter"
+          dynamicExample={{
+            setup: `You want to convert ${getSymbol(from)} ${amount.toLocaleString()} ${from} to ${to}.`,
+            calculation: `Using the ECB exchange rate: 1 ${from} = ${getSymbol(to)} ${rate1.toLocaleString(undefined, { maximumFractionDigits: 4 })} ${to}. So ${amount.toLocaleString()} ${from} x ${rate1.toLocaleString(undefined, { maximumFractionDigits: 4 })} = ${getSymbol(to)} ${converted.toLocaleString(undefined, { maximumFractionDigits: 2 })}.`,
+            result: `${getSymbol(from)} ${amount.toLocaleString()} ${from} = ${getSymbol(to)} ${converted.toLocaleString(undefined, { maximumFractionDigits: 2 })} ${to}. The reverse rate is 1 ${to} = ${getSymbol(from)} ${rateReverse.toLocaleString(undefined, { maximumFractionDigits: 4 })} ${from}. Rates are sourced from the European Central Bank and update daily.`,
+          }}
+        />
+      )}
     </div>
   );
 }

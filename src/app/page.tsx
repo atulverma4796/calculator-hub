@@ -7,23 +7,23 @@ export default function Home() {
   return (
     <div>
       {/* ── HERO — Premium with orbiting icons + rich gradient ── */}
-      <section className="relative overflow-hidden border-b border-gray-100">
+      <section className="relative overflow-hidden border-b border-gray-100 dark:border-gray-800">
         {/* Rich animated gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-100 via-purple-50 via-50% to-cyan-50 animate-gradient" />
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-indigo-200/30 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/4" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-200/20 rounded-full blur-[80px] translate-y-1/3 -translate-x-1/4" />
-        <div className="absolute top-1/2 left-1/2 w-[300px] h-[300px] bg-cyan-200/15 rounded-full blur-[60px] -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute inset-0 bg-gradient-to-br from-indigo-100 via-purple-50 via-50% to-cyan-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-900 animate-gradient" />
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-indigo-200/30 dark:bg-indigo-900/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/4" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-200/20 dark:bg-purple-900/10 rounded-full blur-[80px] translate-y-1/3 -translate-x-1/4" />
+        <div className="absolute top-1/2 left-1/2 w-[300px] h-[300px] bg-cyan-200/15 dark:bg-cyan-900/10 rounded-full blur-[60px] -translate-x-1/2 -translate-y-1/2" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left — Text */}
             <div>
-              <div className="inline-flex items-center gap-2 bg-indigo-50 border border-indigo-100 rounded-full px-4 py-1.5 mb-6">
+              <div className="inline-flex items-center gap-2 bg-indigo-50 dark:bg-indigo-950 border border-indigo-100 dark:border-indigo-800 rounded-full px-4 py-1.5 mb-6">
                 <div className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
                 <span className="text-xs font-semibold text-indigo-700">15+ Free Calculators</span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-gray-900 leading-[1.15]">
+              <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100 leading-[1.15]">
                 Every answer you need,{" "}
                 <span className="relative">
                   <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent animate-gradient">
@@ -35,7 +35,7 @@ export default function Home() {
                 </span>
               </h1>
 
-              <p className="mt-5 text-lg text-gray-500 leading-relaxed max-w-lg">
+              <p className="mt-5 text-lg text-gray-500 dark:text-gray-400 leading-relaxed max-w-lg">
                 Your loan EMI. Your retirement corpus. Your tax liability.
                 Beautiful charts, instant results — no signup, no limits, free forever.
               </p>
@@ -46,7 +46,7 @@ export default function Home() {
                   <Link
                     key={calc.slug}
                     href={`/calculator/${calc.slug}`}
-                    className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white border border-gray-200 text-sm font-medium text-gray-700 shadow-sm hover:shadow-md hover:border-indigo-300 hover:text-indigo-600 transition-all hover:-translate-y-0.5"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white dark:bg-gray-900 border border-gray-200 text-sm font-medium text-gray-700 dark:text-gray-300 shadow-sm hover:shadow-md hover:border-indigo-300 hover:text-indigo-600 transition-all hover:-translate-y-0.5"
                   >
                     <span className="text-base">{calc.icon}</span>
                     {calc.shortName}
@@ -92,15 +92,15 @@ export default function Home() {
           if (calcs.length === 0) return null;
 
           return (
-            <section key={cat.id} id={cat.id} className={`py-14 ${catIdx % 2 === 0 ? "bg-white" : "bg-gray-50/80"}`}>
+            <section key={cat.id} id={cat.id} className={`py-14 ${catIdx % 2 === 0 ? "bg-white dark:bg-gray-900" : "bg-gray-50/80 dark:bg-gray-800/80"}`}>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center gap-3 mb-8">
                   <div className="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-xl">
                     {cat.icon}
                   </div>
                   <div>
-                    <h2 className="text-xl font-bold text-gray-900">{cat.name}</h2>
-                    <p className="text-sm text-gray-500">{cat.description}</p>
+                    <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">{cat.name}</h2>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">{cat.description}</p>
                   </div>
                 </div>
 
@@ -109,7 +109,7 @@ export default function Home() {
                     <Link
                       key={calc.slug}
                       href={`/calculator/${calc.slug}`}
-                      className="group relative bg-white border border-gray-200 rounded-2xl p-5 hover:shadow-xl hover:border-indigo-200 transition-all duration-300 animate-scale-in"
+                      className="group relative bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-5 hover:shadow-xl hover:border-indigo-200 transition-all duration-300 animate-scale-in"
                       style={{ animationDelay: `${i * 0.05}s` }}
                     >
                       {/* Top gradient line — appears on hover */}
@@ -120,10 +120,10 @@ export default function Home() {
                           {calc.icon}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h3 className="text-sm font-bold text-gray-900 group-hover:text-indigo-600 transition-colors">
+                          <h3 className="text-sm font-bold text-gray-900 dark:text-gray-100 group-hover:text-indigo-600 transition-colors">
                             {calc.name}
                           </h3>
-                          <p className="text-xs text-gray-500 mt-1 line-clamp-2 leading-relaxed">
+                          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-2 leading-relaxed">
                             {calc.description}
                           </p>
                         </div>
@@ -138,18 +138,18 @@ export default function Home() {
       </div>
 
       {/* ── All Calculators — compact grid ── */}
-      <section id="all" className="py-14 bg-white border-t border-gray-100">
+      <section id="all" className="py-14 bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-xl font-bold text-gray-900 mb-6 text-center">All Calculators</h2>
-          <div className="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-8 gap-2">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-6 text-center">All Calculators</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2">
             {CALCULATOR_LIST.map((calc) => (
               <Link
                 key={calc.slug}
                 href={`/calculator/${calc.slug}`}
-                className="group bg-gray-50 border border-gray-100 rounded-xl p-3 text-center hover:bg-white hover:border-indigo-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-200"
+                className="group bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl p-3 text-center hover:bg-white dark:hover:bg-gray-900 hover:border-indigo-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-200"
               >
                 <div className="text-xl mb-1 group-hover:scale-125 transition-transform duration-200">{calc.icon}</div>
-                <p className="text-[11px] font-semibold text-gray-700 group-hover:text-indigo-600 transition-colors leading-tight">{calc.shortName}</p>
+                <p className="text-[11px] font-semibold text-gray-700 dark:text-gray-300 group-hover:text-indigo-600 transition-colors leading-tight">{calc.shortName}</p>
               </Link>
             ))}
           </div>

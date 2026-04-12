@@ -10,12 +10,12 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-      <h1 className="text-3xl font-extrabold text-gray-900 mb-2">Terms of Use</h1>
-      <p className="text-sm text-gray-500 mb-8">Last updated: April 2026</p>
+      <h1 className="text-3xl font-extrabold text-gray-900 dark:text-gray-100 mb-2">Terms of Use</h1>
+      <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Last updated: April 2026</p>
 
-      <div className="prose prose-gray max-w-none space-y-6 text-gray-700 text-sm leading-relaxed">
+      <div className="prose prose-gray max-w-none space-y-6 text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
         <section>
-          <h2 className="text-lg font-bold text-gray-900 mt-8 mb-3">Acceptance of Terms</h2>
+          <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mt-8 mb-3">Acceptance of Terms</h2>
           <p>
             By using CalcHub (calculatorhub.org), you agree to these terms. If you do not agree, please do not use the service.
             CalcHub is a free online calculator tool available to everyone without signup or payment.
@@ -23,7 +23,7 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="text-lg font-bold text-gray-900 mt-8 mb-3">Free Service</h2>
+          <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mt-8 mb-3">Free Service</h2>
           <p>
             CalcHub is provided free of charge. All calculators, features, and results are available without
             any payment, subscription, or account creation. We reserve the right to modify or discontinue
@@ -32,7 +32,7 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="text-lg font-bold text-gray-900 mt-8 mb-3">Calculation Accuracy</h2>
+          <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mt-8 mb-3">Calculation Accuracy</h2>
           <p>
             CalcHub calculators are designed for informational and educational purposes only. While we strive
             for accuracy, calculations should not be considered as financial, tax, legal, or medical advice.
@@ -49,7 +49,7 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="text-lg font-bold text-gray-900 mt-8 mb-3">Intellectual Property</h2>
+          <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mt-8 mb-3">Intellectual Property</h2>
           <p>
             The CalcHub name, logo, design, and original content are the property of CalcHub.
             You may not reproduce or redistribute the site&apos;s code or design without permission.
@@ -58,7 +58,7 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="text-lg font-bold text-gray-900 mt-8 mb-3">Limitation of Liability</h2>
+          <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mt-8 mb-3">Limitation of Liability</h2>
           <p>
             CalcHub is provided &quot;as is&quot; without warranties of any kind. We are not liable for any
             damages arising from the use of our calculators or reliance on their results. Use at your own risk.
@@ -66,7 +66,7 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="text-lg font-bold text-gray-900 mt-8 mb-3">Contact</h2>
+          <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mt-8 mb-3">Contact</h2>
           <p>
             For questions about these terms, use our{" "}
             <Link href="/#feedback" className="text-indigo-600 hover:underline">feedback form</Link>.
@@ -74,7 +74,7 @@ export default function TermsPage() {
         </section>
       </div>
 
-      <div className="mt-12 pt-6 border-t border-gray-200">
+      <div className="mt-12 pt-6 border-t border-gray-200 dark:border-gray-700">
         <Link href="/" className="text-sm text-indigo-600 hover:underline">&larr; Back to Calculators</Link>
       </div>
     </div>

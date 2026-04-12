@@ -1,8 +1,15 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #f8fafc;
   --foreground: #0f172a;
+}
+
+.dark {
+  --background: #0f172a;
+  --foreground: #f1f5f9;
 }
 
 @theme inline {
@@ -101,6 +108,47 @@ html {
   animation: shimmer 2s ease-in-out infinite;
 }
 
+/* Compare mode — compact everything to fit side-by-side */
+.compare-compact .calc-extra { display: none !important; }
+.compare-compact script { display: none !important; }
+
+/* Force single column layout inside compare boxes */
+.compare-compact .lg\:grid-cols-5 { grid-template-columns: 1fr !important; }
+.compare-compact .lg\:col-span-3 { grid-column: span 1 !important; }
+.compare-compact .lg\:col-span-2 { grid-column: span 1 !important; }
+
+/* Scale down text and spacing */
+.compare-compact { font-size: 0.85rem; }
+.compare-compact .text-3xl,
+.compare-compact .sm\:text-4xl { font-size: 1.5rem !important; }
+.compare-compact .text-2xl { font-size: 1.2rem !important; }
+.compare-compact .text-xl { font-size: 1rem !important; }
+.compare-compact .text-lg { font-size: 0.9rem !important; }
+
+/* Reduce padding inside cards */
+.compare-compact .p-6 { padding: 1rem !important; }
+.compare-compact .sm\:p-8 { padding: 1rem !important; }
+.compare-compact .space-y-8 > * + * { margin-top: 1rem !important; }
+.compare-compact .space-y-6 > * + * { margin-top: 0.75rem !important; }
+
+/* Hide charts in compare mode — they don't fit at half width */
+.compare-compact .h-48 { display: none !important; }
+.compare-compact .recharts-wrapper { display: none !important; }
+
+/* Compact currency selector */
+.compare-compact .flex-wrap { gap: 0.25rem !important; }
+.compare-compact .px-2\.5 { padding-left: 0.375rem !important; padding-right: 0.375rem !important; }
+
+/* Compact range sliders */
+.compare-compact input[type="range"] { height: 4px; }
+.compare-compact input[type="range"]::-webkit-slider-thumb { width: 16px; height: 16px; }
+
+/* Print styles — handled via JS: we clone .print-area into a temp container */
+@media print {
+  @page { margin: 10mm; }
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+}
+
 /* Range slider */
 input[type="range"] {
   -webkit-appearance: none;
@@ -111,6 +159,10 @@ input[type="range"] {
   background: #e2e8f0;
   outline: none;
   transition: background 0.2s;
+}
+
+.dark input[type="range"] {
+  background: #334155;
 }
 
 input[type="range"]::-webkit-slider-thumb {
