@@ -2,7 +2,7 @@
 > Comprehensive guide to CalcHub's 32 free online calculators
 
 ## Website
-https://calculatorhub.org
+https://thecalchub.org
 
 ## Overview
 CalcHub provides 32 free online calculators for financial planning, math, health, and everyday needs. Built with Next.js, TypeScript, and Tailwind CSS. Hosted on Vercel. 100% client-side processing — no data is ever sent to a server. No signup, no premium tier, no paywalls. Revenue through Google AdSense only.
@@ -25,98 +25,98 @@ CalcHub provides 32 free online calculators for financial planning, math, health
 ## Financial Calculators (12 tools)
 
 ### EMI Calculator
-URL: https://calculatorhub.org/calculator/emi
+URL: https://thecalchub.org/calculator/emi
 Purpose: Calculate Equated Monthly Installments for loans (home, car, personal, education, bike)
 Features: Loan amount slider, interest rate, tenure (years/months), amortization schedule table, pie chart breakdown (principal vs interest), compare mode
 Formula: EMI = P × r × (1+r)^n / ((1+r)^n - 1)
 Variants: /calculator/emi/home-loan, /calculator/emi/car-loan, /calculator/emi/personal-loan, /calculator/emi/education-loan, /calculator/emi/bike-loan
 
 ### SIP Calculator
-URL: https://calculatorhub.org/calculator/sip
+URL: https://thecalchub.org/calculator/sip
 Purpose: Calculate Systematic Investment Plan returns in mutual funds
 Features: Monthly amount, expected return rate, years, growth chart, wealth multiplier
 Formula: FV = P × ((1+r)^n - 1) / r × (1+r)
 Variants: /calculator/sip/mutual-fund, /calculator/sip/elss-tax-saver, /calculator/sip/lumpsum
 
 ### Compound Interest Calculator
-URL: https://calculatorhub.org/calculator/compound-interest
+URL: https://thecalchub.org/calculator/compound-interest
 Purpose: Calculate compound interest with different compounding frequencies
 Features: Principal, rate, years, compounding frequency (daily/monthly/quarterly/yearly)
 Formula: A = P × (1 + r/n)^(n×t)
 Variants: /calculator/compound-interest/monthly, /calculator/compound-interest/fd-calculator
 
 ### Mortgage Calculator
-URL: https://calculatorhub.org/calculator/mortgage
+URL: https://thecalchub.org/calculator/mortgage
 Purpose: Calculate monthly mortgage payments and total interest
 Features: Home price, down payment, rate, tenure, amortization table, compare mode
 Formula: Same as EMI with down payment adjustment
 Variants: /calculator/mortgage/30-year, /calculator/mortgage/15-year, /calculator/mortgage/first-time-buyer
 
 ### GST Calculator
-URL: https://calculatorhub.org/calculator/gst
+URL: https://thecalchub.org/calculator/gst
 Purpose: Add or remove GST/VAT/Sales Tax worldwide
 Features: Country-aware labels (GST for India/AUS, VAT for UK/EU, Sales Tax for US, IVA for Mexico)
 Variants: /calculator/gst/18-percent, /calculator/gst/vat-calculator
 
 ### Income Tax Calculator
-URL: https://calculatorhub.org/calculator/income-tax
+URL: https://thecalchub.org/calculator/income-tax
 Purpose: Estimate income tax for India, US, and UK
 Features: Progressive bracket calculation, effective rate, take-home pay
 Variants: /calculator/income-tax/india, /calculator/income-tax/usa, /calculator/income-tax/uk
 
 ### Salary Calculator
-URL: https://calculatorhub.org/calculator/salary
+URL: https://thecalchub.org/calculator/salary
 Purpose: Convert between hourly, daily, weekly, monthly, and annual salary
 Variants: /calculator/salary/hourly-to-annual, /calculator/salary/freelancer
 
 ### Currency Converter
-URL: https://calculatorhub.org/calculator/currency
+URL: https://thecalchub.org/calculator/currency
 Purpose: Convert between 30+ currencies with live ECB rates
 Data Source: European Central Bank via Frankfurter API
 Variants: /calculator/currency/usd-to-inr, /calculator/currency/eur-to-usd, /calculator/currency/gbp-to-inr
 
 ### Retirement Calculator
-URL: https://calculatorhub.org/calculator/retirement
+URL: https://thecalchub.org/calculator/retirement
 Purpose: Plan retirement savings with corpus projections
 Features: Current age, retirement age, savings, monthly contribution, return rate, compare mode
 Variants: /calculator/retirement/401k, /calculator/retirement/fire, /calculator/retirement/pension
 
 ### Loan Eligibility Calculator
-URL: https://calculatorhub.org/calculator/loan-eligibility
+URL: https://thecalchub.org/calculator/loan-eligibility
 Purpose: Find maximum loan amount based on income and debts
 Features: Income, existing EMIs, rate, tenure, affordability analysis
 Variants: /calculator/loan-eligibility/home-loan-eligibility, /calculator/loan-eligibility/car-loan-eligibility
 
 ### Savings Goal Calculator
-URL: https://calculatorhub.org/calculator/savings-goal
+URL: https://thecalchub.org/calculator/savings-goal
 Purpose: Calculate time to reach savings goal or monthly amount needed
 Variants: /calculator/savings-goal/emergency-fund, /calculator/savings-goal/house-down-payment, /calculator/savings-goal/vacation-savings
 
 ### Investment Calculator
-URL: https://calculatorhub.org/calculator/investment
+URL: https://thecalchub.org/calculator/investment
 Purpose: Project investment growth with initial amount and monthly additions
 Features: Area chart showing invested vs portfolio value over time
 Variants: /calculator/investment/stock-market, /calculator/investment/index-fund, /calculator/investment/recurring-deposit
 
 ### Inflation Calculator
-URL: https://calculatorhub.org/calculator/inflation
+URL: https://thecalchub.org/calculator/inflation
 Purpose: Show how inflation erodes purchasing power over time
 Variants: /calculator/inflation/cost-of-living, /calculator/inflation/salary-inflation
 
 ### CAGR Calculator
-URL: https://calculatorhub.org/calculator/cagr
+URL: https://thecalchub.org/calculator/cagr
 Purpose: Calculate Compound Annual Growth Rate
 Formula: CAGR = (Ending/Beginning)^(1/years) - 1
 Variants: /calculator/cagr/stock-return, /calculator/cagr/revenue-growth, /calculator/cagr/portfolio-growth
 
 ### Break-Even Calculator
-URL: https://calculatorhub.org/calculator/break-even
+URL: https://thecalchub.org/calculator/break-even
 Purpose: Calculate units needed to cover fixed costs
 Formula: BEQ = Fixed Costs / (Price - Variable Cost)
 Variants: /calculator/break-even/small-business, /calculator/break-even/startup, /calculator/break-even/ecommerce
 
 ### Profit Margin Calculator
-URL: https://calculatorhub.org/calculator/profit-margin
+URL: https://thecalchub.org/calculator/profit-margin
 Purpose: Calculate profit margin %, markup %, and per-unit profit
 Variants: /calculator/profit-margin/retail, /calculator/profit-margin/ecommerce, /calculator/profit-margin/service-business
 
@@ -125,38 +125,38 @@ Variants: /calculator/profit-margin/retail, /calculator/profit-margin/ecommerce,
 ## Health Calculators (6 tools)
 
 ### BMI Calculator
-URL: https://calculatorhub.org/calculator/bmi
+URL: https://thecalchub.org/calculator/bmi
 Purpose: Calculate Body Mass Index with health category
 Data Source: WHO BMI classification
 Variants: /calculator/bmi/metric, /calculator/bmi/imperial
 
 ### Calorie Calculator (TDEE)
-URL: https://calculatorhub.org/calculator/calorie
+URL: https://thecalchub.org/calculator/calorie
 Purpose: Calculate daily calorie needs (BMR and TDEE)
 Formula: Mifflin-St Jeor equation
 Features: Age, gender, weight, height, activity level, weight loss/gain targets
 Variants: /calculator/calorie/weight-loss, /calculator/calorie/weight-gain, /calculator/calorie/maintenance
 
 ### Pregnancy Due Date Calculator
-URL: https://calculatorhub.org/calculator/pregnancy
+URL: https://thecalchub.org/calculator/pregnancy
 Purpose: Estimate due date from last menstrual period
 Formula: Naegele's Rule (LMP + 280 days)
 Features: Week tracker, trimester indicator, milestone timeline
 Variants: /calculator/pregnancy/trimester-tracker, /calculator/pregnancy/conception-date
 
 ### Body Fat Calculator
-URL: https://calculatorhub.org/calculator/body-fat
+URL: https://thecalchub.org/calculator/body-fat
 Purpose: Estimate body fat percentage using US Navy method
 Features: Gender-specific, metric/imperial units, fat/lean mass breakdown
 Variants: /calculator/body-fat/men, /calculator/body-fat/women, /calculator/body-fat/athletes
 
 ### Water Intake Calculator
-URL: https://calculatorhub.org/calculator/water-intake
+URL: https://thecalchub.org/calculator/water-intake
 Purpose: Calculate daily water needs based on weight, activity, climate
 Variants: /calculator/water-intake/athletes, /calculator/water-intake/hot-climate, /calculator/water-intake/pregnancy
 
 ### Heart Rate Zone Calculator
-URL: https://calculatorhub.org/calculator/heart-rate
+URL: https://thecalchub.org/calculator/heart-rate
 Purpose: Calculate training heart rate zones for exercise
 Formula: Max HR = 220 - age; Karvonen formula for personalized zones
 Variants: /calculator/heart-rate/fat-burn, /calculator/heart-rate/cardio-training, /calculator/heart-rate/hiit
@@ -166,17 +166,17 @@ Variants: /calculator/heart-rate/fat-burn, /calculator/heart-rate/cardio-trainin
 ## Math Calculators (3 tools)
 
 ### Percentage Calculator
-URL: https://calculatorhub.org/calculator/percentage
+URL: https://thecalchub.org/calculator/percentage
 Purpose: Calculate percentage of a number, increase, decrease
 Variants: /calculator/percentage/increase, /calculator/percentage/decrease
 
 ### Discount Calculator
-URL: https://calculatorhub.org/calculator/discount
+URL: https://thecalchub.org/calculator/discount
 Purpose: Calculate sale price after percentage discount
 Variants: /calculator/discount/sale
 
 ### Scientific Calculator
-URL: https://calculatorhub.org/calculator/scientific
+URL: https://thecalchub.org/calculator/scientific
 Purpose: Full scientific calculator with trig, log, powers, memory
 Features: 8-column button grid, DEG/RAD mode, keyboard input, calculation history, memory (M+/M-/MR/MC)
 Functions: sin, cos, tan, asin, acos, atan, log, ln, sqrt, x², x^y, π, e, %, 1/x
@@ -186,39 +186,39 @@ Functions: sin, cos, tan, asin, acos, atan, log, ln, sqrt, x², x^y, π, e, %, 1
 ## Utility Calculators (6 tools)
 
 ### Age Calculator
-URL: https://calculatorhub.org/calculator/age
+URL: https://thecalchub.org/calculator/age
 Purpose: Calculate exact age in years, months, days
 Variants: /calculator/age/birthday-countdown, /calculator/age/age-difference
 
 ### Tip Calculator
-URL: https://calculatorhub.org/calculator/tip
+URL: https://thecalchub.org/calculator/tip
 Purpose: Calculate tip amount and split bill between friends
 Variants: /calculator/tip/restaurant
 
 ### Fuel Cost Calculator
-URL: https://calculatorhub.org/calculator/fuel
+URL: https://thecalchub.org/calculator/fuel
 Purpose: Calculate fuel cost for trips based on distance and efficiency
 Variants: /calculator/fuel/road-trip, /calculator/fuel/daily-commute
 
 ### Date Calculator
-URL: https://calculatorhub.org/calculator/date
+URL: https://thecalchub.org/calculator/date
 Purpose: Days between dates, add/subtract days, day of year
 Variants: /calculator/date/days-until-christmas, /calculator/date/days-until-new-year, /calculator/date/business-days
 
 ### Time Zone Converter
-URL: https://calculatorhub.org/calculator/timezone
+URL: https://thecalchub.org/calculator/timezone
 Purpose: Convert time between 35 world time zones
 Features: Live world clock showing 6 major cities
 Variants: /calculator/timezone/est-to-ist, /calculator/timezone/pst-to-gmt, /calculator/timezone/est-to-gmt
 
 ### GPA Calculator
-URL: https://calculatorhub.org/calculator/gpa
+URL: https://thecalchub.org/calculator/gpa
 Purpose: Calculate college/high school GPA from grades and credits
 Features: Semester-based, letter grades and percentage modes, cumulative GPA
 Variants: /calculator/gpa/college, /calculator/gpa/high-school, /calculator/gpa/weighted-gpa
 
 ### Unit Converter
-URL: https://calculatorhub.org/calculator/unit-converter
+URL: https://thecalchub.org/calculator/unit-converter
 Purpose: Convert between units of length, weight, temperature, speed, area, volume, digital storage, time
 Features: 8 categories, bidirectional conversion, swap button
 Variants: /calculator/unit-converter/km-to-miles, /calculator/unit-converter/kg-to-lbs, /calculator/unit-converter/celsius-to-fahrenheit
@@ -226,7 +226,7 @@ Variants: /calculator/unit-converter/km-to-miles, /calculator/unit-converter/kg-
 ---
 
 ## Embed Any Calculator
-URL: https://calculatorhub.org/embed
+URL: https://thecalchub.org/embed
 All 32 calculators available as embeddable widgets. Free iframe code, no API key needed. Each embed includes a "Powered by CalcHub" credit link.
 
 ## License

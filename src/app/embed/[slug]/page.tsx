@@ -35,7 +35,7 @@ import TimeZoneConverter from "@/components/calculators/TimeZoneConverter";
 import GPACalculator from "@/components/calculators/GPACalculator";
 import UnitConverter from "@/components/calculators/UnitConverter";
 
-const SITE_URL = "https://calculatorhub.org";
+const SITE_URL = "https://thecalchub.org";
 
 const CALCULATOR_COMPONENTS: Record<string, React.ComponentType> = {
   emi: EMICalculator,

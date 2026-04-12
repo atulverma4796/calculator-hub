@@ -91,7 +91,7 @@ export default function OGImage() {
             color: "rgba(255,255,255,0.6)",
           }}
         >
-          calculatorhub.org
+          thecalchub.org
         </div>
       </div>
     ),

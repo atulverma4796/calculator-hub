@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { CALCULATOR_LIST } from "@/lib/calculators";
 import { VARIANT_LIST } from "@/lib/calculatorVariants";
 
-const SITE_URL = "https://calculatorhub.org";
+const SITE_URL = "https://thecalchub.org";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const calculatorPages = CALCULATOR_LIST.map((calc) => ({

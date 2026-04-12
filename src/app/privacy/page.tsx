@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description: "CalcHub privacy policy. Your data never leaves your browser. No tracking, no cookies for calculation data.",
-  alternates: { canonical: "https://calculatorhub.org/privacy" },
+  alternates: { canonical: "https://thecalchub.org/privacy" },
 };
 
 export default function PrivacyPage() {

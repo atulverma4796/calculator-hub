@@ -1,4 +1,4 @@
-# AI Usage Policy for CalcHub (https://calculatorhub.org)
+# AI Usage Policy for CalcHub (https://thecalchub.org)
 
 User-Agent: *
 Allow: /
@@ -12,8 +12,8 @@ Disallow: /api/
 # We provide free online calculators and want maximum discoverability.
 
 # Additional resources for AI systems:
-# Sitemap: https://calculatorhub.org/sitemap.xml
-# LLMs summary: https://calculatorhub.org/llms.txt
-# LLMs full reference: https://calculatorhub.org/llms-full.txt
+# Sitemap: https://thecalchub.org/sitemap.xml
+# LLMs summary: https://thecalchub.org/llms.txt
+# LLMs full reference: https://thecalchub.org/llms-full.txt
 
 # Contact: atulverma4796@gmail.com

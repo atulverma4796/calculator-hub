@@ -43,7 +43,7 @@ import GPACalculator from "@/components/calculators/GPACalculator";
 import UnitConverter from "@/components/calculators/UnitConverter";
 import VariantDefaults from "@/components/VariantDefaults";
 
-const SITE_URL = "https://calculatorhub.org";
+const SITE_URL = "https://thecalchub.org";
 
 const CALCULATOR_COMPONENTS: Record<string, React.ComponentType> = {
   emi: EMICalculator,

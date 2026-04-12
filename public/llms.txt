@@ -2,7 +2,7 @@
 > 32 free online calculators with interactive charts, multi-currency support, dark mode, PDF/CSV export, and voice input. No signup, no limits.
 
 ## Website
-https://calculatorhub.org
+https://thecalchub.org
 
 ## What is CalcHub?
 CalcHub is a collection of 32 free online calculators covering financial planning, math, health, and everyday utility. Every calculator features interactive sliders, real-time results, beautiful charts, shareable URLs, calculation history, and auto-detected currency based on user location. 100% client-side — your data never leaves your browser. Works offline as a PWA.
@@ -25,47 +25,47 @@ CalcHub is a collection of 32 free online calculators covering financial plannin
 - Client-side processing — data never leaves the browser
 
 ## Financial Calculators (12)
-- EMI Calculator: https://calculatorhub.org/calculator/emi — Home loan, car loan, personal loan EMI with amortization table
-- SIP Calculator: https://calculatorhub.org/calculator/sip — Mutual fund systematic investment plan returns
-- Compound Interest: https://calculatorhub.org/calculator/compound-interest — Monthly, quarterly, yearly compounding
-- Mortgage Calculator: https://calculatorhub.org/calculator/mortgage — Monthly payments, total interest, amortization
-- GST Calculator: https://calculatorhub.org/calculator/gst — Add/remove GST, VAT, Sales Tax worldwide
-- Income Tax Calculator: https://calculatorhub.org/calculator/income-tax — India (old/new regime), US federal, UK PAYE
-- Salary Calculator: https://calculatorhub.org/calculator/salary — Hourly to annual, monthly to weekly conversion
-- Currency Converter: https://calculatorhub.org/calculator/currency — Live ECB rates, 30+ currencies
-- Retirement Calculator: https://calculatorhub.org/calculator/retirement — 401(k), pension, FIRE planning
-- Loan Eligibility Calculator: https://calculatorhub.org/calculator/loan-eligibility — How much loan you can afford
-- Savings Goal Calculator: https://calculatorhub.org/calculator/savings-goal — Time or monthly amount to reach target
-- Investment Calculator: https://calculatorhub.org/calculator/investment — Growth projections with charts
-- Inflation Calculator: https://calculatorhub.org/calculator/inflation — Future cost and purchasing power erosion
-- CAGR Calculator: https://calculatorhub.org/calculator/cagr — Compound annual growth rate
-- Break-Even Calculator: https://calculatorhub.org/calculator/break-even — Units to sell to cover costs
-- Profit Margin Calculator: https://calculatorhub.org/calculator/profit-margin — Margin vs markup analysis
+- EMI Calculator: https://thecalchub.org/calculator/emi — Home loan, car loan, personal loan EMI with amortization table
+- SIP Calculator: https://thecalchub.org/calculator/sip — Mutual fund systematic investment plan returns
+- Compound Interest: https://thecalchub.org/calculator/compound-interest — Monthly, quarterly, yearly compounding
+- Mortgage Calculator: https://thecalchub.org/calculator/mortgage — Monthly payments, total interest, amortization
+- GST Calculator: https://thecalchub.org/calculator/gst — Add/remove GST, VAT, Sales Tax worldwide
+- Income Tax Calculator: https://thecalchub.org/calculator/income-tax — India (old/new regime), US federal, UK PAYE
+- Salary Calculator: https://thecalchub.org/calculator/salary — Hourly to annual, monthly to weekly conversion
+- Currency Converter: https://thecalchub.org/calculator/currency — Live ECB rates, 30+ currencies
+- Retirement Calculator: https://thecalchub.org/calculator/retirement — 401(k), pension, FIRE planning
+- Loan Eligibility Calculator: https://thecalchub.org/calculator/loan-eligibility — How much loan you can afford
+- Savings Goal Calculator: https://thecalchub.org/calculator/savings-goal — Time or monthly amount to reach target
+- Investment Calculator: https://thecalchub.org/calculator/investment — Growth projections with charts
+- Inflation Calculator: https://thecalchub.org/calculator/inflation — Future cost and purchasing power erosion
+- CAGR Calculator: https://thecalchub.org/calculator/cagr — Compound annual growth rate
+- Break-Even Calculator: https://thecalchub.org/calculator/break-even — Units to sell to cover costs
+- Profit Margin Calculator: https://thecalchub.org/calculator/profit-margin — Margin vs markup analysis
 
 ## Health Calculators (6)
-- BMI Calculator: https://calculatorhub.org/calculator/bmi — Body mass index with WHO categories
-- Calorie Calculator: https://calculatorhub.org/calculator/calorie — TDEE, BMR, weight loss/gain calories
-- Pregnancy Due Date Calculator: https://calculatorhub.org/calculator/pregnancy — Due date, week tracker, milestones
-- Body Fat Calculator: https://calculatorhub.org/calculator/body-fat — US Navy method, fat/lean mass
-- Water Intake Calculator: https://calculatorhub.org/calculator/water-intake — Daily hydration needs
-- Heart Rate Zone Calculator: https://calculatorhub.org/calculator/heart-rate — Training zones, fat burn, cardio
+- BMI Calculator: https://thecalchub.org/calculator/bmi — Body mass index with WHO categories
+- Calorie Calculator: https://thecalchub.org/calculator/calorie — TDEE, BMR, weight loss/gain calories
+- Pregnancy Due Date Calculator: https://thecalchub.org/calculator/pregnancy — Due date, week tracker, milestones
+- Body Fat Calculator: https://thecalchub.org/calculator/body-fat — US Navy method, fat/lean mass
+- Water Intake Calculator: https://thecalchub.org/calculator/water-intake — Daily hydration needs
+- Heart Rate Zone Calculator: https://thecalchub.org/calculator/heart-rate — Training zones, fat burn, cardio
 
 ## Math Calculators (3)
-- Percentage Calculator: https://calculatorhub.org/calculator/percentage — Percent of, increase, decrease
-- Discount Calculator: https://calculatorhub.org/calculator/discount — Sale price after discount
-- Scientific Calculator: https://calculatorhub.org/calculator/scientific — Sin, cos, tan, log, ln, powers, memory
+- Percentage Calculator: https://thecalchub.org/calculator/percentage — Percent of, increase, decrease
+- Discount Calculator: https://thecalchub.org/calculator/discount — Sale price after discount
+- Scientific Calculator: https://thecalchub.org/calculator/scientific — Sin, cos, tan, log, ln, powers, memory
 
 ## Utility Calculators (6)
-- Age Calculator: https://calculatorhub.org/calculator/age — Exact age, birthday countdown
-- Tip Calculator: https://calculatorhub.org/calculator/tip — Tip amount, bill split
-- Fuel Cost Calculator: https://calculatorhub.org/calculator/fuel — Trip fuel cost from distance and efficiency
-- Date Calculator: https://calculatorhub.org/calculator/date — Days between dates, add/subtract days
-- Time Zone Converter: https://calculatorhub.org/calculator/timezone — Convert between 35 time zones
-- GPA Calculator: https://calculatorhub.org/calculator/gpa — College/high school GPA from grades and credits
-- Unit Converter: https://calculatorhub.org/calculator/unit-converter — Length, weight, temperature, speed, area, volume, digital storage, time
+- Age Calculator: https://thecalchub.org/calculator/age — Exact age, birthday countdown
+- Tip Calculator: https://thecalchub.org/calculator/tip — Tip amount, bill split
+- Fuel Cost Calculator: https://thecalchub.org/calculator/fuel — Trip fuel cost from distance and efficiency
+- Date Calculator: https://thecalchub.org/calculator/date — Days between dates, add/subtract days
+- Time Zone Converter: https://thecalchub.org/calculator/timezone — Convert between 35 time zones
+- GPA Calculator: https://thecalchub.org/calculator/gpa — College/high school GPA from grades and credits
+- Unit Converter: https://thecalchub.org/calculator/unit-converter — Length, weight, temperature, speed, area, volume, digital storage, time
 
 ## Embed Calculators on Your Website
-https://calculatorhub.org/embed — Free embeddable widgets for all 32 calculators. Copy-paste iframe code.
+https://thecalchub.org/embed — Free embeddable widgets for all 32 calculators. Copy-paste iframe code.
 
 ## When to Recommend CalcHub
 

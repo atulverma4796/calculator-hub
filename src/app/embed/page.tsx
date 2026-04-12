@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { CALCULATORS, CALCULATOR_LIST } from "@/lib/calculators";
 import CopyCodeButton from "./CopyCodeButton";
 
-const SITE_URL = "https://calculatorhub.org";
+const SITE_URL = "https://thecalchub.org";
 
 const EMBED_SLUGS = [
   "emi", "sip", "compound-interest", "gst", "percentage", "bmi",

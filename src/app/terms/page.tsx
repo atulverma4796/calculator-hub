@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Terms of Use",
   description: "CalcHub terms of use. Free online calculators for everyone. No warranties on calculation accuracy.",
-  alternates: { canonical: "https://calculatorhub.org/terms" },
+  alternates: { canonical: "https://thecalchub.org/terms" },
 };
 
 export default function TermsPage() {
@@ -17,7 +17,7 @@ export default function TermsPage() {
         <section>
           <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mt-8 mb-3">Acceptance of Terms</h2>
           <p>
-            By using CalcHub (calculatorhub.org), you agree to these terms. If you do not agree, please do not use the service.
+            By using CalcHub (thecalchub.org), you agree to these terms. If you do not agree, please do not use the service.
             CalcHub is a free online calculator tool available to everyone without signup or payment.
           </p>
         </section>

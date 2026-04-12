@@ -43,7 +43,7 @@ import TimeZoneConverter from "@/components/calculators/TimeZoneConverter";
 import GPACalculator from "@/components/calculators/GPACalculator";
 import UnitConverter from "@/components/calculators/UnitConverter";
 
-const SITE_URL = "https://calculatorhub.org";
+const SITE_URL = "https://thecalchub.org";
 
 const CALCULATOR_COMPONENTS: Record<string, React.ComponentType> = {
   emi: EMICalculator,
@@ -122,15 +122,15 @@ export default async function CalculatorPage({ params }: { params: Promise<{ slu
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Home", item: "https://calculatorhub.org" },
-          { "@type": "ListItem", position: 2, name: calc.name, item: `https://calculatorhub.org/calculator/${slug}` },
+          { "@type": "ListItem", position: 1, name: "Home", item: "https://thecalchub.org" },
+          { "@type": "ListItem", position: 2, name: calc.name, item: `https://thecalchub.org/calculator/${slug}` },
         ],
       }} />
       <JsonLd data={{
         "@context": "https://schema.org",
         "@type": "WebApplication",
         name: calc.name,
-        url: `https://calculatorhub.org/calculator/${slug}`,
+        url: `https://thecalchub.org/calculator/${slug}`,
         description: calc.description,
         applicationCategory: "FinanceApplication",
         operatingSystem: "All",

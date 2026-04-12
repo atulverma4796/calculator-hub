@@ -22,7 +22,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const SITE_URL = "https://calculatorhub.org";
+const SITE_URL = "https://thecalchub.org";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -98,7 +98,7 @@ export default function RootLayout({
           "@context": "https://schema.org",
           "@type": "WebApplication",
           name: "CalcHub — Free Online Calculators",
-          url: "https://calculatorhub.org",
+          url: "https://thecalchub.org",
           description: "30+ free online calculators with dark mode, voice input, PDF/CSV export, compare mode, and 37-currency auto-detect. EMI, SIP, mortgage, tax, BMI, calorie, scientific, and more.",
           applicationCategory: "FinanceApplication",
           operatingSystem: "All",
