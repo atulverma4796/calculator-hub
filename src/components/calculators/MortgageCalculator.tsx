@@ -124,7 +124,7 @@ export default function MortgageCalculator() {
             <div className="flex items-center justify-between mb-2">
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Loan Term (Years)</label>
               <div className="flex items-center gap-1">
-                <input type="number" value={years} onChange={(e) => setYears(Math.max(1, Number(e.target.value)))} min={1} max={30} className="w-20 text-right text-sm font-bold text-sky-700 bg-sky-50 border border-sky-200 rounded-lg px-3 py-1.5" />
+                <input type="number" value={years} onChange={(e) => setYears(Number(e.target.value))} min={1} max={30} className="w-20 text-right text-sm font-bold text-sky-700 bg-sky-50 border border-sky-200 rounded-lg px-3 py-1.5" />
                 <VoiceInputButton onResult={(v) => setYears(v)} />
               </div>
             </div>

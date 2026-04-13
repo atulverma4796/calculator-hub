@@ -132,7 +132,7 @@ export default function InflationCalculator() {
               <input
                 type="number"
                 value={years}
-                onChange={(e) => setYears(Math.max(1, Number(e.target.value)))}
+                onChange={(e) => setYears(Number(e.target.value))}
                 min={1}
                 max={50}
                 className="w-24 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"

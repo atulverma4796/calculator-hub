@@ -112,7 +112,7 @@ export default function SalaryCalculator() {
           <div className="flex items-center justify-between mb-2">
             <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Hours per Week</label>
             <div className="flex items-center gap-1">
-              <input type="number" value={hoursPerWeek} onChange={(e) => setHoursPerWeek(Math.max(1, Number(e.target.value)))} min={1} max={80} className="w-20 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5" />
+              <input type="number" value={hoursPerWeek} onChange={(e) => setHoursPerWeek(Number(e.target.value))} min={1} max={80} className="w-20 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5" />
               <VoiceInputButton onResult={(v) => setHoursPerWeek(v)} />
             </div>
           </div>

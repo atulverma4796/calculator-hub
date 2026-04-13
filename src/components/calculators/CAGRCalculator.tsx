@@ -111,7 +111,7 @@ export default function CAGRCalculator() {
                 <input
                   type="number"
                   value={years}
-                  onChange={(e) => setYears(Math.max(1, Number(e.target.value)))}
+                  onChange={(e) => setYears(Number(e.target.value))}
                   min={1}
                   max={100}
                   step={0.5}

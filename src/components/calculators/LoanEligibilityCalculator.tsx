@@ -179,7 +179,7 @@ export default function LoanEligibilityCalculator() {
               <input
                 type="number"
                 value={tenure}
-                onChange={(e) => setTenure(Math.max(1, Number(e.target.value)))}
+                onChange={(e) => setTenure(Number(e.target.value))}
                 min={1}
                 max={30}
                 className="w-24 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
@@ -200,7 +200,7 @@ export default function LoanEligibilityCalculator() {
               <input
                 type="number"
                 value={downPaymentPct}
-                onChange={(e) => setDownPaymentPct(Math.min(90, Math.max(0, Number(e.target.value))))}
+                onChange={(e) => setDownPaymentPct(Number(e.target.value))}
                 min={0}
                 max={90}
                 className="w-24 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"

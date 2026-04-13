@@ -274,7 +274,7 @@ export default function GPACalculator() {
                       value={course.credits}
                       min={1}
                       max={10}
-                      onChange={(e) => updateCourse(sem.id, course.id, "credits", Math.max(1, Number(e.target.value)))}
+                      onChange={(e) => updateCourse(sem.id, course.id, "credits", Number(e.target.value))}
                       className="w-20 sm:w-auto sm:col-span-2 text-sm text-center px-2 py-2.5 sm:py-2 border border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-emerald-700 dark:text-emerald-300 font-bold focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                     />
                     <VoiceInputButton onResult={(v) => updateCourse(sem.id, course.id, "credits", Math.max(1, Math.min(10, v)))} />

@@ -250,7 +250,7 @@ export default function SavingsGoalCalculator() {
                 <input
                   type="number"
                   value={targetYears}
-                  onChange={(e) => setTargetYears(Math.max(1, Number(e.target.value)))}
+                  onChange={(e) => setTargetYears(Number(e.target.value))}
                   min={1}
                   max={50}
                   className="w-24 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"

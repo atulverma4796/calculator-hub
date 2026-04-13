@@ -202,7 +202,7 @@ export default function TimeZoneConverter() {
               min={0}
               max={23}
               value={hour}
-              onChange={(e) => setHour(Math.min(23, Math.max(0, Number(e.target.value))))}
+              onChange={(e) => setHour(Number(e.target.value))}
               className="w-20 text-center text-xl font-bold text-teal-700 dark:text-teal-300 bg-teal-50 dark:bg-teal-900/20 border border-teal-200 dark:border-teal-700 rounded-xl px-3 py-3 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
             />
             <VoiceInputButton onResult={(v) => setHour(Math.min(23, Math.max(0, v)))} />
@@ -212,7 +212,7 @@ export default function TimeZoneConverter() {
               min={0}
               max={59}
               value={minute}
-              onChange={(e) => setMinute(Math.min(59, Math.max(0, Number(e.target.value))))}
+              onChange={(e) => setMinute(Number(e.target.value))}
               className="w-20 text-center text-xl font-bold text-teal-700 dark:text-teal-300 bg-teal-50 dark:bg-teal-900/20 border border-teal-200 dark:border-teal-700 rounded-xl px-3 py-3 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
             />
             <VoiceInputButton onResult={(v) => setMinute(Math.min(59, Math.max(0, v)))} />
