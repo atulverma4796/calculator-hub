@@ -119,7 +119,7 @@ export default function ProfitMarginCalculator() {
                 <input
                   type="number"
                   value={revenue}
-                  onChange={(e) => setRevenue(Number(e.target.value) || 0)}
+                  onChange={(e) => setRevenue(Number(e.target.value))}
                   step={0.01}
                   className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />
@@ -142,7 +142,7 @@ export default function ProfitMarginCalculator() {
                 <input
                   type="number"
                   value={cost}
-                  onChange={(e) => setCost(Number(e.target.value) || 0)}
+                  onChange={(e) => setCost(Number(e.target.value))}
                   step={0.01}
                   className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />
@@ -163,7 +163,7 @@ export default function ProfitMarginCalculator() {
               <input
                 type="number"
                 value={quantity}
-                onChange={(e) => setQuantity(Number(e.target.value) || 1)}
+                onChange={(e) => setQuantity(Math.max(1, Number(e.target.value)))}
                 min={1}
                 max={1000000}
                 className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"

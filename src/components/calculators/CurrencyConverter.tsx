@@ -165,7 +165,7 @@ export default function CurrencyConverter() {
           <div className="flex gap-3">
             <div className="relative flex-1">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 text-sm">{getSymbol(from)}</span>
-              <input type="number" value={amount} onChange={(e) => setAmount(Number(e.target.value) || 0)} className="w-full pl-8 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-xl text-xl font-bold text-gray-800 dark:text-white dark:bg-gray-800 focus:ring-2 focus:ring-lime-500 focus:border-transparent" />
+              <input type="number" value={amount} onChange={(e) => setAmount(Number(e.target.value))} className="w-full pl-8 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-xl text-xl font-bold text-gray-800 dark:text-white dark:bg-gray-800 focus:ring-2 focus:ring-lime-500 focus:border-transparent" />
             </div>
             <VoiceInputButton onResult={(v) => setAmount(v)} />
             <select value={from} onChange={(e) => setFrom(e.target.value)} className="px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl text-sm font-semibold text-gray-700 dark:text-gray-300 focus:ring-2 focus:ring-lime-500 bg-white dark:bg-gray-800 dark:text-white min-w-[130px]">

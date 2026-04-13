@@ -189,7 +189,7 @@ export default function GSTCalculator() {
           <div className="flex items-center gap-2">
             <div className="relative flex-1">
               <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 text-sm">{currency.symbol}</span>
-              <input type="number" value={amount} onChange={(e) => setAmount(Number(e.target.value) || 0)} className="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl text-lg font-bold text-gray-800 dark:text-white dark:bg-gray-800 focus:ring-2 focus:ring-violet-500 focus:border-transparent" />
+              <input type="number" value={amount} onChange={(e) => setAmount(Number(e.target.value))} className="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl text-lg font-bold text-gray-800 dark:text-white dark:bg-gray-800 focus:ring-2 focus:ring-violet-500 focus:border-transparent" />
             </div>
             <VoiceInputButton onResult={(v) => setAmount(v)} />
           </div>
@@ -207,7 +207,7 @@ export default function GSTCalculator() {
           </div>
           <div className="mt-3 flex items-center gap-2">
             <span className="text-xs text-gray-400 dark:text-gray-500">Custom rate:</span>
-            <input type="number" value={taxRate} onChange={(e) => setTaxRate(Number(e.target.value) || 0)} step={0.5} min={0} max={100} className="w-20 text-center text-sm font-bold text-violet-700 bg-violet-50 border border-violet-200 rounded-lg px-2 py-1 focus:ring-2 focus:ring-violet-500" />
+            <input type="number" value={taxRate} onChange={(e) => setTaxRate(Number(e.target.value))} step={0.5} min={0} max={100} className="w-20 text-center text-sm font-bold text-violet-700 bg-violet-50 border border-violet-200 rounded-lg px-2 py-1 focus:ring-2 focus:ring-violet-500" />
             <VoiceInputButton onResult={(v) => setTaxRate(v)} />
             <span className="text-xs text-gray-400 dark:text-gray-500">%</span>
           </div>

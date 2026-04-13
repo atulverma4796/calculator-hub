@@ -185,7 +185,7 @@ export default function SavingsGoalCalculator() {
                 <input
                   type="number"
                   value={targetAmount}
-                  onChange={(e) => setTargetAmount(Number(e.target.value) || 0)}
+                  onChange={(e) => setTargetAmount(Number(e.target.value))}
                   className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />
                 <VoiceInputButton onResult={(v) => setTargetAmount(v)} />
@@ -207,7 +207,7 @@ export default function SavingsGoalCalculator() {
                 <input
                   type="number"
                   value={currentSavings}
-                  onChange={(e) => setCurrentSavings(Number(e.target.value) || 0)}
+                  onChange={(e) => setCurrentSavings(Number(e.target.value))}
                   className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />
                 <VoiceInputButton onResult={(v) => setCurrentSavings(v)} />
@@ -230,7 +230,7 @@ export default function SavingsGoalCalculator() {
                   <input
                     type="number"
                     value={monthlyContribution}
-                    onChange={(e) => setMonthlyContribution(Number(e.target.value) || 0)}
+                    onChange={(e) => setMonthlyContribution(Number(e.target.value))}
                     className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                   />
                   <VoiceInputButton onResult={(v) => setMonthlyContribution(v)} />
@@ -250,7 +250,7 @@ export default function SavingsGoalCalculator() {
                 <input
                   type="number"
                   value={targetYears}
-                  onChange={(e) => setTargetYears(Number(e.target.value) || 1)}
+                  onChange={(e) => setTargetYears(Math.max(1, Number(e.target.value)))}
                   min={1}
                   max={50}
                   className="w-24 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
@@ -272,7 +272,7 @@ export default function SavingsGoalCalculator() {
               <input
                 type="number"
                 value={returnRate}
-                onChange={(e) => setReturnRate(Number(e.target.value) || 0)}
+                onChange={(e) => setReturnRate(Number(e.target.value))}
                 step={0.1}
                 min={0}
                 max={30}

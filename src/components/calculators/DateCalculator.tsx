@@ -292,7 +292,7 @@ export default function DateCalculator() {
                   type="number"
                   min={0}
                   value={amount}
-                  onChange={(e) => setAmount(Number(e.target.value) || 0)}
+                  onChange={(e) => setAmount(Number(e.target.value))}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl text-lg font-semibold text-violet-700 dark:text-violet-300 bg-violet-50 dark:bg-violet-900/20 focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                 />
               </div>

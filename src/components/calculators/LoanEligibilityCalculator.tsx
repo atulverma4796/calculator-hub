@@ -115,7 +115,7 @@ export default function LoanEligibilityCalculator() {
                 <input
                   type="number"
                   value={monthlyIncome}
-                  onChange={(e) => setMonthlyIncome(Number(e.target.value) || 0)}
+                  onChange={(e) => setMonthlyIncome(Number(e.target.value))}
                   className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />
                 <VoiceInputButton onResult={(v) => setMonthlyIncome(v)} />
@@ -137,7 +137,7 @@ export default function LoanEligibilityCalculator() {
                 <input
                   type="number"
                   value={existingEMIs}
-                  onChange={(e) => setExistingEMIs(Number(e.target.value) || 0)}
+                  onChange={(e) => setExistingEMIs(Number(e.target.value))}
                   className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />
                 <VoiceInputButton onResult={(v) => setExistingEMIs(v)} />
@@ -157,7 +157,7 @@ export default function LoanEligibilityCalculator() {
               <input
                 type="number"
                 value={rate}
-                onChange={(e) => setRate(Number(e.target.value) || 0)}
+                onChange={(e) => setRate(Number(e.target.value))}
                 step={0.1}
                 min={0.1}
                 max={30}
@@ -179,7 +179,7 @@ export default function LoanEligibilityCalculator() {
               <input
                 type="number"
                 value={tenure}
-                onChange={(e) => setTenure(Number(e.target.value) || 1)}
+                onChange={(e) => setTenure(Math.max(1, Number(e.target.value)))}
                 min={1}
                 max={30}
                 className="w-24 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
@@ -200,7 +200,7 @@ export default function LoanEligibilityCalculator() {
               <input
                 type="number"
                 value={downPaymentPct}
-                onChange={(e) => setDownPaymentPct(Math.min(90, Math.max(0, Number(e.target.value) || 0)))}
+                onChange={(e) => setDownPaymentPct(Math.min(90, Math.max(0, Number(e.target.value))))}
                 min={0}
                 max={90}
                 className="w-24 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"

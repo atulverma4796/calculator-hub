@@ -274,7 +274,7 @@ export default function GPACalculator() {
                       value={course.credits}
                       min={1}
                       max={10}
-                      onChange={(e) => updateCourse(sem.id, course.id, "credits", Number(e.target.value) || 1)}
+                      onChange={(e) => updateCourse(sem.id, course.id, "credits", Math.max(1, Number(e.target.value)))}
                       className="w-20 sm:w-auto sm:col-span-2 text-sm text-center px-2 py-2.5 sm:py-2 border border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-emerald-700 dark:text-emerald-300 font-bold focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                     />
                     <VoiceInputButton onResult={(v) => updateCourse(sem.id, course.id, "credits", Math.max(1, Math.min(10, v)))} />
@@ -297,7 +297,7 @@ export default function GPACalculator() {
                           min={0}
                           max={100}
                           value={percentages[course.id] ?? 0}
-                          onChange={(e) => handlePercentageChange(course.id, Number(e.target.value) || 0)}
+                          onChange={(e) => handlePercentageChange(course.id, Number(e.target.value))}
                           className="flex-1 text-sm text-center px-2 py-2.5 sm:py-2 border border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 font-bold focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                         />
                         <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 whitespace-nowrap">
@@ -392,7 +392,7 @@ export default function GPACalculator() {
             min={0}
             max={4}
             value={targetGPA}
-            onChange={(e) => setTargetGPA(Number(e.target.value) || 0)}
+            onChange={(e) => setTargetGPA(Number(e.target.value))}
             className="w-20 text-center text-sm font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-700 rounded-lg px-2 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
           />
         </div>

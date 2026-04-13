@@ -122,7 +122,7 @@ export default function EMICalculator() {
                 <input
                   type="number"
                   value={amount}
-                  onChange={(e) => setAmount(Number(e.target.value) || 0)}
+                  onChange={(e) => setAmount(Number(e.target.value))}
                   className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />
                 <VoiceInputButton onResult={(v) => setAmount(v)} />
@@ -150,7 +150,7 @@ export default function EMICalculator() {
               <input
                 type="number"
                 value={rate}
-                onChange={(e) => setRate(Number(e.target.value) || 0)}
+                onChange={(e) => setRate(Number(e.target.value))}
                 step={0.1}
                 min={0.1}
                 max={30}
@@ -181,7 +181,7 @@ export default function EMICalculator() {
                 <input
                   type="number"
                   value={tenure}
-                  onChange={(e) => setTenure(Number(e.target.value) || 1)}
+                  onChange={(e) => setTenure(Math.max(1, Number(e.target.value)))}
                   min={1}
                   max={tenureType === "years" ? 30 : 360}
                   className="w-20 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"

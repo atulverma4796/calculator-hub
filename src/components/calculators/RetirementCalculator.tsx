@@ -113,12 +113,12 @@ export default function RetirementCalculator() {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1 block">Current Age</label>
-              <input type="number" value={currentAge} onChange={(e) => setCurrentAge(Number(e.target.value) || 18)} min={18} max={70} className="w-full text-center text-sm font-bold text-fuchsia-700 bg-fuchsia-50 border border-fuchsia-200 rounded-lg px-3 py-2" />
+              <input type="number" value={currentAge} onChange={(e) => setCurrentAge(Number(e.target.value))} min={18} max={70} className="w-full text-center text-sm font-bold text-fuchsia-700 bg-fuchsia-50 border border-fuchsia-200 rounded-lg px-3 py-2" />
               <VoiceInputButton onResult={(v) => setCurrentAge(v)} />
             </div>
             <div>
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1 block">Retire at Age</label>
-              <input type="number" value={retireAge} onChange={(e) => setRetireAge(Number(e.target.value) || 50)} min={currentAge + 1} max={80} className="w-full text-center text-sm font-bold text-fuchsia-700 bg-fuchsia-50 border border-fuchsia-200 rounded-lg px-3 py-2" />
+              <input type="number" value={retireAge} onChange={(e) => setRetireAge(Number(e.target.value))} min={currentAge + 1} max={80} className="w-full text-center text-sm font-bold text-fuchsia-700 bg-fuchsia-50 border border-fuchsia-200 rounded-lg px-3 py-2" />
               <VoiceInputButton onResult={(v) => setRetireAge(v)} />
             </div>
           </div>
@@ -127,7 +127,7 @@ export default function RetirementCalculator() {
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Current Savings</label>
               <div className="flex items-center gap-1">
                 <span className="text-xs text-gray-400 dark:text-gray-500">{currency.symbol}</span>
-                <input type="number" value={currentSavings} onChange={(e) => setCurrentSavings(Number(e.target.value) || 0)} className="w-32 text-right text-sm font-bold text-fuchsia-700 bg-fuchsia-50 border border-fuchsia-200 rounded-lg px-3 py-1.5" />
+                <input type="number" value={currentSavings} onChange={(e) => setCurrentSavings(Number(e.target.value))} className="w-32 text-right text-sm font-bold text-fuchsia-700 bg-fuchsia-50 border border-fuchsia-200 rounded-lg px-3 py-1.5" />
                 <VoiceInputButton onResult={(v) => setCurrentSavings(v)} />
               </div>
             </div>
@@ -138,7 +138,7 @@ export default function RetirementCalculator() {
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Monthly Saving</label>
               <div className="flex items-center gap-1">
                 <span className="text-xs text-gray-400 dark:text-gray-500">{currency.symbol}</span>
-                <input type="number" value={monthlySaving} onChange={(e) => setMonthlySaving(Number(e.target.value) || 0)} className="w-28 text-right text-sm font-bold text-fuchsia-700 bg-fuchsia-50 border border-fuchsia-200 rounded-lg px-3 py-1.5" />
+                <input type="number" value={monthlySaving} onChange={(e) => setMonthlySaving(Number(e.target.value))} className="w-28 text-right text-sm font-bold text-fuchsia-700 bg-fuchsia-50 border border-fuchsia-200 rounded-lg px-3 py-1.5" />
                 <VoiceInputButton onResult={(v) => setMonthlySaving(v)} />
               </div>
             </div>
@@ -148,7 +148,7 @@ export default function RetirementCalculator() {
             <div className="flex items-center justify-between mb-2">
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Expected Return (%)</label>
               <div className="flex items-center gap-1">
-                <input type="number" value={returnRate} onChange={(e) => setReturnRate(Number(e.target.value) || 0)} step={0.5} className="w-20 text-right text-sm font-bold text-fuchsia-700 bg-fuchsia-50 border border-fuchsia-200 rounded-lg px-3 py-1.5" />
+                <input type="number" value={returnRate} onChange={(e) => setReturnRate(Number(e.target.value))} step={0.5} className="w-20 text-right text-sm font-bold text-fuchsia-700 bg-fuchsia-50 border border-fuchsia-200 rounded-lg px-3 py-1.5" />
                 <VoiceInputButton onResult={(v) => setReturnRate(v)} />
               </div>
             </div>

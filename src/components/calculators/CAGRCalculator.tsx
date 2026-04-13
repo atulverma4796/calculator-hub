@@ -69,7 +69,7 @@ export default function CAGRCalculator() {
                 <input
                   type="number"
                   value={beginningValue}
-                  onChange={(e) => setBeginningValue(Number(e.target.value) || 0)}
+                  onChange={(e) => setBeginningValue(Number(e.target.value))}
                   className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />
                 <VoiceInputButton onResult={(v) => setBeginningValue(v)} />
@@ -90,7 +90,7 @@ export default function CAGRCalculator() {
                 <input
                   type="number"
                   value={endingValue}
-                  onChange={(e) => setEndingValue(Number(e.target.value) || 0)}
+                  onChange={(e) => setEndingValue(Number(e.target.value))}
                   className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />
                 <VoiceInputButton onResult={(v) => setEndingValue(v)} />
@@ -111,7 +111,7 @@ export default function CAGRCalculator() {
                 <input
                   type="number"
                   value={years}
-                  onChange={(e) => setYears(Number(e.target.value) || 1)}
+                  onChange={(e) => setYears(Math.max(1, Number(e.target.value)))}
                   min={1}
                   max={100}
                   step={0.5}

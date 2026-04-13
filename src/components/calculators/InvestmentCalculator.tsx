@@ -116,7 +116,7 @@ export default function InvestmentCalculator() {
                 <input
                   type="number"
                   value={initialInvestment}
-                  onChange={(e) => setInitialInvestment(Number(e.target.value) || 0)}
+                  onChange={(e) => setInitialInvestment(Number(e.target.value))}
                   className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />
                 <VoiceInputButton onResult={(v) => setInitialInvestment(v)} />
@@ -138,7 +138,7 @@ export default function InvestmentCalculator() {
                 <input
                   type="number"
                   value={monthlyAddition}
-                  onChange={(e) => setMonthlyAddition(Number(e.target.value) || 0)}
+                  onChange={(e) => setMonthlyAddition(Number(e.target.value))}
                   className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />
                 <VoiceInputButton onResult={(v) => setMonthlyAddition(v)} />
@@ -158,7 +158,7 @@ export default function InvestmentCalculator() {
               <input
                 type="number"
                 value={annualReturn}
-                onChange={(e) => setAnnualReturn(Number(e.target.value) || 0)}
+                onChange={(e) => setAnnualReturn(Number(e.target.value))}
                 step={0.5}
                 min={0}
                 max={50}
@@ -180,7 +180,7 @@ export default function InvestmentCalculator() {
               <input
                 type="number"
                 value={years}
-                onChange={(e) => setYears(Number(e.target.value) || 1)}
+                onChange={(e) => setYears(Math.max(1, Number(e.target.value)))}
                 min={1}
                 max={50}
                 className="w-24 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"

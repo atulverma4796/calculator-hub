@@ -93,7 +93,7 @@ export default function BreakEvenCalculator() {
                 <input
                   type="number"
                   value={fixedCosts}
-                  onChange={(e) => setFixedCosts(Number(e.target.value) || 0)}
+                  onChange={(e) => setFixedCosts(Number(e.target.value))}
                   className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />
                 <VoiceInputButton onResult={(v) => setFixedCosts(v)} />
@@ -115,7 +115,7 @@ export default function BreakEvenCalculator() {
                 <input
                   type="number"
                   value={variableCost}
-                  onChange={(e) => setVariableCost(Number(e.target.value) || 0)}
+                  onChange={(e) => setVariableCost(Number(e.target.value))}
                   step={0.01}
                   className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />
@@ -138,7 +138,7 @@ export default function BreakEvenCalculator() {
                 <input
                   type="number"
                   value={sellingPrice}
-                  onChange={(e) => setSellingPrice(Number(e.target.value) || 0)}
+                  onChange={(e) => setSellingPrice(Number(e.target.value))}
                   step={0.01}
                   className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />

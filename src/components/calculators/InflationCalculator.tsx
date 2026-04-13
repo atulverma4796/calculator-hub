@@ -90,7 +90,7 @@ export default function InflationCalculator() {
                 <input
                   type="number"
                   value={currentAmount}
-                  onChange={(e) => setCurrentAmount(Number(e.target.value) || 0)}
+                  onChange={(e) => setCurrentAmount(Number(e.target.value))}
                   className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />
                 <VoiceInputButton onResult={(v) => setCurrentAmount(v)} />
@@ -110,7 +110,7 @@ export default function InflationCalculator() {
               <input
                 type="number"
                 value={inflationRate}
-                onChange={(e) => setInflationRate(Number(e.target.value) || 0)}
+                onChange={(e) => setInflationRate(Number(e.target.value))}
                 step={0.1}
                 min={0.1}
                 max={30}
@@ -132,7 +132,7 @@ export default function InflationCalculator() {
               <input
                 type="number"
                 value={years}
-                onChange={(e) => setYears(Number(e.target.value) || 1)}
+                onChange={(e) => setYears(Math.max(1, Number(e.target.value)))}
                 min={1}
                 max={50}
                 className="w-24 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"

@@ -54,10 +54,10 @@ export default function PercentageCalculator() {
         <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-4">What is X% of Y?</h3>
         <div className="flex items-center gap-3 flex-wrap">
           <span className="text-sm text-gray-600 dark:text-gray-400">What is</span>
-          <input type="number" value={pct1} onChange={(e) => setPct1(Number(e.target.value) || 0)} className="w-20 text-center text-sm font-bold text-pink-700 bg-pink-50 border border-pink-200 rounded-lg px-2 py-2 focus:ring-2 focus:ring-pink-500 focus:border-transparent" />
+          <input type="number" value={pct1} onChange={(e) => setPct1(Number(e.target.value))} className="w-20 text-center text-sm font-bold text-pink-700 bg-pink-50 border border-pink-200 rounded-lg px-2 py-2 focus:ring-2 focus:ring-pink-500 focus:border-transparent" />
           <VoiceInputButton onResult={(v) => setPct1(v)} />
           <span className="text-sm text-gray-600 dark:text-gray-400">% of</span>
-          <input type="number" value={num1} onChange={(e) => setNum1(Number(e.target.value) || 0)} className="w-28 text-center text-sm font-bold text-pink-700 bg-pink-50 border border-pink-200 rounded-lg px-2 py-2 focus:ring-2 focus:ring-pink-500 focus:border-transparent" />
+          <input type="number" value={num1} onChange={(e) => setNum1(Number(e.target.value))} className="w-28 text-center text-sm font-bold text-pink-700 bg-pink-50 border border-pink-200 rounded-lg px-2 py-2 focus:ring-2 focus:ring-pink-500 focus:border-transparent" />
           <VoiceInputButton onResult={(v) => setNum1(v)} />
           <span className="text-sm text-gray-600 dark:text-gray-400">?</span>
         </div>
@@ -71,10 +71,10 @@ export default function PercentageCalculator() {
       <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 shadow-sm">
         <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-4">X is what percent of Y?</h3>
         <div className="flex items-center gap-3 flex-wrap">
-          <input type="number" value={num2a} onChange={(e) => setNum2a(Number(e.target.value) || 0)} className="w-24 text-center text-sm font-bold text-pink-700 bg-pink-50 border border-pink-200 rounded-lg px-2 py-2 focus:ring-2 focus:ring-pink-500 focus:border-transparent" />
+          <input type="number" value={num2a} onChange={(e) => setNum2a(Number(e.target.value))} className="w-24 text-center text-sm font-bold text-pink-700 bg-pink-50 border border-pink-200 rounded-lg px-2 py-2 focus:ring-2 focus:ring-pink-500 focus:border-transparent" />
           <VoiceInputButton onResult={(v) => setNum2a(v)} />
           <span className="text-sm text-gray-600 dark:text-gray-400">is what % of</span>
-          <input type="number" value={num2b} onChange={(e) => setNum2b(Number(e.target.value) || 0)} className="w-24 text-center text-sm font-bold text-pink-700 bg-pink-50 border border-pink-200 rounded-lg px-2 py-2 focus:ring-2 focus:ring-pink-500 focus:border-transparent" />
+          <input type="number" value={num2b} onChange={(e) => setNum2b(Number(e.target.value))} className="w-24 text-center text-sm font-bold text-pink-700 bg-pink-50 border border-pink-200 rounded-lg px-2 py-2 focus:ring-2 focus:ring-pink-500 focus:border-transparent" />
           <VoiceInputButton onResult={(v) => setNum2b(v)} />
           <span className="text-sm text-gray-600 dark:text-gray-400">?</span>
         </div>
@@ -89,10 +89,10 @@ export default function PercentageCalculator() {
         <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-4">Percentage Change</h3>
         <div className="flex items-center gap-3 flex-wrap">
           <span className="text-sm text-gray-600 dark:text-gray-400">From</span>
-          <input type="number" value={num3a} onChange={(e) => setNum3a(Number(e.target.value) || 0)} className="w-24 text-center text-sm font-bold text-pink-700 bg-pink-50 border border-pink-200 rounded-lg px-2 py-2 focus:ring-2 focus:ring-pink-500 focus:border-transparent" />
+          <input type="number" value={num3a} onChange={(e) => setNum3a(Number(e.target.value))} className="w-24 text-center text-sm font-bold text-pink-700 bg-pink-50 border border-pink-200 rounded-lg px-2 py-2 focus:ring-2 focus:ring-pink-500 focus:border-transparent" />
           <VoiceInputButton onResult={(v) => setNum3a(v)} />
           <span className="text-sm text-gray-600 dark:text-gray-400">to</span>
-          <input type="number" value={num3b} onChange={(e) => setNum3b(Number(e.target.value) || 0)} className="w-24 text-center text-sm font-bold text-pink-700 bg-pink-50 border border-pink-200 rounded-lg px-2 py-2 focus:ring-2 focus:ring-pink-500 focus:border-transparent" />
+          <input type="number" value={num3b} onChange={(e) => setNum3b(Number(e.target.value))} className="w-24 text-center text-sm font-bold text-pink-700 bg-pink-50 border border-pink-200 rounded-lg px-2 py-2 focus:ring-2 focus:ring-pink-500 focus:border-transparent" />
           <VoiceInputButton onResult={(v) => setNum3b(v)} />
         </div>
         <div className="mt-4 bg-gradient-to-r from-pink-500 to-rose-600 text-white rounded-xl px-5 py-3 inline-flex items-center gap-2">

@@ -81,7 +81,7 @@ export default function FuelCalculator() {
           <div className="flex items-center justify-between mb-2">
             <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Distance ({distUnit})</label>
             <div className="flex items-center gap-1">
-              <input type="number" value={distance} onChange={(e) => setDistance(Number(e.target.value) || 0)} className="w-28 text-right text-sm font-bold text-orange-700 bg-orange-50 border border-orange-200 rounded-lg px-3 py-1.5" />
+              <input type="number" value={distance} onChange={(e) => setDistance(Number(e.target.value))} className="w-28 text-right text-sm font-bold text-orange-700 bg-orange-50 border border-orange-200 rounded-lg px-3 py-1.5" />
               <VoiceInputButton onResult={(v) => setDistance(v)} />
             </div>
           </div>
@@ -92,7 +92,7 @@ export default function FuelCalculator() {
           <div className="flex items-center justify-between mb-2">
             <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Fuel Efficiency ({efficiencyLabel})</label>
             <div className="flex items-center gap-1">
-              <input type="number" value={efficiency} onChange={(e) => setEfficiency(Number(e.target.value) || 0)} step={0.5} className="w-24 text-right text-sm font-bold text-orange-700 bg-orange-50 border border-orange-200 rounded-lg px-3 py-1.5" />
+              <input type="number" value={efficiency} onChange={(e) => setEfficiency(Number(e.target.value))} step={0.5} className="w-24 text-right text-sm font-bold text-orange-700 bg-orange-50 border border-orange-200 rounded-lg px-3 py-1.5" />
               <VoiceInputButton onResult={(v) => setEfficiency(v)} />
             </div>
           </div>
@@ -104,7 +104,7 @@ export default function FuelCalculator() {
             <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Fuel Price ({currency.symbol}/{currency.fuelUnit === "kmpl" ? "liter" : "gallon"})</label>
             <div className="flex items-center gap-1">
               <span className="text-xs text-gray-400 dark:text-gray-500">{currency.symbol}</span>
-              <input type="number" value={fuelPrice} onChange={(e) => setFuelPrice(Number(e.target.value) || 0)} step={0.1} className="w-28 text-right text-sm font-bold text-orange-700 bg-orange-50 border border-orange-200 rounded-lg px-3 py-1.5" />
+              <input type="number" value={fuelPrice} onChange={(e) => setFuelPrice(Number(e.target.value))} step={0.1} className="w-28 text-right text-sm font-bold text-orange-700 bg-orange-50 border border-orange-200 rounded-lg px-3 py-1.5" />
               <VoiceInputButton onResult={(v) => setFuelPrice(v)} />
             </div>
           </div>
