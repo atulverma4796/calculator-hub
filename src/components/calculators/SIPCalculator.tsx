@@ -12,6 +12,7 @@ import InsightCard from "@/components/InsightCard";
 import { useShareableURL, useInitialParams } from "@/hooks/useShareableURL";
 import { useCalcHistory } from "@/hooks/useCalcHistory";
 import VoiceInputButton from "@/components/VoiceInputButton";
+import CalcInput from "@/components/CalcInput";
 
 export default function SIPCalculator() {
   const { getString, getNumber, hasParams } = useInitialParams();
@@ -95,7 +96,7 @@ export default function SIPCalculator() {
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Monthly Investment</label>
               <div className="flex items-center gap-1">
                 <span className="text-xs text-gray-400 dark:text-gray-500">{currency.symbol}</span>
-                <input type="number" value={monthly} onChange={(e) => setMonthly(Number(e.target.value))} className="w-32 text-right text-sm font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-emerald-500 focus:border-transparent" />
+                <CalcInput value={monthly} onChange={setMonthly} className="w-32 text-right text-sm font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-emerald-500 focus:border-transparent" />
                 <VoiceInputButton onResult={(v) => setMonthly(v)} />
               </div>
             </div>
@@ -106,7 +107,7 @@ export default function SIPCalculator() {
             <div className="flex items-center justify-between mb-2">
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Expected Return Rate (% p.a.)</label>
               <div className="flex items-center gap-1">
-                <input type="number" value={rate} onChange={(e) => setRate(Number(e.target.value))} step={0.5} className="w-24 text-right text-sm font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-emerald-500 focus:border-transparent" />
+                <CalcInput value={rate} onChange={setRate} step={0.5} className="w-24 text-right text-sm font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-emerald-500 focus:border-transparent" />
                 <VoiceInputButton onResult={(v) => setRate(v)} />
               </div>
             </div>
@@ -117,7 +118,7 @@ export default function SIPCalculator() {
             <div className="flex items-center justify-between mb-2">
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Time Period (Years)</label>
               <div className="flex items-center gap-1">
-                <input type="number" value={years} onChange={(e) => setYears(Number(e.target.value))} min={1} max={40} className="w-20 text-right text-sm font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-emerald-500 focus:border-transparent" />
+                <CalcInput value={years} onChange={setYears} min={1} max={40} className="w-20 text-right text-sm font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-emerald-500 focus:border-transparent" />
                 <VoiceInputButton onResult={(v) => setYears(v)} />
               </div>
             </div>

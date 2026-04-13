@@ -8,6 +8,7 @@ import CalculationHistory from "@/components/CalculationHistory";
 import InsightCard from "@/components/InsightCard";
 import { useShareableURL, useInitialParams } from "@/hooks/useShareableURL";
 import { useCalcHistory } from "@/hooks/useCalcHistory";
+import CalcInput from "@/components/CalcInput";
 import VoiceInputButton from "@/components/VoiceInputButton";
 
 export default function InflationCalculator() {
@@ -87,10 +88,9 @@ export default function InflationCalculator() {
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Current Amount</label>
               <div className="flex items-center gap-1">
                 <span className="text-xs text-gray-400 dark:text-gray-500">{currency.symbol}</span>
-                <input
-                  type="number"
+                <CalcInput
                   value={currentAmount}
-                  onChange={(e) => setCurrentAmount(Number(e.target.value))}
+                  onChange={setCurrentAmount}
                   className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />
                 <VoiceInputButton onResult={(v) => setCurrentAmount(v)} />
@@ -107,10 +107,9 @@ export default function InflationCalculator() {
           <div>
             <div className="flex items-center justify-between mb-2">
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Inflation Rate (% p.a.)</label>
-              <input
-                type="number"
+              <CalcInput
                 value={inflationRate}
-                onChange={(e) => setInflationRate(Number(e.target.value))}
+                onChange={setInflationRate}
                 step={0.1}
                 min={0.1}
                 max={30}
@@ -129,10 +128,9 @@ export default function InflationCalculator() {
           <div>
             <div className="flex items-center justify-between mb-2">
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Time Period (Years)</label>
-              <input
-                type="number"
+              <CalcInput
                 value={years}
-                onChange={(e) => setYears(Number(e.target.value))}
+                onChange={setYears}
                 min={1}
                 max={50}
                 className="w-24 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"

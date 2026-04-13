@@ -11,6 +11,7 @@ import InsightCard from "@/components/InsightCard";
 import { useShareableURL, useInitialParams } from "@/hooks/useShareableURL";
 import { useCalcHistory } from "@/hooks/useCalcHistory";
 import VoiceInputButton from "@/components/VoiceInputButton";
+import CalcInput from "@/components/CalcInput";
 
 export default function TipCalculator() {
   const { getString, getNumber, hasParams } = useInitialParams();
@@ -77,7 +78,7 @@ export default function TipCalculator() {
           <div className="flex items-center gap-2">
             <div className="relative flex-1">
               <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 text-lg">{currency.symbol}</span>
-              <input type="number" value={bill} onChange={(e) => setBill(Number(e.target.value))} className="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl text-2xl font-bold text-gray-800 dark:text-white dark:bg-gray-800 focus:ring-2 focus:ring-yellow-500 focus:border-transparent" />
+              <CalcInput value={bill} onChange={setBill} className="w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl text-2xl font-bold text-gray-800 dark:text-white dark:bg-gray-800 focus:ring-2 focus:ring-yellow-500 focus:border-transparent" />
             </div>
             <VoiceInputButton onResult={(v) => setBill(v)} />
           </div>

@@ -9,6 +9,7 @@ import InsightCard from "@/components/InsightCard";
 import { useShareableURL, useInitialParams } from "@/hooks/useShareableURL";
 import { useCalcHistory } from "@/hooks/useCalcHistory";
 import VoiceInputButton from "@/components/VoiceInputButton";
+import CalcInput from "@/components/CalcInput";
 
 export default function LoanEligibilityCalculator() {
   const { getString, getNumber, hasParams } = useInitialParams();
@@ -112,10 +113,9 @@ export default function LoanEligibilityCalculator() {
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Monthly Income</label>
               <div className="flex items-center gap-1">
                 <span className="text-xs text-gray-400 dark:text-gray-500">{currency.symbol}</span>
-                <input
-                  type="number"
+                <CalcInput
                   value={monthlyIncome}
-                  onChange={(e) => setMonthlyIncome(Number(e.target.value))}
+                  onChange={setMonthlyIncome}
                   className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />
                 <VoiceInputButton onResult={(v) => setMonthlyIncome(v)} />
@@ -134,10 +134,9 @@ export default function LoanEligibilityCalculator() {
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Existing EMIs / Obligations</label>
               <div className="flex items-center gap-1">
                 <span className="text-xs text-gray-400 dark:text-gray-500">{currency.symbol}</span>
-                <input
-                  type="number"
+                <CalcInput
                   value={existingEMIs}
-                  onChange={(e) => setExistingEMIs(Number(e.target.value))}
+                  onChange={setExistingEMIs}
                   className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />
                 <VoiceInputButton onResult={(v) => setExistingEMIs(v)} />
@@ -154,10 +153,9 @@ export default function LoanEligibilityCalculator() {
           <div>
             <div className="flex items-center justify-between mb-2">
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Interest Rate (% p.a.)</label>
-              <input
-                type="number"
+              <CalcInput
                 value={rate}
-                onChange={(e) => setRate(Number(e.target.value))}
+                onChange={setRate}
                 step={0.1}
                 min={0.1}
                 max={30}
@@ -176,10 +174,9 @@ export default function LoanEligibilityCalculator() {
           <div>
             <div className="flex items-center justify-between mb-2">
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Loan Tenure (Years)</label>
-              <input
-                type="number"
+              <CalcInput
                 value={tenure}
-                onChange={(e) => setTenure(Number(e.target.value))}
+                onChange={setTenure}
                 min={1}
                 max={30}
                 className="w-24 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
@@ -197,10 +194,9 @@ export default function LoanEligibilityCalculator() {
           <div>
             <div className="flex items-center justify-between mb-2">
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Down Payment (%)</label>
-              <input
-                type="number"
+              <CalcInput
                 value={downPaymentPct}
-                onChange={(e) => setDownPaymentPct(Number(e.target.value))}
+                onChange={setDownPaymentPct}
                 min={0}
                 max={90}
                 className="w-24 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"

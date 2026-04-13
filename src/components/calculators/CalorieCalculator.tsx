@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import CalcInput from "@/components/CalcInput";
 import VoiceInputButton from "@/components/VoiceInputButton";
 import ActionButtons from "@/components/ActionButtons";
 import CalculationHistory from "@/components/CalculationHistory";
@@ -107,7 +108,7 @@ export default function CalorieCalculator() {
           <div className="flex items-center justify-between mb-2">
             <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Age (years)</label>
             <div className="flex items-center gap-1">
-              <input type="number" value={age} onChange={(e) => setAge(Number(e.target.value))} className="w-24 text-right text-sm font-bold text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-gray-800 dark:text-green-300 dark:border-green-700" />
+              <CalcInput value={age} onChange={setAge} className="w-24 text-right text-sm font-bold text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-gray-800 dark:text-green-300 dark:border-green-700" />
               <VoiceInputButton onResult={(v) => setAge(v)} />
             </div>
           </div>
@@ -119,7 +120,7 @@ export default function CalorieCalculator() {
           <div className="flex items-center justify-between mb-2">
             <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Weight ({unit === "metric" ? "kg" : "lbs"})</label>
             <div className="flex items-center gap-1">
-              <input type="number" value={weight} onChange={(e) => setWeight(Number(e.target.value))} className="w-24 text-right text-sm font-bold text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-gray-800 dark:text-green-300 dark:border-green-700" />
+              <CalcInput value={weight} onChange={setWeight} className="w-24 text-right text-sm font-bold text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-gray-800 dark:text-green-300 dark:border-green-700" />
               <VoiceInputButton onResult={(v) => setWeight(v)} />
             </div>
           </div>
@@ -132,7 +133,7 @@ export default function CalorieCalculator() {
             <div className="flex items-center justify-between mb-2">
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Height (cm)</label>
               <div className="flex items-center gap-1">
-                <input type="number" value={height} onChange={(e) => setHeight(Number(e.target.value))} className="w-24 text-right text-sm font-bold text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-gray-800 dark:text-green-300 dark:border-green-700" />
+                <CalcInput value={height} onChange={setHeight} className="w-24 text-right text-sm font-bold text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-gray-800 dark:text-green-300 dark:border-green-700" />
                 <VoiceInputButton onResult={(v) => setHeight(v)} />
               </div>
             </div>
@@ -144,7 +145,7 @@ export default function CalorieCalculator() {
               <div className="flex items-center justify-between mb-2">
                 <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Feet</label>
                 <div className="flex items-center gap-1">
-                  <input type="number" value={heightFt} onChange={(e) => setHeightFt(Number(e.target.value))} className="w-20 text-right text-sm font-bold text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-gray-800 dark:text-green-300 dark:border-green-700" />
+                  <CalcInput value={heightFt} onChange={setHeightFt} className="w-20 text-right text-sm font-bold text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-gray-800 dark:text-green-300 dark:border-green-700" />
                   <VoiceInputButton onResult={(v) => setHeightFt(v)} />
                 </div>
               </div>
@@ -154,7 +155,7 @@ export default function CalorieCalculator() {
               <div className="flex items-center justify-between mb-2">
                 <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Inches</label>
                 <div className="flex items-center gap-1">
-                  <input type="number" value={heightIn} onChange={(e) => setHeightIn(Number(e.target.value))} className="w-20 text-right text-sm font-bold text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-gray-800 dark:text-green-300 dark:border-green-700" />
+                  <CalcInput value={heightIn} onChange={setHeightIn} className="w-20 text-right text-sm font-bold text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-gray-800 dark:text-green-300 dark:border-green-700" />
                   <VoiceInputButton onResult={(v) => setHeightIn(v)} />
                 </div>
               </div>

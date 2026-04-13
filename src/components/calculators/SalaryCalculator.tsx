@@ -11,6 +11,7 @@ import InsightCard from "@/components/InsightCard";
 import { useShareableURL, useInitialParams } from "@/hooks/useShareableURL";
 import { useCalcHistory } from "@/hooks/useCalcHistory";
 import VoiceInputButton from "@/components/VoiceInputButton";
+import CalcInput from "@/components/CalcInput";
 
 export default function SalaryCalculator() {
   const { getString, getNumber, hasParams } = useInitialParams();
@@ -94,7 +95,7 @@ export default function SalaryCalculator() {
             <div className="flex items-center gap-2 flex-1 min-w-[140px]">
               <div className="relative flex-1">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500">{currency.symbol}</span>
-                <input type="number" value={amount} onChange={(e) => setAmount(Number(e.target.value))} className="w-full pl-7 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-xl text-lg font-bold text-gray-800 dark:text-white dark:bg-gray-800 focus:ring-2 focus:ring-indigo-500 focus:border-transparent" />
+                <CalcInput value={amount} onChange={setAmount} className="w-full pl-7 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-xl text-lg font-bold text-gray-800 dark:text-white dark:bg-gray-800 focus:ring-2 focus:ring-indigo-500 focus:border-transparent" />
               </div>
               <VoiceInputButton onResult={(v) => setAmount(v)} />
             </div>
@@ -112,7 +113,7 @@ export default function SalaryCalculator() {
           <div className="flex items-center justify-between mb-2">
             <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Hours per Week</label>
             <div className="flex items-center gap-1">
-              <input type="number" value={hoursPerWeek} onChange={(e) => setHoursPerWeek(Number(e.target.value))} min={1} max={80} className="w-20 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5" />
+              <CalcInput value={hoursPerWeek} onChange={setHoursPerWeek} min={1} max={80} className="w-20 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5" />
               <VoiceInputButton onResult={(v) => setHoursPerWeek(v)} />
             </div>
           </div>

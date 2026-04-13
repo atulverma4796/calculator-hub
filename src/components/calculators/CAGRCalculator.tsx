@@ -6,6 +6,7 @@ import CalculationHistory from "@/components/CalculationHistory";
 import InsightCard from "@/components/InsightCard";
 import { useShareableURL, useInitialParams } from "@/hooks/useShareableURL";
 import { useCalcHistory } from "@/hooks/useCalcHistory";
+import CalcInput from "@/components/CalcInput";
 import VoiceInputButton from "@/components/VoiceInputButton";
 
 export default function CAGRCalculator() {
@@ -66,10 +67,9 @@ export default function CAGRCalculator() {
             <div className="flex items-center justify-between mb-2">
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Beginning Value</label>
               <div className="flex items-center gap-1">
-                <input
-                  type="number"
+                <CalcInput
                   value={beginningValue}
-                  onChange={(e) => setBeginningValue(Number(e.target.value))}
+                  onChange={setBeginningValue}
                   className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />
                 <VoiceInputButton onResult={(v) => setBeginningValue(v)} />
@@ -87,10 +87,9 @@ export default function CAGRCalculator() {
             <div className="flex items-center justify-between mb-2">
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Ending Value</label>
               <div className="flex items-center gap-1">
-                <input
-                  type="number"
+                <CalcInput
                   value={endingValue}
-                  onChange={(e) => setEndingValue(Number(e.target.value))}
+                  onChange={setEndingValue}
                   className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />
                 <VoiceInputButton onResult={(v) => setEndingValue(v)} />
@@ -108,10 +107,9 @@ export default function CAGRCalculator() {
             <div className="flex items-center justify-between mb-2">
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Number of Years</label>
               <div className="flex items-center gap-1">
-                <input
-                  type="number"
+                <CalcInput
                   value={years}
-                  onChange={(e) => setYears(Number(e.target.value))}
+                  onChange={setYears}
                   min={1}
                   max={100}
                   step={0.5}

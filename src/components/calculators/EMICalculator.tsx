@@ -12,6 +12,7 @@ import InsightCard from "@/components/InsightCard";
 import { useShareableURL, useInitialParams } from "@/hooks/useShareableURL";
 import { useCalcHistory } from "@/hooks/useCalcHistory";
 import VoiceInputButton from "@/components/VoiceInputButton";
+import CalcInput from "@/components/CalcInput";
 
 export default function EMICalculator() {
   const { getString, getNumber, hasParams } = useInitialParams();
@@ -119,10 +120,9 @@ export default function EMICalculator() {
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Loan Amount</label>
               <div className="flex items-center gap-1">
                 <span className="text-xs text-gray-400 dark:text-gray-500">{currency.symbol}</span>
-                <input
-                  type="number"
+                <CalcInput
                   value={amount}
-                  onChange={(e) => setAmount(Number(e.target.value))}
+                  onChange={setAmount}
                   className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />
                 <VoiceInputButton onResult={(v) => setAmount(v)} />
@@ -147,10 +147,9 @@ export default function EMICalculator() {
           <div>
             <div className="flex items-center justify-between mb-2">
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Interest Rate (% p.a.)</label>
-              <input
-                type="number"
+              <CalcInput
                 value={rate}
-                onChange={(e) => setRate(Number(e.target.value))}
+                onChange={setRate}
                 step={0.1}
                 min={0.1}
                 max={30}
@@ -178,10 +177,9 @@ export default function EMICalculator() {
             <div className="flex items-center justify-between mb-2">
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Loan Tenure</label>
               <div className="flex items-center gap-2">
-                <input
-                  type="number"
+                <CalcInput
                   value={tenure}
-                  onChange={(e) => setTenure(Number(e.target.value))}
+                  onChange={setTenure}
                   min={1}
                   max={tenureType === "years" ? 30 : 360}
                   className="w-20 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"

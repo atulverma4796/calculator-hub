@@ -12,6 +12,7 @@ import InsightCard from "@/components/InsightCard";
 import { useShareableURL, useInitialParams } from "@/hooks/useShareableURL";
 import { useCalcHistory } from "@/hooks/useCalcHistory";
 import VoiceInputButton from "@/components/VoiceInputButton";
+import CalcInput from "@/components/CalcInput";
 
 export default function CompoundInterestCalculator() {
   const { getString, getNumber, hasParams } = useInitialParams();
@@ -87,7 +88,7 @@ export default function CompoundInterestCalculator() {
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Principal Amount</label>
               <div className="flex items-center gap-1">
                 <span className="text-xs text-gray-400 dark:text-gray-500">{currency.symbol}</span>
-                <input type="number" value={principal} onChange={(e) => setPrincipal(Number(e.target.value))} className="w-32 text-right text-sm font-bold text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-amber-500 focus:border-transparent" />
+                <CalcInput value={principal} onChange={setPrincipal} className="w-32 text-right text-sm font-bold text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-amber-500 focus:border-transparent" />
                 <VoiceInputButton onResult={(v) => setPrincipal(v)} />
               </div>
             </div>
@@ -98,7 +99,7 @@ export default function CompoundInterestCalculator() {
             <div className="flex items-center justify-between mb-2">
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Annual Interest Rate (%)</label>
               <div className="flex items-center gap-1">
-                <input type="number" value={rate} onChange={(e) => setRate(Number(e.target.value))} step={0.5} className="w-24 text-right text-sm font-bold text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-amber-500 focus:border-transparent" />
+                <CalcInput value={rate} onChange={setRate} step={0.5} className="w-24 text-right text-sm font-bold text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-amber-500 focus:border-transparent" />
                 <VoiceInputButton onResult={(v) => setRate(v)} />
               </div>
             </div>
@@ -109,7 +110,7 @@ export default function CompoundInterestCalculator() {
             <div className="flex items-center justify-between mb-2">
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Time Period (Years)</label>
               <div className="flex items-center gap-1">
-                <input type="number" value={years} onChange={(e) => setYears(Number(e.target.value))} min={1} max={50} className="w-20 text-right text-sm font-bold text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-amber-500 focus:border-transparent" />
+                <CalcInput value={years} onChange={setYears} min={1} max={50} className="w-20 text-right text-sm font-bold text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-amber-500 focus:border-transparent" />
                 <VoiceInputButton onResult={(v) => setYears(v)} />
               </div>
             </div>

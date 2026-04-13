@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import VoiceInputButton from "@/components/VoiceInputButton";
+import CalcInput from "@/components/CalcInput";
 import { CALCULATOR_CONTENT } from "@/lib/calculatorContent";
 import CalculatorEducation from "@/components/CalculatorEducation";
 import ActionButtons from "@/components/ActionButtons";
@@ -75,7 +76,7 @@ export default function BMICalculator() {
           <div className="flex items-center justify-between mb-2">
             <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Weight ({weightUnit})</label>
             <div className="flex items-center gap-1">
-              <input type="number" value={weight} onChange={(e) => setWeight(Number(e.target.value))} className="w-24 text-right text-sm font-bold text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-green-500 focus:border-transparent" />
+              <CalcInput value={weight} onChange={setWeight} className="w-24 text-right text-sm font-bold text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-green-500 focus:border-transparent" />
               <VoiceInputButton onResult={(v) => setWeight(v)} />
             </div>
           </div>
@@ -87,7 +88,7 @@ export default function BMICalculator() {
           <div className="flex items-center justify-between mb-2">
             <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Height (cm)</label>
             <div className="flex items-center gap-1">
-              <input type="number" value={height} onChange={(e) => setHeight(Number(e.target.value))} className="w-24 text-right text-sm font-bold text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-green-500 focus:border-transparent" />
+              <CalcInput value={height} onChange={setHeight} className="w-24 text-right text-sm font-bold text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-green-500 focus:border-transparent" />
               <VoiceInputButton onResult={(v) => setHeight(v)} />
             </div>
           </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo, useCallback } from "react";
+import CalcInput from "@/components/CalcInput";
 import VoiceInputButton from "@/components/VoiceInputButton";
 import ActionButtons from "@/components/ActionButtons";
 import CalculationHistory from "@/components/CalculationHistory";
@@ -269,12 +270,11 @@ export default function GPACalculator() {
                     className="w-full sm:col-span-4 text-sm px-3 py-2.5 sm:py-2 border border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                   />
                   <div className="flex gap-2 sm:contents">
-                    <input
-                      type="number"
+                    <CalcInput
                       value={course.credits}
                       min={1}
                       max={10}
-                      onChange={(e) => updateCourse(sem.id, course.id, "credits", Number(e.target.value))}
+                      onChange={(v) => updateCourse(sem.id, course.id, "credits", v)}
                       className="w-20 sm:w-auto sm:col-span-2 text-sm text-center px-2 py-2.5 sm:py-2 border border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-emerald-700 dark:text-emerald-300 font-bold focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                     />
                     <VoiceInputButton onResult={(v) => updateCourse(sem.id, course.id, "credits", Math.max(1, Math.min(10, v)))} />
@@ -292,12 +292,11 @@ export default function GPACalculator() {
                       </select>
                     ) : (
                       <div className="flex-1 sm:flex-none sm:col-span-4 flex items-center gap-1">
-                        <input
-                          type="number"
+                        <CalcInput
                           min={0}
                           max={100}
                           value={percentages[course.id] ?? 0}
-                          onChange={(e) => handlePercentageChange(course.id, Number(e.target.value))}
+                          onChange={(v) => handlePercentageChange(course.id, v)}
                           className="flex-1 text-sm text-center px-2 py-2.5 sm:py-2 border border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 font-bold focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                         />
                         <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 whitespace-nowrap">
@@ -386,13 +385,12 @@ export default function GPACalculator() {
         <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3">Target GPA Calculator</h3>
         <div className="flex items-center gap-3">
           <span className="text-sm text-gray-600 dark:text-gray-400">I want a cumulative GPA of</span>
-          <input
-            type="number"
+          <CalcInput
             step={0.1}
             min={0}
             max={4}
             value={targetGPA}
-            onChange={(e) => setTargetGPA(Number(e.target.value))}
+            onChange={setTargetGPA}
             className="w-20 text-center text-sm font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-700 rounded-lg px-2 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
           />
         </div>

@@ -11,6 +11,7 @@ import InsightCard from "@/components/InsightCard";
 import { useShareableURL, useInitialParams } from "@/hooks/useShareableURL";
 import { useCalcHistory } from "@/hooks/useCalcHistory";
 import VoiceInputButton from "@/components/VoiceInputButton";
+import CalcInput from "@/components/CalcInput";
 
 export default function FuelCalculator() {
   const { getString, getNumber, hasParams } = useInitialParams();
@@ -81,7 +82,7 @@ export default function FuelCalculator() {
           <div className="flex items-center justify-between mb-2">
             <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Distance ({distUnit})</label>
             <div className="flex items-center gap-1">
-              <input type="number" value={distance} onChange={(e) => setDistance(Number(e.target.value))} className="w-28 text-right text-sm font-bold text-orange-700 bg-orange-50 border border-orange-200 rounded-lg px-3 py-1.5" />
+              <CalcInput value={distance} onChange={setDistance} className="w-28 text-right text-sm font-bold text-orange-700 bg-orange-50 border border-orange-200 rounded-lg px-3 py-1.5" />
               <VoiceInputButton onResult={(v) => setDistance(v)} />
             </div>
           </div>
@@ -92,7 +93,7 @@ export default function FuelCalculator() {
           <div className="flex items-center justify-between mb-2">
             <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Fuel Efficiency ({efficiencyLabel})</label>
             <div className="flex items-center gap-1">
-              <input type="number" value={efficiency} onChange={(e) => setEfficiency(Number(e.target.value))} step={0.5} className="w-24 text-right text-sm font-bold text-orange-700 bg-orange-50 border border-orange-200 rounded-lg px-3 py-1.5" />
+              <CalcInput value={efficiency} onChange={setEfficiency} step={0.5} className="w-24 text-right text-sm font-bold text-orange-700 bg-orange-50 border border-orange-200 rounded-lg px-3 py-1.5" />
               <VoiceInputButton onResult={(v) => setEfficiency(v)} />
             </div>
           </div>
@@ -104,7 +105,7 @@ export default function FuelCalculator() {
             <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Fuel Price ({currency.symbol}/{currency.fuelUnit === "kmpl" ? "liter" : "gallon"})</label>
             <div className="flex items-center gap-1">
               <span className="text-xs text-gray-400 dark:text-gray-500">{currency.symbol}</span>
-              <input type="number" value={fuelPrice} onChange={(e) => setFuelPrice(Number(e.target.value))} step={0.1} className="w-28 text-right text-sm font-bold text-orange-700 bg-orange-50 border border-orange-200 rounded-lg px-3 py-1.5" />
+              <CalcInput value={fuelPrice} onChange={setFuelPrice} step={0.1} className="w-28 text-right text-sm font-bold text-orange-700 bg-orange-50 border border-orange-200 rounded-lg px-3 py-1.5" />
               <VoiceInputButton onResult={(v) => setFuelPrice(v)} />
             </div>
           </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import CalcInput from "@/components/CalcInput";
 import VoiceInputButton from "@/components/VoiceInputButton";
 import ActionButtons from "@/components/ActionButtons";
 import CalculationHistory from "@/components/CalculationHistory";
@@ -105,7 +106,7 @@ export default function WaterIntakeCalculator() {
           <div className="flex items-center justify-between mb-2">
             <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Weight ({unit === "metric" ? "kg" : "lbs"})</label>
             <div className="flex items-center gap-1">
-              <input type="number" value={weight} onChange={(e) => setWeight(Number(e.target.value))} className="w-24 text-right text-sm font-bold text-blue-700 bg-blue-50 border border-blue-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:text-blue-300 dark:border-blue-700" />
+              <CalcInput value={weight} onChange={setWeight} className="w-24 text-right text-sm font-bold text-blue-700 bg-blue-50 border border-blue-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:text-blue-300 dark:border-blue-700" />
               <VoiceInputButton onResult={(v) => setWeight(v)} />
             </div>
           </div>
@@ -117,7 +118,7 @@ export default function WaterIntakeCalculator() {
           <div className="flex items-center justify-between mb-2">
             <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Exercise (min/day)</label>
             <div className="flex items-center gap-1">
-              <input type="number" value={exerciseMin} onChange={(e) => setExerciseMin(Number(e.target.value))} className="w-24 text-right text-sm font-bold text-blue-700 bg-blue-50 border border-blue-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:text-blue-300 dark:border-blue-700" />
+              <CalcInput value={exerciseMin} onChange={setExerciseMin} className="w-24 text-right text-sm font-bold text-blue-700 bg-blue-50 border border-blue-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:text-blue-300 dark:border-blue-700" />
               <VoiceInputButton onResult={(v) => setExerciseMin(v)} />
             </div>
           </div>

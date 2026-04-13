@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import CalcInput from "@/components/CalcInput";
 import VoiceInputButton from "@/components/VoiceInputButton";
 import ActionButtons from "@/components/ActionButtons";
 import CalculationHistory from "@/components/CalculationHistory";
@@ -133,7 +134,7 @@ export default function BodyFatCalculator() {
           <div className="flex items-center justify-between mb-2">
             <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Weight ({weightLabel})</label>
             <div className="flex items-center gap-1">
-              <input type="number" value={weight} onChange={(e) => setWeight(Number(e.target.value))} className="w-24 text-right text-sm font-bold text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-gray-800 dark:text-green-300 dark:border-green-700" />
+              <CalcInput value={weight} onChange={setWeight} className="w-24 text-right text-sm font-bold text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-gray-800 dark:text-green-300 dark:border-green-700" />
               <VoiceInputButton onResult={(v) => setWeight(v)} />
             </div>
           </div>
@@ -145,7 +146,7 @@ export default function BodyFatCalculator() {
           <div className="flex items-center justify-between mb-2">
             <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Height ({unitLabel})</label>
             <div className="flex items-center gap-1">
-              <input type="number" value={height} onChange={(e) => setHeight(Number(e.target.value))} className="w-24 text-right text-sm font-bold text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-gray-800 dark:text-green-300 dark:border-green-700" />
+              <CalcInput value={height} onChange={setHeight} className="w-24 text-right text-sm font-bold text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-gray-800 dark:text-green-300 dark:border-green-700" />
               <VoiceInputButton onResult={(v) => setHeight(v)} />
             </div>
           </div>
@@ -157,7 +158,7 @@ export default function BodyFatCalculator() {
           <div className="flex items-center justify-between mb-2">
             <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Neck circumference ({unitLabel})</label>
             <div className="flex items-center gap-1">
-              <input type="number" value={neck} onChange={(e) => setNeck(Number(e.target.value))} className="w-24 text-right text-sm font-bold text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-gray-800 dark:text-green-300 dark:border-green-700" />
+              <CalcInput value={neck} onChange={setNeck} className="w-24 text-right text-sm font-bold text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-gray-800 dark:text-green-300 dark:border-green-700" />
               <VoiceInputButton onResult={(v) => setNeck(v)} />
             </div>
           </div>
@@ -169,7 +170,7 @@ export default function BodyFatCalculator() {
           <div className="flex items-center justify-between mb-2">
             <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Waist circumference ({unitLabel})</label>
             <div className="flex items-center gap-1">
-              <input type="number" value={waist} onChange={(e) => setWaist(Number(e.target.value))} className="w-24 text-right text-sm font-bold text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-gray-800 dark:text-green-300 dark:border-green-700" />
+              <CalcInput value={waist} onChange={setWaist} className="w-24 text-right text-sm font-bold text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-gray-800 dark:text-green-300 dark:border-green-700" />
               <VoiceInputButton onResult={(v) => setWaist(v)} />
             </div>
           </div>
@@ -182,7 +183,7 @@ export default function BodyFatCalculator() {
             <div className="flex items-center justify-between mb-2">
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Hip circumference ({unitLabel})</label>
               <div className="flex items-center gap-1">
-                <input type="number" value={hip} onChange={(e) => setHip(Number(e.target.value))} className="w-24 text-right text-sm font-bold text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-gray-800 dark:text-green-300 dark:border-green-700" />
+                <CalcInput value={hip} onChange={setHip} className="w-24 text-right text-sm font-bold text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-gray-800 dark:text-green-300 dark:border-green-700" />
                 <VoiceInputButton onResult={(v) => setHip(v)} />
               </div>
             </div>

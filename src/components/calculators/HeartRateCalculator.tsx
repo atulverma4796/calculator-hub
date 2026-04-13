@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import CalcInput from "@/components/CalcInput";
 import VoiceInputButton from "@/components/VoiceInputButton";
 import ActionButtons from "@/components/ActionButtons";
 import CalculationHistory from "@/components/CalculationHistory";
@@ -84,7 +85,7 @@ export default function HeartRateCalculator() {
           <div className="flex items-center justify-between mb-2">
             <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Age (years)</label>
             <div className="flex items-center gap-1">
-              <input type="number" value={age} onChange={(e) => setAge(Number(e.target.value))} className="w-24 text-right text-sm font-bold text-red-700 bg-red-50 border border-red-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-red-500 focus:border-transparent dark:bg-gray-800 dark:text-red-300 dark:border-red-700" />
+              <CalcInput value={age} onChange={setAge} className="w-24 text-right text-sm font-bold text-red-700 bg-red-50 border border-red-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-red-500 focus:border-transparent dark:bg-gray-800 dark:text-red-300 dark:border-red-700" />
               <VoiceInputButton onResult={(v) => setAge(v)} />
             </div>
           </div>
@@ -99,7 +100,7 @@ export default function HeartRateCalculator() {
               <span className="text-xs font-normal text-gray-400 dark:text-gray-500 ml-1">optional</span>
             </label>
             <div className="flex items-center gap-1">
-              <input type="number" value={restingHR} onChange={(e) => setRestingHR(Number(e.target.value))} className="w-24 text-right text-sm font-bold text-red-700 bg-red-50 border border-red-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-red-500 focus:border-transparent dark:bg-gray-800 dark:text-red-300 dark:border-red-700" />
+              <CalcInput value={restingHR} onChange={setRestingHR} className="w-24 text-right text-sm font-bold text-red-700 bg-red-50 border border-red-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-red-500 focus:border-transparent dark:bg-gray-800 dark:text-red-300 dark:border-red-700" />
               <VoiceInputButton onResult={(v) => setRestingHR(v)} />
             </div>
           </div>

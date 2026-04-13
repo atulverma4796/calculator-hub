@@ -12,6 +12,7 @@ import InsightCard from "@/components/InsightCard";
 import { useShareableURL, useInitialParams } from "@/hooks/useShareableURL";
 import { useCalcHistory } from "@/hooks/useCalcHistory";
 import VoiceInputButton from "@/components/VoiceInputButton";
+import CalcInput from "@/components/CalcInput";
 
 export default function MortgageCalculator() {
   const { getString, getNumber, hasParams } = useInitialParams();
@@ -92,7 +93,7 @@ export default function MortgageCalculator() {
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Home Price</label>
               <div className="flex items-center gap-1">
                 <span className="text-xs text-gray-400 dark:text-gray-500">{currency.symbol}</span>
-                <input type="number" value={price} onChange={(e) => setPrice(Number(e.target.value))} className="w-32 text-right text-sm font-bold text-sky-700 bg-sky-50 border border-sky-200 rounded-lg px-3 py-1.5" />
+                <CalcInput value={price} onChange={setPrice} className="w-32 text-right text-sm font-bold text-sky-700 bg-sky-50 border border-sky-200 rounded-lg px-3 py-1.5" />
                 <VoiceInputButton onResult={(v) => setPrice(v)} />
               </div>
             </div>
@@ -103,7 +104,7 @@ export default function MortgageCalculator() {
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Down Payment</label>
               <div className="flex items-center gap-1">
                 <span className="text-xs text-gray-400 dark:text-gray-500">{currency.symbol}</span>
-                <input type="number" value={down} onChange={(e) => setDown(Number(e.target.value))} className="w-32 text-right text-sm font-bold text-sky-700 bg-sky-50 border border-sky-200 rounded-lg px-3 py-1.5" />
+                <CalcInput value={down} onChange={setDown} className="w-32 text-right text-sm font-bold text-sky-700 bg-sky-50 border border-sky-200 rounded-lg px-3 py-1.5" />
                 <VoiceInputButton onResult={(v) => setDown(v)} />
               </div>
             </div>
@@ -114,7 +115,7 @@ export default function MortgageCalculator() {
             <div className="flex items-center justify-between mb-2">
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Interest Rate (%)</label>
               <div className="flex items-center gap-1">
-                <input type="number" value={rate} onChange={(e) => setRate(Number(e.target.value))} step={0.1} className="w-24 text-right text-sm font-bold text-sky-700 bg-sky-50 border border-sky-200 rounded-lg px-3 py-1.5" />
+                <CalcInput value={rate} onChange={setRate} step={0.1} className="w-24 text-right text-sm font-bold text-sky-700 bg-sky-50 border border-sky-200 rounded-lg px-3 py-1.5" />
                 <VoiceInputButton onResult={(v) => setRate(v)} />
               </div>
             </div>
@@ -124,7 +125,7 @@ export default function MortgageCalculator() {
             <div className="flex items-center justify-between mb-2">
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Loan Term (Years)</label>
               <div className="flex items-center gap-1">
-                <input type="number" value={years} onChange={(e) => setYears(Number(e.target.value))} min={1} max={30} className="w-20 text-right text-sm font-bold text-sky-700 bg-sky-50 border border-sky-200 rounded-lg px-3 py-1.5" />
+                <CalcInput value={years} onChange={setYears} min={1} max={30} className="w-20 text-right text-sm font-bold text-sky-700 bg-sky-50 border border-sky-200 rounded-lg px-3 py-1.5" />
                 <VoiceInputButton onResult={(v) => setYears(v)} />
               </div>
             </div>

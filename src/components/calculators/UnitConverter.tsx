@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo, useCallback } from "react";
+import CalcInput from "@/components/CalcInput";
 import VoiceInputButton from "@/components/VoiceInputButton";
 import ActionButtons from "@/components/ActionButtons";
 import CalculationHistory from "@/components/CalculationHistory";
@@ -246,16 +247,10 @@ export default function UnitConverter() {
         <div>
           <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 block">From</label>
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
-            <input
-              type="number"
-              value={displayFrom}
-              onChange={(e) => {
-                setFromValue(e.target.value);
-                setEditingSide("from");
-              }}
-              onFocus={() => setEditingSide("from")}
+            <CalcInput
+              value={Number(displayFrom) || 0}
+              onChange={(v) => { setFromValue(String(v)); setEditingSide("from"); }}
               className="flex-1 px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl text-lg font-bold text-sky-700 dark:text-sky-300 bg-sky-50 dark:bg-sky-900/20 focus:ring-2 focus:ring-sky-500 focus:border-transparent"
-              placeholder="Enter value"
             />
             <VoiceInputButton onResult={(v) => { setFromValue(String(v)); setEditingSide("from"); }} />
             <select
@@ -288,16 +283,10 @@ export default function UnitConverter() {
         <div>
           <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 block">To</label>
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
-            <input
-              type="number"
-              value={displayTo}
-              onChange={(e) => {
-                setToValue(e.target.value);
-                setEditingSide("to");
-              }}
-              onFocus={() => setEditingSide("to")}
+            <CalcInput
+              value={Number(displayTo) || 0}
+              onChange={(v) => { setToValue(String(v)); setEditingSide("to"); }}
               className="flex-1 px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl text-lg font-bold text-sky-700 dark:text-sky-300 bg-sky-50 dark:bg-sky-900/20 focus:ring-2 focus:ring-sky-500 focus:border-transparent"
-              placeholder="Result"
             />
             <VoiceInputButton onResult={(v) => { setToValue(String(v)); setEditingSide("to"); }} />
             <select

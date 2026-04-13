@@ -9,6 +9,7 @@ import CalculationHistory from "@/components/CalculationHistory";
 import InsightCard from "@/components/InsightCard";
 import { useShareableURL, useInitialParams } from "@/hooks/useShareableURL";
 import { useCalcHistory } from "@/hooks/useCalcHistory";
+import CalcInput from "@/components/CalcInput";
 
 // Sources:
 // India: incometax.gov.in AY 2026-27 (Section 115BAC New Regime, Budget 2025)
@@ -153,7 +154,7 @@ export default function IncomeTaxCalculator() {
             <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Annual Income</label>
             <div className="flex items-center gap-1">
               <span className="text-xs text-gray-400 dark:text-gray-500">{regimeCurrency.symbol}</span>
-              <input type="number" value={income} onChange={(e) => setIncome(Number(e.target.value))} className="w-36 text-right text-sm font-bold text-teal-700 bg-teal-50 border border-teal-200 rounded-lg px-3 py-1.5" />
+              <CalcInput value={income} onChange={setIncome} className="w-36 text-right text-sm font-bold text-teal-700 bg-teal-50 border border-teal-200 rounded-lg px-3 py-1.5" />
             </div>
           </div>
           <input type="range" min={0} max={maxSlider} step={10000} value={income} onChange={(e) => setIncome(Number(e.target.value))} className="w-full" />

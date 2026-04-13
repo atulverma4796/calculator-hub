@@ -8,6 +8,7 @@ import CalculationHistory from "@/components/CalculationHistory";
 import InsightCard from "@/components/InsightCard";
 import { useShareableURL, useInitialParams } from "@/hooks/useShareableURL";
 import { useCalcHistory } from "@/hooks/useCalcHistory";
+import CalcInput from "@/components/CalcInput";
 import VoiceInputButton from "@/components/VoiceInputButton";
 
 export default function BreakEvenCalculator() {
@@ -90,10 +91,9 @@ export default function BreakEvenCalculator() {
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Fixed Costs (Total)</label>
               <div className="flex items-center gap-1">
                 <span className="text-xs text-gray-400 dark:text-gray-500">{currency.symbol}</span>
-                <input
-                  type="number"
+                <CalcInput
                   value={fixedCosts}
-                  onChange={(e) => setFixedCosts(Number(e.target.value))}
+                  onChange={setFixedCosts}
                   className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />
                 <VoiceInputButton onResult={(v) => setFixedCosts(v)} />
@@ -112,10 +112,9 @@ export default function BreakEvenCalculator() {
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Variable Cost per Unit</label>
               <div className="flex items-center gap-1">
                 <span className="text-xs text-gray-400 dark:text-gray-500">{currency.symbol}</span>
-                <input
-                  type="number"
+                <CalcInput
                   value={variableCost}
-                  onChange={(e) => setVariableCost(Number(e.target.value))}
+                  onChange={setVariableCost}
                   step={0.01}
                   className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />
@@ -135,10 +134,9 @@ export default function BreakEvenCalculator() {
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Selling Price per Unit</label>
               <div className="flex items-center gap-1">
                 <span className="text-xs text-gray-400 dark:text-gray-500">{currency.symbol}</span>
-                <input
-                  type="number"
+                <CalcInput
                   value={sellingPrice}
-                  onChange={(e) => setSellingPrice(Number(e.target.value))}
+                  onChange={setSellingPrice}
                   step={0.01}
                   className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />

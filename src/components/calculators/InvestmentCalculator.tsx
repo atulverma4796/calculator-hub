@@ -9,6 +9,7 @@ import CalculationHistory from "@/components/CalculationHistory";
 import InsightCard from "@/components/InsightCard";
 import { useShareableURL, useInitialParams } from "@/hooks/useShareableURL";
 import { useCalcHistory } from "@/hooks/useCalcHistory";
+import CalcInput from "@/components/CalcInput";
 import VoiceInputButton from "@/components/VoiceInputButton";
 
 export default function InvestmentCalculator() {
@@ -113,10 +114,9 @@ export default function InvestmentCalculator() {
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Initial Investment</label>
               <div className="flex items-center gap-1">
                 <span className="text-xs text-gray-400 dark:text-gray-500">{currency.symbol}</span>
-                <input
-                  type="number"
+                <CalcInput
                   value={initialInvestment}
-                  onChange={(e) => setInitialInvestment(Number(e.target.value))}
+                  onChange={setInitialInvestment}
                   className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />
                 <VoiceInputButton onResult={(v) => setInitialInvestment(v)} />
@@ -135,10 +135,9 @@ export default function InvestmentCalculator() {
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Monthly Addition</label>
               <div className="flex items-center gap-1">
                 <span className="text-xs text-gray-400 dark:text-gray-500">{currency.symbol}</span>
-                <input
-                  type="number"
+                <CalcInput
                   value={monthlyAddition}
-                  onChange={(e) => setMonthlyAddition(Number(e.target.value))}
+                  onChange={setMonthlyAddition}
                   className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />
                 <VoiceInputButton onResult={(v) => setMonthlyAddition(v)} />
@@ -155,10 +154,9 @@ export default function InvestmentCalculator() {
           <div>
             <div className="flex items-center justify-between mb-2">
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Annual Return Rate (%)</label>
-              <input
-                type="number"
+              <CalcInput
                 value={annualReturn}
-                onChange={(e) => setAnnualReturn(Number(e.target.value))}
+                onChange={setAnnualReturn}
                 step={0.5}
                 min={0}
                 max={50}
@@ -177,10 +175,9 @@ export default function InvestmentCalculator() {
           <div>
             <div className="flex items-center justify-between mb-2">
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Investment Period (Years)</label>
-              <input
-                type="number"
+              <CalcInput
                 value={years}
-                onChange={(e) => setYears(Number(e.target.value))}
+                onChange={setYears}
                 min={1}
                 max={50}
                 className="w-24 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"

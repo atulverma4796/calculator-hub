@@ -8,6 +8,7 @@ import CalculationHistory from "@/components/CalculationHistory";
 import InsightCard from "@/components/InsightCard";
 import { useShareableURL, useInitialParams } from "@/hooks/useShareableURL";
 import { useCalcHistory } from "@/hooks/useCalcHistory";
+import CalcInput from "@/components/CalcInput";
 import VoiceInputButton from "@/components/VoiceInputButton";
 
 export default function ProfitMarginCalculator() {
@@ -116,10 +117,9 @@ export default function ProfitMarginCalculator() {
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Revenue (Selling Price) per Unit</label>
               <div className="flex items-center gap-1">
                 <span className="text-xs text-gray-400 dark:text-gray-500">{currency.symbol}</span>
-                <input
-                  type="number"
+                <CalcInput
                   value={revenue}
-                  onChange={(e) => setRevenue(Number(e.target.value))}
+                  onChange={setRevenue}
                   step={0.01}
                   className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />
@@ -139,10 +139,9 @@ export default function ProfitMarginCalculator() {
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Cost per Unit</label>
               <div className="flex items-center gap-1">
                 <span className="text-xs text-gray-400 dark:text-gray-500">{currency.symbol}</span>
-                <input
-                  type="number"
+                <CalcInput
                   value={cost}
-                  onChange={(e) => setCost(Number(e.target.value))}
+                  onChange={setCost}
                   step={0.01}
                   className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />
@@ -160,10 +159,9 @@ export default function ProfitMarginCalculator() {
           <div>
             <div className="flex items-center justify-between mb-2">
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Quantity (Units)</label>
-              <input
-                type="number"
+              <CalcInput
                 value={quantity}
-                onChange={(e) => setQuantity(Number(e.target.value))}
+                onChange={setQuantity}
                 min={1}
                 max={1000000}
                 className="w-32 text-right text-sm font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"

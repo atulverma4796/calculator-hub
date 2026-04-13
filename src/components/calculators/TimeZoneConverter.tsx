@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
+import CalcInput from "@/components/CalcInput";
 import VoiceInputButton from "@/components/VoiceInputButton";
 import ActionButtons from "@/components/ActionButtons";
 import CalculationHistory from "@/components/CalculationHistory";
@@ -197,22 +198,20 @@ export default function TimeZoneConverter() {
         <div>
           <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 block">Time</label>
           <div className="flex items-center gap-2">
-            <input
-              type="number"
+            <CalcInput
               min={0}
               max={23}
               value={hour}
-              onChange={(e) => setHour(Number(e.target.value))}
+              onChange={setHour}
               className="w-20 text-center text-xl font-bold text-teal-700 dark:text-teal-300 bg-teal-50 dark:bg-teal-900/20 border border-teal-200 dark:border-teal-700 rounded-xl px-3 py-3 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
             />
             <VoiceInputButton onResult={(v) => setHour(Math.min(23, Math.max(0, v)))} />
             <span className="text-2xl font-bold text-gray-400">:</span>
-            <input
-              type="number"
+            <CalcInput
               min={0}
               max={59}
               value={minute}
-              onChange={(e) => setMinute(Number(e.target.value))}
+              onChange={setMinute}
               className="w-20 text-center text-xl font-bold text-teal-700 dark:text-teal-300 bg-teal-50 dark:bg-teal-900/20 border border-teal-200 dark:border-teal-700 rounded-xl px-3 py-3 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
             />
             <VoiceInputButton onResult={(v) => setMinute(Math.min(59, Math.max(0, v)))} />

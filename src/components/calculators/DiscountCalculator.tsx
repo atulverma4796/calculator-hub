@@ -11,6 +11,7 @@ import InsightCard from "@/components/InsightCard";
 import { useShareableURL, useInitialParams } from "@/hooks/useShareableURL";
 import { useCalcHistory } from "@/hooks/useCalcHistory";
 import VoiceInputButton from "@/components/VoiceInputButton";
+import CalcInput from "@/components/CalcInput";
 
 export default function DiscountCalculator() {
   const { getString, getNumber, hasParams } = useInitialParams();
@@ -68,7 +69,7 @@ export default function DiscountCalculator() {
             <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Original Price</label>
             <div className="flex items-center gap-1">
               <span className="text-xs text-gray-400 dark:text-gray-500">{currency.symbol}</span>
-              <input type="number" value={price} onChange={(e) => setPrice(Number(e.target.value))} className="w-32 text-right text-sm font-bold text-red-700 bg-red-50 border border-red-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-red-500 focus:border-transparent" />
+              <CalcInput value={price} onChange={setPrice} className="w-32 text-right text-sm font-bold text-red-700 bg-red-50 border border-red-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-red-500 focus:border-transparent" />
               <VoiceInputButton onResult={(v) => setPrice(v)} />
             </div>
           </div>
@@ -79,7 +80,7 @@ export default function DiscountCalculator() {
           <div className="flex items-center justify-between mb-2">
             <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Discount (%)</label>
             <div className="flex items-center gap-1">
-              <input type="number" value={discount} onChange={(e) => setDiscount(Number(e.target.value))} min={0} max={100} className="w-24 text-right text-sm font-bold text-red-700 bg-red-50 border border-red-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-red-500 focus:border-transparent" />
+              <CalcInput value={discount} onChange={setDiscount} min={0} max={100} className="w-24 text-right text-sm font-bold text-red-700 bg-red-50 border border-red-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-red-500 focus:border-transparent" />
               <VoiceInputButton onResult={(v) => setDiscount(v)} />
             </div>
           </div>
