@@ -119,16 +119,7 @@ export default function RootLayout({
             "37 Currency Auto-Detect", "PWA Offline Support", "Embeddable Widgets",
           ],
         }} />
-        <JsonLd data={{
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: [
-            { "@type": "Question", name: "Is CalcHub free?", acceptedAnswer: { "@type": "Answer", text: "Yes, all 15+ calculators are 100% free. No signup, no premium tier, no hidden charges." }},
-            { "@type": "Question", name: "Is my data safe on CalcHub?", acceptedAnswer: { "@type": "Answer", text: "All calculations happen entirely in your browser. No data is ever sent to any server." }},
-            { "@type": "Question", name: "Does CalcHub support multiple currencies?", acceptedAnswer: { "@type": "Answer", text: "Yes, CalcHub auto-detects your currency from your timezone and supports 37 currencies including USD, EUR, GBP, INR, JPY, AED, SGD, CHF, KRW, and many more." }},
-            { "@type": "Question", name: "How accurate are the currency exchange rates?", acceptedAnswer: { "@type": "Answer", text: "The Currency Converter uses live exchange rates from the European Central Bank (ECB) via the Frankfurter API." }},
-          ],
-        }} />
+        {/* FAQPage schema moved to homepage only — prevents duplicate FAQPage on calculator pages */}
         <HideOnEmbed>
           {/* Header */}
           <header className="sticky top-0 z-50 border-b border-indigo-100/60 dark:border-gray-800 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl">

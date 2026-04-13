@@ -2,10 +2,21 @@ import Link from "next/link";
 import { CALCULATOR_LIST, CATEGORIES } from "@/lib/calculators";
 import HeroAnimation from "@/components/HeroAnimation";
 import FeedbackForm from "@/components/FeedbackForm";
+import JsonLd from "@/components/JsonLd";
 
 export default function Home() {
   return (
     <div>
+      <JsonLd data={{
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: [
+          { "@type": "Question", name: "Is CalcHub free?", acceptedAnswer: { "@type": "Answer", text: "Yes, all 30+ calculators are 100% free. No signup, no premium tier, no hidden charges." }},
+          { "@type": "Question", name: "Is my data safe on CalcHub?", acceptedAnswer: { "@type": "Answer", text: "All calculations happen entirely in your browser. No data is ever sent to any server." }},
+          { "@type": "Question", name: "Does CalcHub support multiple currencies?", acceptedAnswer: { "@type": "Answer", text: "Yes, CalcHub auto-detects your currency from your timezone and supports 37 currencies including USD, EUR, GBP, INR, JPY, AED, SGD, CHF, KRW, and many more." }},
+          { "@type": "Question", name: "How accurate are the currency exchange rates?", acceptedAnswer: { "@type": "Answer", text: "The Currency Converter uses live exchange rates from the European Central Bank (ECB) via the Frankfurter API." }},
+        ],
+      }} />
       {/* ── HERO — Premium with orbiting icons + rich gradient ── */}
       <section className="relative overflow-hidden border-b border-gray-100 dark:border-gray-800">
         {/* Rich animated gradient background */}
