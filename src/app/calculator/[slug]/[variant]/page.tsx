@@ -9,6 +9,7 @@ import MobileSwipeNav from "@/components/MobileSwipeNav";
 import CompareToggle from "@/components/CompareToggle";
 import TrustBadges from "@/components/TrustBadges";
 import CalculateNext from "@/components/CalculateNext";
+import EmbedButton from "@/components/EmbedButton";
 import EMICalculator from "@/components/calculators/EMICalculator";
 import SIPCalculator from "@/components/calculators/SIPCalculator";
 import CompoundInterestCalculator from "@/components/calculators/CompoundInterestCalculator";
@@ -241,6 +242,7 @@ export default async function VariantPage({ params }: { params: Promise<{ slug: 
       {/* Trust badges */}
       <section className="pb-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <EmbedButton slug={slug} calculatorName={calc.name} />
           <TrustBadges calculatorName={calc.name} />
           <CalculateNext currentSlug={slug} />
         </div>

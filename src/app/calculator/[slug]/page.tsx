@@ -10,6 +10,7 @@ import CompareToggle from "@/components/CompareToggle";
 import TrustBadges from "@/components/TrustBadges";
 import CalculateNext from "@/components/CalculateNext";
 import FeatureBadges from "@/components/FeatureBadges";
+import EmbedButton from "@/components/EmbedButton";
 import EMICalculator from "@/components/calculators/EMICalculator";
 import SIPCalculator from "@/components/calculators/SIPCalculator";
 import CompoundInterestCalculator from "@/components/calculators/CompoundInterestCalculator";
@@ -204,6 +205,7 @@ export default async function CalculatorPage({ params }: { params: Promise<{ slu
                 </div>
               </div>
             </CompareToggle>
+            <EmbedButton slug={slug} calculatorName={calc.name} />
             <TrustBadges calculatorName={calc.name} />
             <CalculateNext currentSlug={slug} />
           </Suspense>
