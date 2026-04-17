@@ -92,6 +92,7 @@ export default function RootLayout({
     >
       <head>
         <Analytics />
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5211865118198179" crossOrigin="anonymous"></script>
       </head>
       <body className="min-h-full flex flex-col bg-[var(--background)]">
         <JsonLd data={{
