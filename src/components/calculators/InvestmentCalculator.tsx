@@ -7,6 +7,7 @@ import CurrencySelector from "@/components/CurrencySelector";
 import ActionButtons from "@/components/ActionButtons";
 import CalculationHistory from "@/components/CalculationHistory";
 import InsightCard from "@/components/InsightCard";
+import AffiliateCard from "@/components/AffiliateCard";
 import { useShareableURL, useInitialParams } from "@/hooks/useShareableURL";
 import { useCalcHistory } from "@/hooks/useCalcHistory";
 import CalcInput from "@/components/CalcInput";
@@ -277,6 +278,8 @@ export default function InvestmentCalculator() {
         insight={`Your money grew ${result.growthMultiplier.toFixed(1)} times. You invested ${fmt(result.totalInvested)} and earned ${fmt(result.totalReturns)} in pure returns — that's money working for you.`}
         tip={years < 10 ? "Investing for 10+ years dramatically increases the compounding effect. Time in market beats timing the market." : undefined}
       />
+
+      <AffiliateCard type="investment" />
 
       <CalculationHistory calculator="investment" onLoad={(inputs) => {
         if (inputs.currency) setCurrency(getCurrencyConfig(String(inputs.currency)));

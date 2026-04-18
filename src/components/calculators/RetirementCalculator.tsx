@@ -9,6 +9,7 @@ import CalculatorEducation from "@/components/CalculatorEducation";
 import ActionButtons from "@/components/ActionButtons";
 import CalculationHistory from "@/components/CalculationHistory";
 import InsightCard from "@/components/InsightCard";
+import AffiliateCard from "@/components/AffiliateCard";
 import { useShareableURL, useInitialParams } from "@/hooks/useShareableURL";
 import { useCalcHistory } from "@/hooks/useCalcHistory";
 import VoiceInputButton from "@/components/VoiceInputButton";
@@ -198,6 +199,8 @@ export default function RetirementCalculator() {
         insight={`By age ${retireAge}, you'll have ${fmt(result.total)}. You invest ${fmt(result.invested)} from your pocket — ${fmt(result.returns)} comes from returns.`}
         tip={`Using the 4% rule, your ${fmt(result.total)} corpus could support about ${fmt(Math.round(result.total * 0.04))}/year in retirement withdrawals.`}
       />
+
+      <AffiliateCard type="investment" />
 
       <CalculationHistory
         calculator="retirement"

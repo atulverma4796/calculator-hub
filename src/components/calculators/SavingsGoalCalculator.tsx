@@ -6,6 +6,7 @@ import CurrencySelector from "@/components/CurrencySelector";
 import ActionButtons from "@/components/ActionButtons";
 import CalculationHistory from "@/components/CalculationHistory";
 import InsightCard from "@/components/InsightCard";
+import AffiliateCard from "@/components/AffiliateCard";
 import { useShareableURL, useInitialParams } from "@/hooks/useShareableURL";
 import { useCalcHistory } from "@/hooks/useCalcHistory";
 import CalcInput from "@/components/CalcInput";
@@ -348,6 +349,8 @@ export default function SavingsGoalCalculator() {
         }
         tip={result.totalReturns < result.totalContributed * 0.1 ? "A higher return rate (like equity mutual funds at 12%) can significantly reduce the time or amount needed." : undefined}
       />
+
+      <AffiliateCard type="investment" />
 
       <CalculationHistory calculator="savings-goal" onLoad={(inputs) => {
         if (inputs.currency) setCurrency(getCurrencyConfig(String(inputs.currency)));

@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import ActionButtons from "@/components/ActionButtons";
 import CalculationHistory from "@/components/CalculationHistory";
 import InsightCard from "@/components/InsightCard";
+import AffiliateCard from "@/components/AffiliateCard";
 import { useShareableURL, useInitialParams } from "@/hooks/useShareableURL";
 import { useCalcHistory } from "@/hooks/useCalcHistory";
 import CalcInput from "@/components/CalcInput";
@@ -179,6 +180,8 @@ export default function CAGRCalculator() {
         }
         tip={result.cagr > 0 && result.cagr < 7 ? "A CAGR below 7% may not beat inflation in many countries. Consider diversifying into higher-growth assets." : undefined}
       />
+
+      <AffiliateCard type="investment" />
 
       <CalculationHistory calculator="cagr" onLoad={(inputs) => {
         if (inputs.beginningValue) setBeginningValue(Number(inputs.beginningValue));

@@ -9,6 +9,7 @@ import CalculatorEducation from "@/components/CalculatorEducation";
 import ActionButtons from "@/components/ActionButtons";
 import CalculationHistory from "@/components/CalculationHistory";
 import InsightCard from "@/components/InsightCard";
+import AffiliateCard from "@/components/AffiliateCard";
 import { useShareableURL, useInitialParams } from "@/hooks/useShareableURL";
 import { useCalcHistory } from "@/hooks/useCalcHistory";
 import VoiceInputButton from "@/components/VoiceInputButton";
@@ -177,6 +178,8 @@ export default function SIPCalculator() {
         insight={`By investing ${fmt(monthly)}/month, you'll build wealth of ${fmt(result.futureValue)} in ${years} years. Your total investment is ${fmt(result.invested)} — the remaining ${fmt(result.returns)} is profit from compounding.`}
         tip={`Your money grew ${result.invested > 0 ? (result.futureValue / result.invested).toFixed(1) : 0}x. ${years < 15 ? "Extending to 20+ years would amplify returns dramatically." : "Long-term SIP is the smartest wealth-building strategy."}`}
       />
+
+      <AffiliateCard type="groww" />
 
       <CalculationHistory
         calculator="sip"

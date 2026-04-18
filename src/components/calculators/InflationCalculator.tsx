@@ -6,6 +6,7 @@ import CurrencySelector from "@/components/CurrencySelector";
 import ActionButtons from "@/components/ActionButtons";
 import CalculationHistory from "@/components/CalculationHistory";
 import InsightCard from "@/components/InsightCard";
+import AffiliateCard from "@/components/AffiliateCard";
 import { useShareableURL, useInitialParams } from "@/hooks/useShareableURL";
 import { useCalcHistory } from "@/hooks/useCalcHistory";
 import CalcInput from "@/components/CalcInput";
@@ -178,6 +179,8 @@ export default function InflationCalculator() {
         insight={`In ${years} years, what costs ${fmt(currentAmount)} today will cost ${fmt(result.futureValue)}. Your ${fmt(currentAmount)} will only buy ${fmt(result.purchasingPower)} worth of goods — a ${powerLossPct}% loss in purchasing power.`}
         tip={inflationRate > 5 ? "To beat inflation, your investments should earn at least " + inflationRate + "% annually. Consider equity or index funds for long-term wealth preservation." : undefined}
       />
+
+      <AffiliateCard type="investment" />
 
       <CalculationHistory calculator="inflation" onLoad={(inputs) => {
         if (inputs.currency) setCurrency(getCurrencyConfig(String(inputs.currency)));

@@ -9,6 +9,7 @@ import CalculatorEducation from "@/components/CalculatorEducation";
 import ActionButtons from "@/components/ActionButtons";
 import CalculationHistory from "@/components/CalculationHistory";
 import InsightCard from "@/components/InsightCard";
+import AffiliateCard from "@/components/AffiliateCard";
 import { useShareableURL, useInitialParams } from "@/hooks/useShareableURL";
 import { useCalcHistory } from "@/hooks/useCalcHistory";
 import VoiceInputButton from "@/components/VoiceInputButton";
@@ -173,6 +174,8 @@ export default function CompoundInterestCalculator() {
         insight={`Your ${fmt(principal)} grows to ${fmt(result.amount)} in ${years} years — that's ${fmt(result.interest)} in pure interest earnings.`}
         tip={result.amount > principal * 2 ? `Your money more than doubled! The Rule of 72 says it takes about ${Math.round(72 / rate)} years to double at ${rate}%.` : `At ${rate}%, your money doubles in about ${Math.round(72 / rate)} years (Rule of 72).`}
       />
+
+      <AffiliateCard type="investment" />
 
       <CalculationHistory
         calculator="compound-interest"

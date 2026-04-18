@@ -10,6 +10,7 @@ import CalculationHistory from "@/components/CalculationHistory";
 import InsightCard from "@/components/InsightCard";
 import { useShareableURL, useInitialParams } from "@/hooks/useShareableURL";
 import { useCalcHistory } from "@/hooks/useCalcHistory";
+import AffiliateCard from "@/components/AffiliateCard";
 
 const CURRENCY_INFO: Record<string, { name: string; symbol: string }> = {
   USD: { name: "US Dollar", symbol: "$" },
@@ -232,6 +233,8 @@ export default function CurrencyConverter() {
           tip={rate1 > 100 ? `1 ${from} buys over ${Math.floor(rate1)} ${to} — the ${from} is much stronger.` : rate1 < 0.01 ? `1 ${from} is worth very little in ${to} — the ${to} is much stronger.` : undefined}
         />
       )}
+
+      <AffiliateCard type="wise" />
 
       <CalculationHistory
         calculator="currency"
