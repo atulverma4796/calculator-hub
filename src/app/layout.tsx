@@ -11,6 +11,7 @@ import CookieConsent from "@/components/CookieConsent";
 import ThemeToggle from "@/components/ThemeToggle";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 import HideOnEmbed from "@/components/LayoutShell";
+import VisitTracker from "@/components/VisitTracker";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -95,6 +96,7 @@ export default function RootLayout({
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5211865118198179" crossOrigin="anonymous"></script>
       </head>
       <body className="min-h-full flex flex-col bg-[var(--background)]">
+        <VisitTracker />
         <JsonLd data={{
           "@context": "https://schema.org",
           "@type": "WebApplication",

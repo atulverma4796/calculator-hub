@@ -29,6 +29,7 @@ export default function PrivacyPage() {
           <ul className="list-disc pl-6 space-y-2 mt-2">
             <li><strong>Google Analytics (GA4):</strong> Anonymous page views, session duration, device type, and approximate location (country level). No personally identifiable information is collected.</li>
             <li><strong>Google AdSense:</strong> May use cookies to serve relevant ads. You can opt out of personalized ads at <a href="https://adssettings.google.com" className="text-indigo-600 hover:underline" target="_blank" rel="noopener noreferrer">Google Ad Settings</a>.</li>
+            <li><strong>Anonymous visit signal:</strong> Once per browser session we record an anonymous event with high-level metadata (browser, country, landing page) for abuse detection. No calculator inputs or results are recorded.</li>
           </ul>
         </section>
 
