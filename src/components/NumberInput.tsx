@@ -1,6 +1,6 @@
 "use client";
 
-import { useId } from "react";
+import { useId, useState, useRef, useEffect } from "react";
 
 interface NumberInputProps {
   label: string;
@@ -17,9 +17,9 @@ interface NumberInputProps {
  * Accessible number input with mobile numeric keyboard support.
  * - `inputMode="decimal"` triggers the numeric keypad on mobile devices
  * - Proper `aria-label` derived from the label prop
- * - Strips non-numeric characters on input
- * - Dark mode support
- * - Optional prefix/suffix display
+ * - Mobile UX: clears the field on focus so a typed value replaces (not
+ *   appends to) the existing default. Restores the prior value if the
+ *   user taps away without typing.
  */
 export default function NumberInput({
   label,
@@ -32,19 +32,15 @@ export default function NumberInput({
   suffix,
 }: NumberInputProps) {
   const id = useId();
+  const [display, setDisplay] = useState(String(value));
+  const focused = useRef(false);
+  const valueAtFocus = useRef("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // Strip everything except digits, decimal point, and minus sign
-    const raw = e.target.value.replace(/[^\d.\-]/g, "");
-    if (raw === "" || raw === "-") {
-      onChange(0);
-      return;
+  useEffect(() => {
+    if (!focused.current) {
+      setDisplay(String(value));
     }
-    const parsed = parseFloat(raw);
-    if (!isNaN(parsed)) {
-      onChange(parsed);
-    }
-  };
+  }, [value]);
 
   return (
     <div className="flex flex-col gap-1.5">
@@ -62,14 +58,37 @@ export default function NumberInput({
         )}
         <input
           id={id}
-          type="number"
+          type="text"
           inputMode="decimal"
           aria-label={label}
-          value={value}
-          onChange={handleChange}
-          onFocus={(e) => {
-            const target = e.target;
-            setTimeout(() => target.select(), 0);
+          value={display}
+          onChange={(e) => {
+            // Strip everything except digits, decimal point, and minus sign
+            const raw = e.target.value.replace(/[^\d.\-]/g, "");
+            setDisplay(raw);
+            if (raw === "" || raw === "-" || raw === ".") return;
+            const parsed = parseFloat(raw);
+            if (!isNaN(parsed)) onChange(parsed);
+          }}
+          onFocus={() => {
+            focused.current = true;
+            valueAtFocus.current = display;
+            setDisplay("");
+          }}
+          onBlur={() => {
+            focused.current = false;
+            const trimmed = display.trim();
+            if (trimmed === "" || trimmed === "-" || trimmed === ".") {
+              setDisplay(valueAtFocus.current);
+              return;
+            }
+            const parsed = parseFloat(trimmed);
+            if (isNaN(parsed)) {
+              setDisplay(valueAtFocus.current);
+            } else {
+              setDisplay(String(parsed));
+              onChange(parsed);
+            }
           }}
           min={min}
           max={max}
