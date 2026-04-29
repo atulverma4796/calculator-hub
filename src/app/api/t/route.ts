@@ -122,8 +122,52 @@ export async function POST(req: NextRequest) {
     const forwarded = req.headers.get("x-forwarded-for");
     const ip = forwarded?.split(",")[0]?.trim() || req.headers.get("x-real-ip") || "unknown";
 
-    // Geo lookup
-    const geo = await lookupGeo(ip);
+    // Vercel geo headers — more accurate than third-party IP lookups because
+    // Vercel uses MaxMind directly. Decode URI components since some headers
+    // (city, region) come URL-encoded for non-ASCII names.
+    const safeDecode = (v: string | null) => {
+      if (!v) return undefined;
+      try {
+        return decodeURIComponent(v);
+      } catch {
+        return v;
+      }
+    };
+    const vercelGeo: GeoLookup | null = (() => {
+      const country = safeDecode(req.headers.get("x-vercel-ip-country"));
+      const city = safeDecode(req.headers.get("x-vercel-ip-city"));
+      const region = safeDecode(req.headers.get("x-vercel-ip-country-region"));
+      const tz = safeDecode(req.headers.get("x-vercel-ip-timezone"));
+      if (!country) return null;
+      return {
+        countryCode: country,
+        country,
+        city,
+        region,
+        timezone: tz,
+      };
+    })();
+
+    // Use Vercel's geo if available; fall back to third-party for ISP/proxy/hosting flags.
+    const externalGeo = await lookupGeo(ip);
+    const geo: GeoLookup | null = vercelGeo
+      ? {
+          ...vercelGeo,
+          // Pull ISP/proxy/hosting/mobile from external lookup since Vercel
+          // doesn't expose those.
+          isp: externalGeo?.isp,
+          org: externalGeo?.org,
+          asn: externalGeo?.asn,
+          proxy: externalGeo?.proxy,
+          hosting: externalGeo?.hosting,
+          mobile: externalGeo?.mobile,
+          // Prefer Vercel's country/city/region; keep timezone from Vercel.
+          country: vercelGeo.country || externalGeo?.country,
+          city: vercelGeo.city || externalGeo?.city,
+          region: vercelGeo.region || externalGeo?.region,
+        }
+      : externalGeo;
+
     const locationLine = geo
       ? [geo.city, geo.region, geo.country].filter(Boolean).join(", ")
       : "Unknown";
