@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import ActionButtons from "@/components/ActionButtons";
+import CalcInput from "@/components/CalcInput";
 import CalculationHistory from "@/components/CalculationHistory";
 import InsightCard from "@/components/InsightCard";
 import { useShareableURL, useInitialParams } from "@/hooks/useShareableURL";
@@ -288,11 +289,10 @@ export default function DateCalculator() {
               </div>
               <div className="w-28">
                 <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 block">Amount</label>
-                <input
-                  type="number"
-                  min={0}
+                <CalcInput
                   value={amount}
-                  onChange={(e) => setAmount(Number(e.target.value))}
+                  onChange={setAmount}
+                  min={0}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl text-lg font-semibold text-violet-700 dark:text-violet-300 bg-violet-50 dark:bg-violet-900/20 focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                 />
               </div>

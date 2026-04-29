@@ -46,10 +46,14 @@ export default function CalcInput({ value, onChange, min, max, step, className =
           }
         }
       }}
-      onFocus={() => {
+      onFocus={(e) => {
         focused.current = true;
-        // Select all text on focus for easy replacement
-        if (display === "0") setDisplay("");
+        // Select all text on focus so the next keystroke replaces the existing
+        // value instead of appending to it. Critical on mobile, where users
+        // can't easily Cmd+A or triple-click. Defer one tick so the virtual
+        // keyboard's focus handling doesn't drop the selection.
+        const target = e.target;
+        setTimeout(() => target.select(), 0);
       }}
       onBlur={() => {
         focused.current = false;

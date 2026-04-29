@@ -67,6 +67,10 @@ export default function NumberInput({
           aria-label={label}
           value={value}
           onChange={handleChange}
+          onFocus={(e) => {
+            const target = e.target;
+            setTimeout(() => target.select(), 0);
+          }}
           min={min}
           max={max}
           step={step}

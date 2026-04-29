@@ -224,6 +224,7 @@ export default function GPACalculator() {
                   prev.map((s) => (s.id === sem.id ? { ...s, name: e.target.value } : s))
                 )
               }
+              onFocus={(e) => e.target.select()}
               className="text-sm font-bold text-gray-800 dark:text-gray-200 bg-transparent border-none outline-none focus:ring-0 p-0"
             />
             <div className="flex items-center gap-2">
@@ -266,6 +267,7 @@ export default function GPACalculator() {
                     type="text"
                     value={course.name}
                     onChange={(e) => updateCourse(sem.id, course.id, "name", e.target.value)}
+                    onFocus={(e) => e.target.select()}
                     placeholder="Course name"
                     className="w-full sm:col-span-4 text-sm px-3 py-2.5 sm:py-2 border border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                   />
