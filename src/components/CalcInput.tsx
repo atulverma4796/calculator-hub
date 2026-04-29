@@ -14,11 +14,20 @@ interface CalcInputProps {
 /**
  * A number input that allows users to freely clear and retype values.
  * Uses string state internally to avoid the "05" / can't-clear problem.
- * Syncs back to the parent's number state on every change.
+ *
+ * Mobile UX: on focus, the field is cleared visually so the user can
+ * type a fresh value without fighting an existing default like "1000".
+ * If they tap away without typing anything, the previous value is
+ * restored. (Programmatic `select()` is unreliable on mobile browsers
+ * during the touch-focus → virtual-keyboard sequence — clearing the
+ * input is the robust alternative.)
  */
 export default function CalcInput({ value, onChange, min, max, step, className = "" }: CalcInputProps) {
   const [display, setDisplay] = useState(String(value));
   const focused = useRef(false);
+  // Snapshot of the display value at focus time, so we can restore it
+  // if the user taps away without typing.
+  const valueAtFocus = useRef("");
 
   // Sync display when parent value changes (e.g., from slider, reset, voice input)
   // but NOT while the user is actively typing in this field
@@ -41,29 +50,33 @@ export default function CalcInput({ value, onChange, min, max, step, className =
           const num = parseFloat(raw);
           if (!isNaN(num)) {
             onChange(num);
-          } else if (raw === "" || raw === "-" || raw === ".") {
-            onChange(0);
           }
+          // If raw is empty/incomplete, leave the parent value untouched
+          // so we can restore it on blur if the user tapped away.
         }
       }}
-      onFocus={(e) => {
+      onFocus={() => {
         focused.current = true;
-        // Select all text on focus so the next keystroke replaces the existing
-        // value instead of appending to it. Critical on mobile, where users
-        // can't easily Cmd+A or triple-click. Defer one tick so the virtual
-        // keyboard's focus handling doesn't drop the selection.
-        const target = e.target;
-        setTimeout(() => target.select(), 0);
+        valueAtFocus.current = display;
+        // Clear the field so a typed value replaces — does not append to —
+        // any existing default. Works reliably across mobile browsers.
+        setDisplay("");
       }}
       onBlur={() => {
         focused.current = false;
-        // Clean up display on blur
-        const num = parseFloat(display);
-        if (isNaN(num) || display === "") {
-          setDisplay("0");
-          onChange(0);
+        const trimmed = display.trim();
+        if (trimmed === "" || trimmed === "-" || trimmed === ".") {
+          // User tapped away without typing a valid value — restore the
+          // value that was there before focus.
+          setDisplay(valueAtFocus.current);
+          return;
+        }
+        const num = parseFloat(trimmed);
+        if (isNaN(num)) {
+          setDisplay(valueAtFocus.current);
         } else {
           setDisplay(String(num)); // removes leading zeros like "05" → "5"
+          onChange(num);
         }
       }}
       min={min}
