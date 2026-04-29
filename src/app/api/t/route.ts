@@ -130,13 +130,18 @@ export async function POST(req: NextRequest) {
     const ispLine = geo?.isp || geo?.org || "Unknown";
     const flags = botSignals(geo, device, browserTimezone, referrer);
 
-    // Suppress email when this is clearly a bot — keeps the inbox useful.
-    // 2+ signals = strong bot. Hosting/datacenter alone is also suppress-worthy.
-    const isLikelyBot =
-      flags.length >= 2 ||
-      flags.some((f) => f === "hosting/datacenter IP" || f === "automated user-agent");
+    // Suppress email only on STRONG bot signals (datacenter IP or automated
+    // user-agent). Soft signals like "no referrer" or "missing screen size"
+    // false-positive too easily on real direct visits and privacy-conscious
+    // mobile users — they're surfaced in the email body, not used to drop it.
+    const isLikelyBot = flags.some(
+      (f) => f === "hosting/datacenter IP" || f === "automated user-agent",
+    );
 
-    if (isLikelyBot) {
+    // Allow ?force=1 in the page URL to bypass suppression for testing.
+    const forceSend = typeof url === "string" && /[?&]force=1\b/.test(url);
+
+    if (isLikelyBot && !forceSend) {
       return NextResponse.json({ success: true, suppressed: true });
     }
 
