@@ -103,6 +103,7 @@ export default function CurrencySelector({ selected, onChange, accentColor = "in
                   type="text"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
+                  onFocus={(e) => e.target.select()}
                   placeholder="Search currency..."
                   className="w-full px-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-lg dark:bg-gray-800 dark:text-white dark:placeholder-gray-500 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 />
