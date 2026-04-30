@@ -43,6 +43,9 @@ import DateCalculator from "@/components/calculators/DateCalculator";
 import TimeZoneConverter from "@/components/calculators/TimeZoneConverter";
 import GPACalculator from "@/components/calculators/GPACalculator";
 import UnitConverter from "@/components/calculators/UnitConverter";
+import HRACalculator from "@/components/calculators/HRACalculator";
+import GratuityCalculator from "@/components/calculators/GratuityCalculator";
+import FDCalculator from "@/components/calculators/FDCalculator";
 
 const SITE_URL = "https://thecalchub.org";
 
@@ -79,6 +82,9 @@ const CALCULATOR_COMPONENTS: Record<string, React.ComponentType> = {
   timezone: TimeZoneConverter,
   gpa: GPACalculator,
   "unit-converter": UnitConverter,
+  hra: HRACalculator,
+  gratuity: GratuityCalculator,
+  fd: FDCalculator,
 };
 
 const COMPARE_ENABLED = new Set(["emi", "sip", "mortgage", "retirement"]);
