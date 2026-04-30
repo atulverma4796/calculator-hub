@@ -46,6 +46,10 @@ import UnitConverter from "@/components/calculators/UnitConverter";
 import HRACalculator from "@/components/calculators/HRACalculator";
 import GratuityCalculator from "@/components/calculators/GratuityCalculator";
 import FDCalculator from "@/components/calculators/FDCalculator";
+import RDCalculator from "@/components/calculators/RDCalculator";
+import PFCalculator from "@/components/calculators/PFCalculator";
+import LoanPrepaymentCalculator from "@/components/calculators/LoanPrepaymentCalculator";
+import StampDutyCalculator from "@/components/calculators/StampDutyCalculator";
 
 const SITE_URL = "https://thecalchub.org";
 
@@ -85,6 +89,10 @@ const CALCULATOR_COMPONENTS: Record<string, React.ComponentType> = {
   hra: HRACalculator,
   gratuity: GratuityCalculator,
   fd: FDCalculator,
+  rd: RDCalculator,
+  pf: PFCalculator,
+  "loan-prepayment": LoanPrepaymentCalculator,
+  "stamp-duty": StampDutyCalculator,
 };
 
 const COMPARE_ENABLED = new Set(["emi", "sip", "mortgage", "retirement"]);
