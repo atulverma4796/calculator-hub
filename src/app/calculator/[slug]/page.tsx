@@ -50,6 +50,9 @@ import RDCalculator from "@/components/calculators/RDCalculator";
 import PFCalculator from "@/components/calculators/PFCalculator";
 import LoanPrepaymentCalculator from "@/components/calculators/LoanPrepaymentCalculator";
 import StampDutyCalculator from "@/components/calculators/StampDutyCalculator";
+import TaxRegimeCalculator from "@/components/calculators/TaxRegimeCalculator";
+import CapitalGainsCalculator from "@/components/calculators/CapitalGainsCalculator";
+import Form16Calculator from "@/components/calculators/Form16Calculator";
 
 const SITE_URL = "https://thecalchub.org";
 
@@ -93,6 +96,9 @@ const CALCULATOR_COMPONENTS: Record<string, React.ComponentType> = {
   pf: PFCalculator,
   "loan-prepayment": LoanPrepaymentCalculator,
   "stamp-duty": StampDutyCalculator,
+  "tax-regime": TaxRegimeCalculator,
+  "capital-gains": CapitalGainsCalculator,
+  "form-16": Form16Calculator,
 };
 
 const COMPARE_ENABLED = new Set(["emi", "sip", "mortgage", "retirement"]);
