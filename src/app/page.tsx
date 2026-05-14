@@ -3,6 +3,7 @@ import { CALCULATOR_LIST, CATEGORIES } from "@/lib/calculators";
 import HeroAnimation from "@/components/HeroAnimation";
 import FeedbackForm from "@/components/FeedbackForm";
 import JsonLd from "@/components/JsonLd";
+import AdUnit from "@/components/AdUnit";
 
 export default function Home() {
   return (
@@ -94,6 +95,10 @@ export default function Home() {
             </Link>
           ))}
         </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <AdUnit slot="4811234310" />
       </div>
 
       {/* ── Calculator Categories ── */}

@@ -10,6 +10,7 @@ import CompareToggle from "@/components/CompareToggle";
 import TrustBadges from "@/components/TrustBadges";
 import CalculateNext from "@/components/CalculateNext";
 import EmbedButton from "@/components/EmbedButton";
+import AdUnit from "@/components/AdUnit";
 import EMICalculator from "@/components/calculators/EMICalculator";
 import SIPCalculator from "@/components/calculators/SIPCalculator";
 import CompoundInterestCalculator from "@/components/calculators/CompoundInterestCalculator";
@@ -192,6 +193,7 @@ export default async function VariantPage({ params }: { params: Promise<{ slug: 
             <VariantDefaults defaults={v.defaults || {}}>
               <CompareToggle calculator={Component} enabled={COMPARE_ENABLED.has(slug)}>
                 <Component />
+                <AdUnit slot="4811234310" />
               </CompareToggle>
             </VariantDefaults>
           </Suspense>
