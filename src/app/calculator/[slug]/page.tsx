@@ -11,6 +11,7 @@ import TrustBadges from "@/components/TrustBadges";
 import CalculateNext from "@/components/CalculateNext";
 import FeatureBadges from "@/components/FeatureBadges";
 import EmbedButton from "@/components/EmbedButton";
+import AdUnit from "@/components/AdUnit";
 import EMICalculator from "@/components/calculators/EMICalculator";
 import SIPCalculator from "@/components/calculators/SIPCalculator";
 import CompoundInterestCalculator from "@/components/calculators/CompoundInterestCalculator";
@@ -187,6 +188,8 @@ export default async function CalculatorPage({ params }: { params: Promise<{ slu
           <Suspense fallback={<div className="h-96 flex items-center justify-center"><div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" /></div>}>
             <CompareToggle calculator={Component} enabled={COMPARE_ENABLED.has(slug)}>
               <Component />
+
+              <AdUnit slot="4811234310" />
 
               {/* Variant pages — more specific calculators */}
               {variants.length > 0 && (
