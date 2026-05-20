@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   alternates: { canonical: SITE_URL },
   openGraph: {
     title: "Free Online Calculators — EMI, SIP, Tax, Loan, Mortgage",
-    description: "30+ free calculators with dark mode, voice input, PDF/CSV export, compare mode, and 37-currency auto-detect. No signup, works offline.",
+    description: "40+ free calculators with dark mode, voice input, PDF/CSV export, compare mode, and 37-currency auto-detect. No signup, works offline.",
     type: "website",
     locale: "en_US",
     url: SITE_URL,
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Free Online Calculators — No Signup Required",
-    description: "30+ free calculators with dark mode, voice input, PDF export, compare mode. EMI, SIP, mortgage, tax, BMI, calorie, and more.",
+    description: "40+ free calculators with dark mode, voice input, PDF export, compare mode. EMI, SIP, mortgage, tax, BMI, calorie, and more.",
   },
   icons: {
     icon: [
@@ -102,7 +102,7 @@ export default function RootLayout({
           "@type": "WebApplication",
           name: "CalcHub — Free Online Calculators",
           url: "https://thecalchub.org",
-          description: "30+ free online calculators with dark mode, voice input, PDF/CSV export, compare mode, and 37-currency auto-detect. EMI, SIP, mortgage, tax, BMI, calorie, scientific, and more.",
+          description: "42 free online calculators with dark mode, voice input, PDF/CSV export, compare mode, and 37-currency auto-detect. EMI, SIP, HRA, tax regime, capital gains, mortgage, BMI, and more.",
           applicationCategory: "FinanceApplication",
           operatingSystem: "All",
           offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },

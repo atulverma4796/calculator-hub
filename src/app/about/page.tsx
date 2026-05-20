@@ -4,7 +4,7 @@ import { CALCULATOR_LIST, CATEGORIES } from "@/lib/calculators";
 
 export const metadata: Metadata = {
   title: "About CalcHub",
-  description: "CalcHub provides 30+ free online calculators for finance, math, health, and utility. No signup, no limits, beautiful results.",
+  description: "CalcHub provides 42 free online calculators for finance, math, health, and utility. No signup, no limits, beautiful results.",
   alternates: { canonical: "https://thecalchub.org/about" },
 };
 

@@ -12,7 +12,7 @@ export default function Home() {
         "@context": "https://schema.org",
         "@type": "FAQPage",
         mainEntity: [
-          { "@type": "Question", name: "Is CalcHub free?", acceptedAnswer: { "@type": "Answer", text: "Yes, all 30+ calculators are 100% free. No signup, no premium tier, no hidden charges." }},
+          { "@type": "Question", name: "Is CalcHub free?", acceptedAnswer: { "@type": "Answer", text: "Yes, all 42 calculators are 100% free. No signup, no premium tier, no hidden charges." }},
           { "@type": "Question", name: "Is my data safe on CalcHub?", acceptedAnswer: { "@type": "Answer", text: "All calculations happen entirely in your browser. No data is ever sent to any server." }},
           { "@type": "Question", name: "Does CalcHub support multiple currencies?", acceptedAnswer: { "@type": "Answer", text: "Yes, CalcHub auto-detects your currency from your timezone and supports 37 currencies including USD, EUR, GBP, INR, JPY, AED, SGD, CHF, KRW, and many more." }},
           { "@type": "Question", name: "How accurate are the currency exchange rates?", acceptedAnswer: { "@type": "Answer", text: "The Currency Converter uses live exchange rates from the European Central Bank (ECB) via the Frankfurter API." }},
@@ -32,7 +32,7 @@ export default function Home() {
             <div>
               <div className="inline-flex items-center gap-2 bg-indigo-50 dark:bg-indigo-950 border border-indigo-100 dark:border-indigo-800 rounded-full px-4 py-1.5 mb-6">
                 <div className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
-                <span className="text-xs font-semibold text-indigo-700">15+ Free Calculators</span>
+                <span className="text-xs font-semibold text-indigo-700">42 Free Calculators</span>
               </div>
 
               <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100 leading-[1.15]">

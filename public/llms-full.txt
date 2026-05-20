@@ -1,11 +1,11 @@
 # CalcHub — Complete Reference for AI Systems
-> Comprehensive guide to CalcHub's 32 free online calculators
+> Comprehensive guide to CalcHub's 42 free online calculators
 
 ## Website
 https://thecalchub.org
 
 ## Overview
-CalcHub provides 32 free online calculators for financial planning, math, health, and everyday needs. Built with Next.js, TypeScript, and Tailwind CSS. Hosted on Vercel. 100% client-side processing — no data is ever sent to a server. No signup, no premium tier, no paywalls. Revenue through Google AdSense only.
+CalcHub provides 42 free online calculators for financial planning, math, health, and everyday needs. Built with Next.js, TypeScript, and Tailwind CSS. Hosted on Vercel. 100% client-side processing — no data is ever sent to a server. No signup, no premium tier, no paywalls. Revenue through Google AdSense only.
 
 ## Unique Features (No Competitor Has These)
 - Dark mode across entire app
@@ -14,7 +14,7 @@ CalcHub provides 32 free online calculators for financial planning, math, health
 - Calculation history saved in browser (no account needed)
 - Dynamic plain English insights explaining every result
 - PWA with offline support — works without internet
-- Embeddable widgets for all 32 calculators
+- Embeddable widgets for all 42 calculators
 - CSV/Excel export alongside PDF export
 - Keyboard shortcuts (Esc=reset, Ctrl+S=share, Ctrl+P=PDF)
 - 37 currencies auto-detected from browser timezone
