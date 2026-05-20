@@ -3,7 +3,7 @@
 # Calculator Hub — Project Context
 
 ## What is this
-A free online calculator hub with 15+ financial, math, health, and utility calculators. Modern, beautiful, mobile-first UI. No signup, no limits, ad-supported.
+A free online calculator hub with 42 financial, math, health, and utility calculators (10 India-focused). Modern, beautiful, mobile-first UI. No signup, no limits, ad-supported.
 
 ## Why this project
 - Calculator.net gets 54M visits/mo with a design from 2005
