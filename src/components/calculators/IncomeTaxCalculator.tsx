@@ -104,11 +104,33 @@ export default function IncomeTaxCalculator() {
       }
     }
 
+    // India FY 2025-26 New Regime: Section 87A rebate of ₹60,000 making
+    // income up to ₹12L tax-free; 4% Health & Education cess on the
+    // remaining tax. Without these, the calculator would over-charge
+    // users by 60k INR for the most common scenario.
+    let rebate = 0;
+    let cess = 0;
+    if (regime === "india_new") {
+      if (income <= 1200000) {
+        rebate = Math.min(tax, 60000);
+        tax = tax - rebate;
+      }
+      cess = tax * 0.04;
+      tax = tax + cess;
+    }
+
     const effectiveRate = income > 0 ? (tax / income) * 100 : 0;
     const afterTax = income - tax;
 
-    return { tax: Math.round(tax), effectiveRate, afterTax: Math.round(afterTax), breakdown };
-  }, [income, r, regimeCurrency]);
+    return {
+      tax: Math.round(tax),
+      effectiveRate,
+      afterTax: Math.round(afterTax),
+      breakdown,
+      rebate: Math.round(rebate),
+      cess: Math.round(cess),
+    };
+  }, [income, r, regime, regimeCurrency]);
 
   const fmt = (v: number) => formatAmount(v, regimeCurrency);
 
@@ -216,6 +238,48 @@ export default function IncomeTaxCalculator() {
         insight={`On ${fmt(income)} income, your tax is ${fmt(result.tax)}. Your effective rate is ${result.effectiveRate.toFixed(1)}% — much lower than your top bracket rate thanks to progressive taxation.`}
         tip={`After tax, you take home ${fmt(result.afterTax)} (${(100 - result.effectiveRate).toFixed(0)}% of your income).`}
       />
+
+      {/* What's included / what's NOT — protects users from over- or under-estimating their real take-home */}
+      <div className="rounded-2xl bg-amber-50/60 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 p-4 sm:p-5 text-xs sm:text-sm text-amber-900 dark:text-amber-200 leading-relaxed">
+        <strong className="block mb-2 text-amber-900 dark:text-amber-100">
+          What this calculator does &amp; doesn&apos;t include
+        </strong>
+        {regime === "india_new" && (
+          <>
+            <p>
+              <strong>India — New Regime FY 2025-26 (verified per Budget 2025 / Finance Act 2025).</strong>
+              {" "}Includes: progressive slab tax + Section 87A rebate (₹60K, making ≤₹12L tax-free) + 4% Health &amp; Education cess.
+            </p>
+            <p className="mt-2">
+              Does NOT include: standard deduction (₹75K — apply it to your gross to get taxable income), Section 80C/80D/80G deductions, surcharge for incomes &gt; ₹50L,
+              {" "}or Old Regime computation. For Old vs New comparison use the{" "}
+              <a href="/calculator/tax-regime" className="underline font-semibold hover:text-amber-700 dark:hover:text-amber-100">Tax Regime Calculator</a>.
+            </p>
+          </>
+        )}
+        {regime === "us" && (
+          <>
+            <p>
+              <strong>USA — Federal Tax Year 2026, Single filer (IRS Rev. Proc. 2025-32, post-OBBBA).</strong>
+              {" "}Brackets verified against IRS official rates.
+            </p>
+            <p className="mt-2">
+              Does NOT include: standard deduction ($16,100 for 2026 single — subtract from gross for taxable income), FICA payroll tax (Social Security 6.2% + Medicare 1.45% = 7.65%), state/local income tax (varies by state), or filing statuses other than Single (MFJ, MFS, HoH have different brackets).
+            </p>
+          </>
+        )}
+        {regime === "uk" && (
+          <>
+            <p>
+              <strong>UK — PAYE 2026/27 (HMRC — England, Wales &amp; Northern Ireland).</strong>
+              {" "}Includes: Personal Allowance £12,570 + Basic/Higher/Additional rate progressive brackets.
+            </p>
+            <p className="mt-2">
+              Does NOT include: National Insurance contributions (Class 1 employee NI is 8% on £12,570-£50,270, 2% above), Personal Allowance taper (reduces by £1 for every £2 over £100K), Scottish income tax bands (different rates apply if Scottish resident), or other reliefs / pension contributions.
+            </p>
+          </>
+        )}
+      </div>
 
       <CalculationHistory
         calculator="income-tax"
