@@ -108,20 +108,39 @@ export function generateStaticParams() {
   return Object.keys(CALCULATOR_COMPONENTS).map((slug) => ({ slug }));
 }
 
+// Trim a description on a word boundary so it stays within Bing/Google's
+// ~155-char meta description limit without cutting mid-word.
+function trimDescription(text: string, maxLen = 155): string {
+  if (text.length <= maxLen) return text;
+  const slice = text.slice(0, maxLen - 1);
+  const lastSpace = slice.lastIndexOf(" ");
+  return (lastSpace > 100 ? slice.slice(0, lastSpace) : slice).trim() + "…";
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const calc = CALCULATORS[slug];
   if (!calc) return {};
 
+  // Layout adds " | thecalchub.org" template — keep this short so the
+  // combined title stays under 60 chars (Bing/Google SERP cap).
+  const pageTitle = `Free ${calc.name}`;
+  const metaDescription = trimDescription(calc.description);
+
   return {
-    title: `Free ${calc.name} Online — Charts, PDF Export & Dark Mode`,
-    description: `${calc.description} Compare scenarios side-by-side, export PDF/CSV, share via link. Works offline. No signup.`,
+    title: pageTitle,
+    description: metaDescription,
     keywords: calc.keywords,
     alternates: { canonical: `${SITE_URL}/calculator/${slug}` },
     openGraph: {
-      title: `Free ${calc.name} — CalcHub`,
-      description: calc.description,
+      title: `Free ${calc.name} — thecalchub.org`,
+      description: metaDescription,
       url: `${SITE_URL}/calculator/${slug}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Free ${calc.name} — thecalchub.org`,
+      description: metaDescription,
     },
   };
 }

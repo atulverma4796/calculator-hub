@@ -88,20 +88,39 @@ export function generateStaticParams() {
   return CALCULATOR_VARIANTS.map((v) => ({ slug: v.slug, variant: v.variant }));
 }
 
+// Trim title/description so the layout's " | thecalchub.org" suffix
+// keeps the final SERP title under 60 chars and description under 155.
+function trimText(text: string, maxLen: number): string {
+  if (text.length <= maxLen) return text;
+  const slice = text.slice(0, maxLen - 1);
+  const lastSpace = slice.lastIndexOf(" ");
+  return (lastSpace > maxLen * 0.6 ? slice.slice(0, lastSpace) : slice).trim() + "…";
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string; variant: string }> }): Promise<Metadata> {
   const { slug, variant } = await params;
   const v = getVariant(slug, variant);
   if (!v) return {};
 
+  // Page title gets " | thecalchub.org" suffix from layout (~17 chars),
+  // so cap pageTitle at ~42 to keep total under 60.
+  const pageTitle = trimText(v.title, 42);
+  const metaDescription = trimText(v.description, 155);
+
   return {
-    title: v.title,
-    description: v.description,
+    title: pageTitle,
+    description: metaDescription,
     keywords: v.keywords,
     alternates: { canonical: `${SITE_URL}/calculator/${slug}/${variant}` },
     openGraph: {
-      title: v.title,
-      description: v.description,
+      title: pageTitle,
+      description: metaDescription,
       url: `${SITE_URL}/calculator/${slug}/${variant}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: pageTitle,
+      description: metaDescription,
     },
   };
 }
