@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "CalcHub — Free Online Calculators",
-    short_name: "CalcHub",
+    name: "TheCalcHub — Free Online Calculators · thecalchub.org",
+    short_name: "TheCalcHub",
     description:
       "42 free online calculators for EMI, SIP, HRA, tax regime, capital gains, compound interest, mortgage, GST, BMI, calorie, scientific, and more. Interactive charts, multi-currency support. No signup.",
     start_url: "/",
