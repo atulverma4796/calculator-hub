@@ -11,13 +11,16 @@ import { useShareableURL, useInitialParams } from "@/hooks/useShareableURL";
 import { useCalcHistory } from "@/hooks/useCalcHistory";
 import CalcInput from "@/components/CalcInput";
 
-// Sources:
-// India: incometax.gov.in AY 2026-27 (Section 115BAC New Regime, Budget 2025)
-// US: IRS Rev. Proc. 2025-32 (Tax Year 2026, post-OBBBA)
+// Sources (all verified May 2026 via official tax authority pages):
+// India New: incometax.gov.in AY 2026-27 (Section 115BAC, Budget 2025)
+// India Old: incometax.gov.in AY 2026-27 (default exemption ₹2.5L)
+// US: IRS Rev. Proc. 2025-32 (Tax Year 2026, post-OBBBA), single filer
 // UK: GOV.UK HMRC 2026/27 (England, Wales & Northern Ireland)
+// Canada: CRA 2026 federal brackets (effective 1 Jan 2026)
+// Australia: ATO 2025-26 (Stage 3 rates, effective 1 Jul 2024)
 const TAX_REGIMES = {
   india_new: {
-    name: "India — New Regime (FY 2025-26)",
+    name: "🇮🇳 India — New Regime (FY 2025-26)",
     currencyCode: "INR",
     brackets: [
       { min: 0, max: 400000, rate: 0 },
@@ -29,8 +32,18 @@ const TAX_REGIMES = {
       { min: 2400000, max: Infinity, rate: 30 },
     ],
   },
+  india_old: {
+    name: "🇮🇳 India — Old Regime (FY 2025-26)",
+    currencyCode: "INR",
+    brackets: [
+      { min: 0, max: 250000, rate: 0 },
+      { min: 250000, max: 500000, rate: 5 },
+      { min: 500000, max: 1000000, rate: 20 },
+      { min: 1000000, max: Infinity, rate: 30 },
+    ],
+  },
   us: {
-    name: "USA — Federal (Tax Year 2026)",
+    name: "🇺🇸 USA — Federal (Tax Year 2026, Single)",
     currencyCode: "USD",
     brackets: [
       { min: 0, max: 12400, rate: 10 },
@@ -43,13 +56,35 @@ const TAX_REGIMES = {
     ],
   },
   uk: {
-    name: "UK — PAYE (2026/27)",
+    name: "🇬🇧 UK — PAYE (2026/27)",
     currencyCode: "GBP",
     brackets: [
       { min: 0, max: 12570, rate: 0 },
       { min: 12570, max: 50270, rate: 20 },
       { min: 50270, max: 125140, rate: 40 },
       { min: 125140, max: Infinity, rate: 45 },
+    ],
+  },
+  canada: {
+    name: "🇨🇦 Canada — Federal (2026)",
+    currencyCode: "CAD",
+    brackets: [
+      { min: 0, max: 58523, rate: 14 },
+      { min: 58523, max: 117045, rate: 20.5 },
+      { min: 117045, max: 181440, rate: 26 },
+      { min: 181440, max: 258482, rate: 29 },
+      { min: 258482, max: Infinity, rate: 33 },
+    ],
+  },
+  australia: {
+    name: "🇦🇺 Australia — ATO Resident (2025-26)",
+    currencyCode: "AUD",
+    brackets: [
+      { min: 0, max: 18200, rate: 0 },
+      { min: 18200, max: 45000, rate: 16 },
+      { min: 45000, max: 135000, rate: 30 },
+      { min: 135000, max: 190000, rate: 37 },
+      { min: 190000, max: Infinity, rate: 45 },
     ],
   },
 };
@@ -59,6 +94,8 @@ type RegimeKey = keyof typeof TAX_REGIMES;
 function getDefaultRegime(code: string): RegimeKey {
   if (code === "INR") return "india_new";
   if (code === "GBP") return "uk";
+  if (code === "CAD") return "canada";
+  if (code === "AUD") return "australia";
   return "us";
 }
 
@@ -104,15 +141,21 @@ export default function IncomeTaxCalculator() {
       }
     }
 
-    // India FY 2025-26 New Regime: Section 87A rebate of ₹60,000 making
-    // income up to ₹12L tax-free; 4% Health & Education cess on the
-    // remaining tax. Without these, the calculator would over-charge
-    // users by 60k INR for the most common scenario.
+    // India FY 2025-26 — apply Section 87A rebate + 4% cess.
+    // - New Regime: rebate ₹60K when income ≤ ₹12L (makes income up to ₹12L tax-free)
+    // - Old Regime: rebate ₹12,500 when income ≤ ₹5L (makes income up to ₹5L tax-free)
     let rebate = 0;
     let cess = 0;
     if (regime === "india_new") {
       if (income <= 1200000) {
         rebate = Math.min(tax, 60000);
+        tax = tax - rebate;
+      }
+      cess = tax * 0.04;
+      tax = tax + cess;
+    } else if (regime === "india_old") {
+      if (income <= 500000) {
+        rebate = Math.min(tax, 12500);
         tax = tax - rebate;
       }
       cess = tax * 0.04;
@@ -136,7 +179,16 @@ export default function IncomeTaxCalculator() {
 
   useCalcHistory("income-tax", { income, regime }, `Tax: ${fmt(result.tax)} — Effective: ${result.effectiveRate.toFixed(1)}%`);
 
-  const maxSlider = regime === "india_new" ? 5000000 : regime === "uk" ? 300000 : 500000;
+  const maxSlider =
+    regime === "india_new" || regime === "india_old"
+      ? 5000000
+      : regime === "uk"
+      ? 300000
+      : regime === "canada"
+      ? 400000
+      : regime === "australia"
+      ? 400000
+      : 500000;
 
   return (
     <div className="max-w-2xl mx-auto space-y-8">
@@ -247,13 +299,49 @@ export default function IncomeTaxCalculator() {
         {regime === "india_new" && (
           <>
             <p>
-              <strong>India — New Regime FY 2025-26 (verified per Budget 2025 / Finance Act 2025).</strong>
+              <strong>🇮🇳 India — New Regime FY 2025-26 (verified per Budget 2025 / Finance Act 2025).</strong>
               {" "}Includes: progressive slab tax + Section 87A rebate (₹60K, making ≤₹12L tax-free) + 4% Health &amp; Education cess.
             </p>
             <p className="mt-2">
               Does NOT include: standard deduction (₹75K — apply it to your gross to get taxable income), Section 80C/80D/80G deductions, surcharge for incomes &gt; ₹50L,
               {" "}or Old Regime computation. For Old vs New comparison use the{" "}
               <a href="/calculator/tax-regime" className="underline font-semibold hover:text-amber-700 dark:hover:text-amber-100">Tax Regime Calculator</a>.
+            </p>
+          </>
+        )}
+        {regime === "india_old" && (
+          <>
+            <p>
+              <strong>🇮🇳 India — Old Regime FY 2025-26 (below-60 individual, default exemption ₹2.5L).</strong>
+              {" "}Includes: progressive slabs (2.5L/5L/10L) + Section 87A rebate (₹12,500, making ≤₹5L tax-free) + 4% Health &amp; Education cess.
+            </p>
+            <p className="mt-2">
+              Does NOT include: standard deduction (₹50K), Section 80C (₹1.5L), 80D (medical insurance), 80G (donations), HRA exemption,
+              {" "}home loan interest, or surcharge for incomes &gt; ₹50L. Senior citizens (60-80) get higher basic exemption (₹3L), super senior (80+) gets ₹5L —
+              {" "}not modeled here. For a full Old vs New comparison use the{" "}
+              <a href="/calculator/tax-regime" className="underline font-semibold hover:text-amber-700 dark:hover:text-amber-100">Tax Regime Calculator</a>.
+            </p>
+          </>
+        )}
+        {regime === "canada" && (
+          <>
+            <p>
+              <strong>🇨🇦 Canada — Federal income tax 2026 (CRA, lower bracket reduced from 15% to 14% effective 1 Jul 2025).</strong>
+              {" "}Includes: progressive federal brackets only.
+            </p>
+            <p className="mt-2">
+              Does NOT include: PROVINCIAL tax (varies hugely — Quebec 14-25.75%, Ontario 5.05-13.16%, Alberta 8-15%, etc., applied on top of federal), Basic Personal Amount tax credit ($16,452 for 2026, tapered for income &gt; ~$177K), CPP/EI contributions, RRSP/TFSA deductions, dividend tax credit, or non-refundable credits. For accurate take-home you must add your province&apos;s rate to the federal tax shown here.
+            </p>
+          </>
+        )}
+        {regime === "australia" && (
+          <>
+            <p>
+              <strong>🇦🇺 Australia — ATO 2025-26 (Stage 3 rates, tax-free threshold $18,200).</strong>
+              {" "}Includes: progressive resident brackets only.
+            </p>
+            <p className="mt-2">
+              Does NOT include: 2% Medicare Levy (most residents pay this on taxable income; Medicare Levy Surcharge applies above income thresholds without private health cover), Low Income Tax Offset (LITO, up to $700 if income ≤ $66,667), HECS/HELP repayments (1-10% above $54,435), super (super contributions are taxed separately at 15%), or non-resident rates (higher, no tax-free threshold). For Queensland/NSW/Vic land tax or stamp duty those are separate state taxes.
             </p>
           </>
         )}
