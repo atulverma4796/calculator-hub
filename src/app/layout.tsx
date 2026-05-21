@@ -197,20 +197,9 @@ export default function RootLayout({
                       <span className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 tracking-wider uppercase mt-1">thecalchub.org</span>
                     </div>
                   </div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
                     42 free online calculators across financial, math, health, and utility — with India-focused tax and salary tools. No signup, no limits.
                   </p>
-                  <nav className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-gray-500 dark:text-gray-400">
-                    <Link href="/" className="hover:text-indigo-600 transition-colors">Home</Link>
-                    <span className="text-gray-300">·</span>
-                    <Link href="/embed" className="hover:text-indigo-600 transition-colors">Embed</Link>
-                    <span className="text-gray-300">·</span>
-                    <Link href="/about" className="hover:text-indigo-600 transition-colors">About</Link>
-                    <span className="text-gray-300">·</span>
-                    <Link href="/privacy" className="hover:text-indigo-600 transition-colors">Privacy</Link>
-                    <span className="text-gray-300">·</span>
-                    <Link href="/terms" className="hover:text-indigo-600 transition-colors">Terms</Link>
-                  </nav>
                 </div>
 
                 {/* Financial (general) */}
@@ -263,6 +252,17 @@ export default function RootLayout({
 
               {/* Bottom bar */}
               <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-gray-500 dark:text-gray-400 mb-4">
+                  <Link href="/" className="hover:text-indigo-600 transition-colors">Home</Link>
+                  <span className="text-gray-300 dark:text-gray-600">·</span>
+                  <Link href="/embed" className="hover:text-indigo-600 transition-colors">Embed</Link>
+                  <span className="text-gray-300 dark:text-gray-600">·</span>
+                  <Link href="/about" className="hover:text-indigo-600 transition-colors">About</Link>
+                  <span className="text-gray-300 dark:text-gray-600">·</span>
+                  <Link href="/privacy" className="hover:text-indigo-600 transition-colors">Privacy</Link>
+                  <span className="text-gray-300 dark:text-gray-600">·</span>
+                  <Link href="/terms" className="hover:text-indigo-600 transition-colors">Terms</Link>
+                </nav>
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
                   <p className="text-xs text-gray-400">&copy; {new Date().getFullYear()} thecalchub.org · All rights reserved.</p>
                   <p className="text-xs text-gray-400">Free calculators for everyone, everywhere.</p>
