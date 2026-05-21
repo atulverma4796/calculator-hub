@@ -3,6 +3,21 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
 import { CALCULATOR_LIST } from "@/lib/calculators";
+
+// India-specific calculator slugs — surfaced as a dedicated footer column
+// so the 10 India-only tools (HRA, FD, RD, PF, etc.) don't get buried.
+const INDIA_SPECIFIC_SLUGS = new Set([
+  "hra",
+  "gratuity",
+  "fd",
+  "rd",
+  "pf",
+  "loan-prepayment",
+  "stamp-duty",
+  "tax-regime",
+  "capital-gains",
+  "form-16",
+]);
 import JsonLd from "@/components/JsonLd";
 import ToastProvider from "@/components/ToastProvider";
 import MobileMenu from "@/components/MobileMenu";
@@ -161,9 +176,9 @@ export default function RootLayout({
           {/* Footer */}
           <footer className="border-t border-gray-200 dark:border-gray-700 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-950 mt-16">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
                 {/* Brand */}
-                <div className="col-span-2 md:col-span-1">
+                <div className="col-span-2 md:col-span-3 lg:col-span-2">
                   <div className="flex items-center gap-2.5 mb-3">
                     <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-sm">
                       <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
@@ -172,27 +187,55 @@ export default function RootLayout({
                     </div>
                     <span className="text-lg font-bold text-gray-900 dark:text-gray-100">Calc<span className="text-indigo-600">Hub</span></span>
                   </div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
-                    Free online calculators. No signup, no limits, beautiful results.
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                    42 free online calculators across financial, math, health, and utility — with India-focused tax and salary tools. No signup, no limits.
                   </p>
+                  <nav className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-gray-500 dark:text-gray-400">
+                    <Link href="/" className="hover:text-indigo-600 transition-colors">Home</Link>
+                    <span className="text-gray-300">·</span>
+                    <Link href="/embed" className="hover:text-indigo-600 transition-colors">Embed</Link>
+                    <span className="text-gray-300">·</span>
+                    <Link href="/about" className="hover:text-indigo-600 transition-colors">About</Link>
+                    <span className="text-gray-300">·</span>
+                    <Link href="/privacy" className="hover:text-indigo-600 transition-colors">Privacy</Link>
+                    <span className="text-gray-300">·</span>
+                    <Link href="/terms" className="hover:text-indigo-600 transition-colors">Terms</Link>
+                  </nav>
                 </div>
 
-                {/* Financial */}
+                {/* Financial (general) */}
                 <div>
                   <h4 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-3">Financial</h4>
                   <nav className="flex flex-col gap-2">
-                    {CALCULATOR_LIST.filter(c => c.category === "financial").slice(0, 6).map(c => (
-                      <Link key={c.slug} href={`/calculator/${c.slug}`} className="text-sm text-gray-500 dark:text-gray-400 hover:text-indigo-600 transition-colors">{c.name}</Link>
-                    ))}
+                    {CALCULATOR_LIST
+                      .filter(c => c.category === "financial" && !INDIA_SPECIFIC_SLUGS.has(c.slug))
+                      .map(c => (
+                        <Link key={c.slug} href={`/calculator/${c.slug}`} className="text-sm text-gray-500 dark:text-gray-400 hover:text-indigo-600 transition-colors">{c.shortName || c.name}</Link>
+                      ))}
+                  </nav>
+                </div>
+
+                {/* India Tax & Salary */}
+                <div>
+                  <h4 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-3">
+                    India Tax &amp; Salary
+                    <span className="ml-1.5 text-[10px] font-bold text-indigo-600 bg-indigo-50 dark:bg-indigo-950 dark:text-indigo-300 px-1.5 py-0.5 rounded uppercase tracking-wider">FY 25-26</span>
+                  </h4>
+                  <nav className="flex flex-col gap-2">
+                    {CALCULATOR_LIST
+                      .filter(c => INDIA_SPECIFIC_SLUGS.has(c.slug))
+                      .map(c => (
+                        <Link key={c.slug} href={`/calculator/${c.slug}`} className="text-sm text-gray-500 dark:text-gray-400 hover:text-indigo-600 transition-colors">{c.shortName || c.name}</Link>
+                      ))}
                   </nav>
                 </div>
 
                 {/* Math & Health */}
                 <div>
-                  <h4 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-3">Math & Health</h4>
+                  <h4 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-3">Math &amp; Health</h4>
                   <nav className="flex flex-col gap-2">
                     {CALCULATOR_LIST.filter(c => c.category === "math" || c.category === "health").map(c => (
-                      <Link key={c.slug} href={`/calculator/${c.slug}`} className="text-sm text-gray-500 dark:text-gray-400 hover:text-indigo-600 transition-colors">{c.name}</Link>
+                      <Link key={c.slug} href={`/calculator/${c.slug}`} className="text-sm text-gray-500 dark:text-gray-400 hover:text-indigo-600 transition-colors">{c.shortName || c.name}</Link>
                     ))}
                   </nav>
                 </div>
@@ -202,7 +245,7 @@ export default function RootLayout({
                   <h4 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-3">Utility</h4>
                   <nav className="flex flex-col gap-2">
                     {CALCULATOR_LIST.filter(c => c.category === "utility").map(c => (
-                      <Link key={c.slug} href={`/calculator/${c.slug}`} className="text-sm text-gray-500 dark:text-gray-400 hover:text-indigo-600 transition-colors">{c.name}</Link>
+                      <Link key={c.slug} href={`/calculator/${c.slug}`} className="text-sm text-gray-500 dark:text-gray-400 hover:text-indigo-600 transition-colors">{c.shortName || c.name}</Link>
                     ))}
                   </nav>
                 </div>
@@ -210,13 +253,6 @@ export default function RootLayout({
 
               {/* Bottom bar */}
               <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
-                <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1 text-xs text-gray-500 dark:text-gray-400 mb-4">
-                  <Link href="/about" className="hover:text-indigo-600 transition-colors">About</Link>
-                  <span className="text-gray-300">·</span>
-                  <Link href="/privacy" className="hover:text-indigo-600 transition-colors">Privacy</Link>
-                  <span className="text-gray-300">·</span>
-                  <Link href="/terms" className="hover:text-indigo-600 transition-colors">Terms</Link>
-                </nav>
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
                   <p className="text-xs text-gray-400">&copy; {new Date().getFullYear()} CalcHub. All rights reserved.</p>
                   <p className="text-xs text-gray-400">Free calculators for everyone, everywhere.</p>
