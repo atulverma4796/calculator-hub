@@ -91,9 +91,64 @@ async function lookupGeo(ip: string): Promise<GeoLookup | null> {
   return null;
 }
 
+// Known datacenter / hosting providers. The primary geo API (ipapi.co)
+// doesn't return a `hosting` flag, so Hetzner / OVH / DO traffic gets
+// labelled "Residential" and slips past the bot suppression. We catch
+// it here by name and ASN.
+const DATACENTER_PATTERNS = [
+  /\bhetzner\b/i,
+  /\bovh\b/i,
+  /\bdigitalocean\b/i,
+  /\blinode\b/i,
+  /\bvultr\b/i,
+  /\bcontabo\b/i,
+  /\bscaleway\b/i,
+  /\bchoopa\b/i,
+  /\bcolocrossing\b/i,
+  /\bcloudflare\b/i,
+  /\bm247\b/i,
+  /\bquadranet\b/i,
+  /\bleaseweb\b/i,
+  /\bamazon\b/i, // AWS
+  /\baws\b/i,
+  /\bgoogle\s*cloud\b/i,
+  /\bgcp\b/i,
+  /\bmicrosoft\b/i, // Azure
+  /\bazure\b/i,
+  /\boracle\s*(cloud|corp)\b/i,
+  /\bdigital\s*ocean\b/i,
+  /\byour-server\.de\b/i,
+];
+
+const DATACENTER_ASNS = new Set([
+  "AS24940", // Hetzner
+  "AS16276", // OVH
+  "AS14061", // DigitalOcean
+  "AS63949", // Linode
+  "AS20473", // Vultr / Choopa
+  "AS51167", // Contabo
+  "AS12876", // Scaleway
+  "AS16509", // Amazon AWS
+  "AS14618", // Amazon AWS
+  "AS15169", // Google
+  "AS8075",  // Microsoft Azure
+  "AS13335", // Cloudflare
+  "AS31898", // Oracle Cloud
+]);
+
+function isDatacenterIp(geo: GeoLookup | null): boolean {
+  if (!geo) return false;
+  if (geo.hosting) return true;
+  const ispStr = `${geo.isp || ""} ${geo.org || ""}`;
+  if (DATACENTER_PATTERNS.some((p) => p.test(ispStr))) return true;
+  const asn = (geo.asn || "").split(/\s+/)[0]?.toUpperCase();
+  if (asn && DATACENTER_ASNS.has(asn)) return true;
+  return false;
+}
+
 function botSignals(geo: GeoLookup | null, device: DeviceInfo, browserTimezone: string, referrer: string): string[] {
   const flags: string[] = [];
-  if (geo?.hosting) flags.push("hosting/datacenter IP");
+  if (isDatacenterIp(geo)) flags.push("hosting/datacenter IP");
   if (geo?.proxy) flags.push("proxy/VPN");
   if (geo && geo.timezone && browserTimezone && geo.timezone !== browserTimezone) {
     flags.push(`timezone mismatch (IP: ${geo.timezone} vs browser: ${browserTimezone})`);
@@ -101,6 +156,12 @@ function botSignals(geo: GeoLookup | null, device: DeviceInfo, browserTimezone: 
   const ua = (device.userAgent || "").toLowerCase();
   if (/(bot|crawler|spider|headless|phantom|puppeteer|playwright|selenium|httpclient|curl|wget)/i.test(ua)) {
     flags.push("automated user-agent");
+  }
+  // Platform mismatch: UA claims Windows but navigator.platform is Linux (and vice versa)
+  // — classic headless Chrome fingerprint leak.
+  const platform = (device.platform || "").toLowerCase();
+  if (ua.includes("windows") && platform && !platform.includes("win")) {
+    flags.push(`platform mismatch (UA: Windows vs navigator: ${device.platform})`);
   }
   if (!device.screen || device.screen === "0x0") flags.push("missing screen size");
   if (!referrer) flags.push("no referrer");
@@ -130,20 +191,17 @@ export async function POST(req: NextRequest) {
     const ispLine = geo?.isp || geo?.org || "Unknown";
     const flags = botSignals(geo, device, browserTimezone, referrer);
 
-    // Suppress email only on STRONG bot signals (datacenter IP or automated
-    // user-agent). Soft signals like "no referrer" or "missing screen size"
-    // false-positive too easily on real direct visits and privacy-conscious
-    // mobile users — they're surfaced in the email body, not used to drop it.
+    // Send email for every visit — bots AND humans. The owner wants to
+    // see all traffic so they know who/what is hitting the site. Bot
+    // detection is still computed and surfaced in the email body so the
+    // owner can tell at a glance whether it's a real user or a crawler,
+    // but no visits are suppressed.
     const isLikelyBot = flags.some(
-      (f) => f === "hosting/datacenter IP" || f === "automated user-agent",
+      (f) =>
+        f === "hosting/datacenter IP" ||
+        f === "automated user-agent" ||
+        f.startsWith("platform mismatch"),
     );
-
-    // Allow ?force=1 in the page URL to bypass suppression for testing.
-    const forceSend = typeof url === "string" && /[?&]force=1\b/.test(url);
-
-    if (isLikelyBot && !forceSend) {
-      return NextResponse.json({ success: true, suppressed: true });
-    }
 
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -157,20 +215,27 @@ export async function POST(req: NextRequest) {
     const subjectGeo = geo?.countryCode || (locationLine !== "Unknown" ? geo?.country : "??");
     const subjectDevice = `${device.browser || "?"} on ${device.os || "?"}`;
     const subjectPath = path || "/";
+    // Tag the subject so the inbox is easy to scan at a glance.
+    const subjectTag = isLikelyBot ? "[Bot]" : "[User]";
 
-    const flagsBlock = flags.length
-      ? `<div style="margin:12px 0;padding:10px 12px;background:#fef3c7;border:1px solid #fbbf24;border-radius:6px;">
-          <strong style="color:#92400e;">⚠️ Soft signals:</strong>
-          <ul style="margin:4px 0 0 18px;padding:0;color:#92400e;font-size:13px;">${flags.map((f) => `<li>${escapeHtml(f)}</li>`).join("")}</ul>
+    const flagsBlock = isLikelyBot
+      ? `<div style="margin:12px 0;padding:10px 12px;background:#fee2e2;border:1px solid #f87171;border-radius:6px;">
+          <strong style="color:#991b1b;">🤖 Likely a bot / crawler:</strong>
+          <ul style="margin:4px 0 0 18px;padding:0;color:#991b1b;font-size:13px;">${flags.map((f) => `<li>${escapeHtml(f)}</li>`).join("")}</ul>
         </div>`
-      : `<div style="margin:12px 0;padding:10px 12px;background:#dcfce7;border:1px solid #86efac;border-radius:6px;color:#166534;font-size:13px;">
-          ✅ Likely a real user.
-        </div>`;
+      : flags.length
+        ? `<div style="margin:12px 0;padding:10px 12px;background:#fef3c7;border:1px solid #fbbf24;border-radius:6px;">
+            <strong style="color:#92400e;">⚠️ Soft signals (probably still a real user):</strong>
+            <ul style="margin:4px 0 0 18px;padding:0;color:#92400e;font-size:13px;">${flags.map((f) => `<li>${escapeHtml(f)}</li>`).join("")}</ul>
+          </div>`
+        : `<div style="margin:12px 0;padding:10px 12px;background:#dcfce7;border:1px solid #86efac;border-radius:6px;color:#166534;font-size:13px;">
+            ✅ Real user — no bot signals detected.
+          </div>`;
 
     await transporter.sendMail({
       from: `"CalcHub Visits" <${process.env.GMAIL_USER}>`,
       to: process.env.GMAIL_USER,
-      subject: `[CalcHub Visit] ${subjectGeo} · ${subjectPath} · ${subjectDevice}`,
+      subject: `${subjectTag} ${subjectGeo} · ${subjectPath} · ${subjectDevice}`,
       html: `
         <div style="font-family:sans-serif;max-width:780px;padding:20px;background:#fff;color:#111;">
           <h2 style="color:#6366f1;margin:0 0 4px 0;">New Visit</h2>
