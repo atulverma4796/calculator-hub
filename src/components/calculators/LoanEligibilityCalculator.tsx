@@ -262,6 +262,22 @@ export default function LoanEligibilityCalculator() {
         tip={existingEMIs > 0 ? `Clearing your existing EMIs of ${fmt(existingEMIs)}/mo would increase your eligible loan by ${fmt(Math.round(existingEMIs * 0.5 * (Math.pow(1 + rate / 1200, tenure * 12) - 1) / (rate / 1200 * Math.pow(1 + rate / 1200, tenure * 12))))}!` : undefined}
       />
 
+      <div className="rounded-2xl bg-amber-50/60 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 p-4 sm:p-5 text-xs sm:text-sm text-amber-900 dark:text-amber-200 leading-relaxed">
+        <strong className="block mb-1.5 text-amber-900 dark:text-amber-100">
+          Estimate only — your actual eligibility may differ
+        </strong>
+        This calculator uses a <strong>50% FOIR</strong> (Fixed Obligation to Income Ratio) — the upper limit most banks allow. Your real eligibility depends on:
+        <ul className="mt-2 space-y-1 list-disc pl-5">
+          <li><strong>Credit score (CIBIL)</strong> — below 750 typically caps FOIR at 40-45%</li>
+          <li><strong>Employment type</strong> — salaried gets higher limits than self-employed</li>
+          <li><strong>Lender policy</strong> — HDFC ~40%, ICICI ~50%, SBI ~55%, NBFCs vary</li>
+          <li><strong>Loan tenure &amp; age</strong> — must end by retirement age (60-65)</li>
+        </ul>
+        <p className="mt-2">
+          Use this as a planning estimate before applying. The bank&apos;s formal sanction letter is the only definitive answer.
+        </p>
+      </div>
+
       <CalculationHistory calculator="loan-eligibility" onLoad={(inputs) => {
         if (inputs.currency) setCurrency(getCurrencyConfig(String(inputs.currency)));
         if (inputs.monthlyIncome) setMonthlyIncome(Number(inputs.monthlyIncome));

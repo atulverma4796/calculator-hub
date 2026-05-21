@@ -10,7 +10,7 @@ import { useCalcHistory } from "@/hooks/useCalcHistory";
 import CalcInput from "@/components/CalcInput";
 import VoiceInputButton from "@/components/VoiceInputButton";
 
-type AssetType = "equity" | "mutualfund-equity" | "mutualfund-debt" | "property" | "gold";
+type AssetType = "equity" | "mutualfund-equity" | "mutualfund-debt" | "property" | "gold" | "crypto";
 
 interface AssetConfig {
   label: string;
@@ -20,6 +20,7 @@ interface AssetConfig {
   ltcgRate: number; // %
   ltcgExemption: number; // ₹
   ltcgUseSlab: boolean;
+  flatRate?: boolean; // True for crypto/VDA — single rate regardless of holding period; no exemption; no loss offset
 }
 
 const ASSETS: Record<AssetType, AssetConfig> = {
@@ -68,6 +69,18 @@ const ASSETS: Record<AssetType, AssetConfig> = {
     ltcgExemption: 0,
     ltcgUseSlab: false,
   },
+  crypto: {
+    label: "Crypto / VDA (Virtual Digital Asset)",
+    // For crypto, India does NOT distinguish STCG vs LTCG — all gains taxed at 30% flat regardless of holding period.
+    // No exemption, no indexation, no loss offset, no carry-forward. 1% TDS on transfers above ₹50K/year applies separately.
+    longTermMonths: 0, // any holding triggers the same 30% rate
+    stcgRate: 30,
+    stcgIsSlab: false,
+    ltcgRate: 30,
+    ltcgExemption: 0,
+    ltcgUseSlab: false,
+    flatRate: true,
+  },
 };
 
 function calcSlabTax(income: number, slab: number): number {
@@ -100,7 +113,11 @@ export default function CapitalGainsCalculator() {
       return { gain, tax: 0, exempt: 0, taxableGain: 0, isLongTerm, type: gain < 0 ? "loss" : "none" };
     }
 
-    if (isLongTerm) {
+    if (cfg.flatRate) {
+      // Crypto/VDA: flat 30% on entire gain, no exemption, no STCG/LTCG distinction.
+      taxableGain = gain;
+      tax = (gain * cfg.ltcgRate) / 100;
+    } else if (isLongTerm) {
       // LTCG
       if (cfg.ltcgUseSlab) {
         tax = calcSlabTax(gain, taxSlab);
@@ -128,7 +145,7 @@ export default function CapitalGainsCalculator() {
       exempt,
       taxableGain,
       isLongTerm,
-      type: isLongTerm ? "ltcg" : "stcg",
+      type: cfg.flatRate ? "flat" : isLongTerm ? "ltcg" : "stcg",
     };
   }, [purchasePrice, salePrice, holdingMonths, assetType, taxSlab]);
 
@@ -141,7 +158,7 @@ export default function CapitalGainsCalculator() {
   useCalcHistory(
     "capital-gains",
     { purchasePrice, salePrice, holdingMonths, assetType, taxSlab },
-    `${result.type === "ltcg" ? "LTCG" : "STCG"}: gain ₹${fmtINR(result.gain)}, tax ₹${fmtINR(result.tax)}`,
+    `${result.type === "flat" ? "Crypto 30%" : result.type === "ltcg" ? "LTCG" : "STCG"}: gain ₹${fmtINR(result.gain)}, tax ₹${fmtINR(result.tax)}`,
   );
 
   return (
@@ -165,7 +182,7 @@ export default function CapitalGainsCalculator() {
           ],
           results: [
             { label: "Total Gain", value: `₹${fmtINR(result.gain)}` },
-            { label: "Gain Type", value: result.type === "ltcg" ? "Long-Term (LTCG)" : "Short-Term (STCG)" },
+            { label: "Gain Type", value: result.type === "flat" ? "Crypto / VDA (flat 30%)" : result.type === "ltcg" ? "Long-Term (LTCG)" : "Short-Term (STCG)" },
             { label: "Exempt (LTCG basic)", value: `₹${fmtINR(result.exempt)}` },
             { label: "Tax Payable (incl. 4% cess)", value: `₹${fmtINR(result.tax)}` },
             { label: "Net Return After Tax", value: `₹${fmtINR(netReturn)}` },
@@ -178,7 +195,7 @@ export default function CapitalGainsCalculator() {
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
         <div className="lg:col-span-3 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
           <p className="text-xs text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 rounded-lg px-3 py-2 font-medium">
-            FY 2025-26 (Budget 2024 rules, effective 23 Jul 2024). Equity STCG 20%, LTCG 12.5% after ₹1.25L exemption. Property/Gold LTCG 12.5% without indexation. Debt MFs (post-1 Apr 2023) always at slab rates. Property bought before 23 Jul 2024 may opt for old 20% LTCG with indexation — this calc uses the new regime.
+            FY 2025-26 (Budget 2024 rules, effective 23 Jul 2024). Equity STCG 20%, LTCG 12.5% after ₹1.25L exemption. Property/Gold LTCG 12.5% without indexation. Debt MFs (post-1 Apr 2023) always at slab rates. Crypto / VDA: flat 30% regardless of holding period — no exemption, no loss offset, 1% TDS on transfers above ₹50K/year. Property bought before 23 Jul 2024 may opt for old 20% LTCG with indexation — this calc uses the new regime.
           </p>
 
           <div>
@@ -190,9 +207,12 @@ export default function CapitalGainsCalculator() {
               <option value="mutualfund-debt">Debt Mutual Funds (post-Apr 2023)</option>
               <option value="property">Real Estate (Property)</option>
               <option value="gold">Gold / Bullion</option>
+              <option value="crypto">Crypto / VDA (Bitcoin, Ethereum, NFT, etc.)</option>
             </select>
             <p className="text-[11px] text-gray-400 mt-1.5">
-              Long-term threshold: {cfg.longTermMonths} months. {cfg.stcgIsSlab && cfg.ltcgUseSlab ? "Both STCG & LTCG taxed at your slab rate." : ""}
+              {cfg.flatRate
+                ? "Crypto: flat 30% tax on any gain, regardless of holding period. No exemption, no loss offset."
+                : `Long-term threshold: ${cfg.longTermMonths} months. ${cfg.stcgIsSlab && cfg.ltcgUseSlab ? "Both STCG & LTCG taxed at your slab rate." : ""}`}
             </p>
           </div>
 
@@ -226,7 +246,9 @@ export default function CapitalGainsCalculator() {
             <input type="range" min={0} max={120} step={1} value={holdingMonths}
               onChange={(e) => setHoldingMonths(Number(e.target.value))} className="w-full" />
             <p className="text-[11px] text-gray-400 mt-1">
-              {result.isLongTerm ? `✓ Long-term (≥${cfg.longTermMonths} months)` : `Short-term (<${cfg.longTermMonths} months)`}
+              {cfg.flatRate
+                ? "Holding period doesn't affect crypto tax — always 30% flat."
+                : result.isLongTerm ? `✓ Long-term (≥${cfg.longTermMonths} months)` : `Short-term (<${cfg.longTermMonths} months)`}
             </p>
           </div>
 
@@ -246,7 +268,7 @@ export default function CapitalGainsCalculator() {
         <div className="lg:col-span-2 space-y-4">
           <div className="bg-gradient-to-br from-fuchsia-600 to-pink-700 rounded-2xl p-6 text-white shadow-xl shadow-fuchsia-200">
             <p className="text-sm font-medium text-fuchsia-100">
-              {result.type === "ltcg" ? "Long-Term Capital Gains" : result.type === "stcg" ? "Short-Term Capital Gains" : "No Gain"}
+              {result.type === "flat" ? "Crypto / VDA Gains" : result.type === "ltcg" ? "Long-Term Capital Gains" : result.type === "stcg" ? "Short-Term Capital Gains" : "No Gain"}
             </p>
             <p className="text-3xl sm:text-4xl font-extrabold mt-1">₹{fmtINR(result.gain)}</p>
             <div className="mt-4 grid grid-cols-2 gap-4">
@@ -286,12 +308,16 @@ export default function CapitalGainsCalculator() {
       </div>
 
       <InsightCard
-        icon={result.type === "ltcg" ? "📈" : result.type === "loss" ? "📉" : "💡"}
+        icon={result.type === "flat" ? "🪙" : result.type === "ltcg" ? "📈" : result.type === "loss" ? "📉" : "💡"}
         title="Capital Gains Insight"
-        color={result.type === "ltcg" ? "green" : "blue"}
+        color={result.type === "flat" ? "amber" : result.type === "ltcg" ? "green" : "blue"}
         insight={
           result.type === "loss"
-            ? `You incurred a loss of ₹${fmtINR(Math.abs(result.gain))}. ${result.isLongTerm ? "Long-term capital losses can be carried forward 8 years and offset against future LTCG." : "Short-term capital losses can offset both STCG and LTCG."}`
+            ? cfg.flatRate
+              ? `You incurred a loss of ₹${fmtINR(Math.abs(result.gain))} on crypto. Important: India does NOT allow crypto losses to be offset against any other income, nor carried forward. The loss is purely financial — no tax benefit.`
+              : `You incurred a loss of ₹${fmtINR(Math.abs(result.gain))}. ${result.isLongTerm ? "Long-term capital losses can be carried forward 8 years and offset against future LTCG." : "Short-term capital losses can offset both STCG and LTCG."}`
+            : result.type === "flat"
+            ? `Crypto gain of ₹${fmtINR(result.gain)} taxed at flat 30% (+4% cess = effective 31.2%). No exemption, no holding-period benefit. Net return after tax: ₹${fmtINR(netReturn)}. Also note: 1% TDS is deducted by exchanges on transfers above ₹50K/year.`
             : result.type === "ltcg"
             ? `Long-term gain of ₹${fmtINR(result.gain)} taxed at the LTCG rate. ${cfg.ltcgExemption > 0 ? `First ₹${fmtINR(cfg.ltcgExemption)} is exempt — that's why your tax is lower than the simple percentage.` : ""} Net return after tax: ₹${fmtINR(netReturn)}.`
             : `Short-term gain of ₹${fmtINR(result.gain)} taxed at ${cfg.stcgIsSlab ? "your income slab" : `${cfg.stcgRate}% (flat)`}. Holding for ${cfg.longTermMonths - holdingMonths} more months would convert this to long-term and likely reduce tax.`
