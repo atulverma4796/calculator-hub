@@ -6,6 +6,7 @@ import CurrencySelector from "@/components/CurrencySelector";
 import ActionButtons from "@/components/ActionButtons";
 import CalculationHistory from "@/components/CalculationHistory";
 import InsightCard from "@/components/InsightCard";
+import AffiliateCard from "@/components/AffiliateCard";
 import { useShareableURL, useInitialParams } from "@/hooks/useShareableURL";
 import { useCalcHistory } from "@/hooks/useCalcHistory";
 import VoiceInputButton from "@/components/VoiceInputButton";
@@ -277,6 +278,8 @@ export default function LoanEligibilityCalculator() {
           Use this as a planning estimate before applying. The bank&apos;s formal sanction letter is the only definitive answer.
         </p>
       </div>
+
+      <AffiliateCard type="loan" />
 
       <CalculationHistory calculator="loan-eligibility" onLoad={(inputs) => {
         if (inputs.currency) setCurrency(getCurrencyConfig(String(inputs.currency)));

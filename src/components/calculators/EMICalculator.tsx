@@ -9,6 +9,7 @@ import CalculatorEducation from "@/components/CalculatorEducation";
 import ActionButtons from "@/components/ActionButtons";
 import CalculationHistory from "@/components/CalculationHistory";
 import InsightCard from "@/components/InsightCard";
+import AffiliateCard from "@/components/AffiliateCard";
 import { useShareableURL, useInitialParams } from "@/hooks/useShareableURL";
 import { useCalcHistory } from "@/hooks/useCalcHistory";
 import VoiceInputButton from "@/components/VoiceInputButton";
@@ -289,6 +290,8 @@ export default function EMICalculator() {
         insight={`You're borrowing ${fmt(amount)} and will pay back ${fmt(result.totalPayment)} over ${tenureType === "years" ? `${tenure} years` : `${tenure} months`}. That means ${fmt(result.totalInterest)} goes to the bank as interest${result.totalInterest > amount ? " — more than the loan itself!" : "."}`}
         tip={result.totalInterest > amount ? `Reducing your tenure to ${Math.max(5, tenure - 5)} years would save significantly on interest.` : undefined}
       />
+
+      <AffiliateCard type="loan" />
 
       <CalculationHistory calculator="emi" onLoad={(inputs) => {
         if (inputs.currency) setCurrency(getCurrencyConfig(String(inputs.currency)));

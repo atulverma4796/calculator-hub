@@ -9,6 +9,7 @@ import CalculatorEducation from "@/components/CalculatorEducation";
 import ActionButtons from "@/components/ActionButtons";
 import CalculationHistory from "@/components/CalculationHistory";
 import InsightCard from "@/components/InsightCard";
+import AffiliateCard from "@/components/AffiliateCard";
 import { useShareableURL, useInitialParams } from "@/hooks/useShareableURL";
 import { useCalcHistory } from "@/hooks/useCalcHistory";
 import VoiceInputButton from "@/components/VoiceInputButton";
@@ -175,6 +176,8 @@ export default function MortgageCalculator() {
         insight={`With ${fmt(down)} down (${price > 0 ? ((down / price) * 100).toFixed(0) : 0}%), you borrow ${fmt(loan)}. Monthly payment: ${fmt(result.monthly)}. Total interest over ${years} years: ${fmt(result.totalInterest)}.`}
         tip={result.totalInterest > loan ? "The interest exceeds your loan amount! Consider a shorter term or larger down payment." : years > 20 ? `A ${years - 10}-year term would save over ${fmt(Math.round(result.totalInterest * 0.4))} in interest.` : undefined}
       />
+
+      <AffiliateCard type="loan" />
 
       <CalculationHistory
         calculator="mortgage"
