@@ -9,6 +9,13 @@ export interface CalculatorMeta {
   colorTo: string; // tailwind gradient to
   keywords: string[];
   searchVolume: string; // for internal reference
+  // SEO overrides — when present, used in <title> and meta description
+  // instead of the auto-generated `Free {name}` + truncated description.
+  // Used for high-impression pages where we want hand-tuned copy that
+  // beats Google's CTR baselines. Layout adds " | thecalchub.org" so
+  // keep seoTitle <= ~43 chars to stay under 60 in the SERP.
+  seoTitle?: string;
+  seoDescription?: string;
 }
 
 export const CALCULATORS: Record<string, CalculatorMeta> = {
@@ -23,6 +30,8 @@ export const CALCULATORS: Record<string, CalculatorMeta> = {
     colorTo: "to-indigo-600",
     keywords: ["EMI calculator", "loan EMI calculator", "home loan EMI", "car loan EMI", "personal loan EMI", "loan calculator", "home loan calculator", "loan EMI calculator online", "EMI calculator India", "housing loan EMI calculator", "auto loan calculator"],
     searchVolume: "1M+/mo",
+    seoTitle: "EMI Calculator — Home, Car, Personal Loan",
+    seoDescription: "Calculate monthly EMI for home, car, or personal loans. Full amortization schedule, total interest, interactive charts. Free, no signup.",
   },
   "sip": {
     slug: "sip",
@@ -35,6 +44,8 @@ export const CALCULATORS: Record<string, CalculatorMeta> = {
     colorTo: "to-teal-600",
     keywords: ["SIP calculator", "mutual fund SIP calculator", "SIP returns calculator", "mutual fund calculator", "monthly investment calculator", "SIP investment calculator", "systematic investment plan calculator", "SIP calculator India", "lumpsum vs SIP calculator"],
     searchVolume: "500K/mo",
+    seoTitle: "SIP Calculator — Mutual Fund Returns India",
+    seoDescription: "Calculate SIP returns from monthly mutual fund investments. See growth over 5/10/20 years with compound returns. Free, India-focused, interactive charts.",
   },
   "compound-interest": {
     slug: "compound-interest",
@@ -167,6 +178,8 @@ export const CALCULATORS: Record<string, CalculatorMeta> = {
     colorTo: "to-cyan-600",
     keywords: ["income tax calculator", "tax calculator", "income tax calculator India", "income tax calculator USA", "income tax calculator UK", "federal tax calculator", "tax bracket calculator", "tax estimator", "how much tax do I owe", "salary tax calculator", "income tax slab calculator", "new regime tax calculator", "old regime tax calculator", "effective tax rate calculator"],
     searchVolume: "500K/mo",
+    seoTitle: "Income Tax Calculator FY 2025-26",
+    seoDescription: "Calculate income tax for India (old/new regime), US Federal 2026, or UK PAYE 2026/27. Includes Section 87A rebate + 4% cess. Free, verified.",
   },
   "currency": {
     slug: "currency",
@@ -179,6 +192,8 @@ export const CALCULATORS: Record<string, CalculatorMeta> = {
     colorTo: "to-green-600",
     keywords: ["currency converter", "USD to INR", "currency exchange calculator", "EUR to USD", "GBP to INR", "AED to INR", "INR to USD", "dollar to rupee", "pound to rupee", "euro to dollar", "currency exchange rate", "forex calculator", "money converter", "live exchange rate", "ECB exchange rate"],
     searchVolume: "1M+/mo",
+    seoTitle: "Currency Converter — Live ECB Rates",
+    seoDescription: "Convert 37+ currencies at real European Central Bank rates. USD, EUR, GBP, INR, JPY and more. Free, instant, no signup, mid-market rates only.",
   },
   "retirement": {
     slug: "retirement",
@@ -229,6 +244,8 @@ export const CALCULATORS: Record<string, CalculatorMeta> = {
     colorTo: "to-indigo-600",
     keywords: ["investment calculator", "investment return calculator", "investment growth calculator", "compound investment calculator", "how much will my investment grow", "investment profit calculator"],
     searchVolume: "300K/mo",
+    seoTitle: "Investment Calculator — Lump Sum + SIP Growth",
+    seoDescription: "Calculate investment growth from lump sum + monthly contributions. See compounding returns over 5/10/20 years. Free, interactive charts.",
   },
   "inflation": {
     slug: "inflation",
@@ -241,6 +258,8 @@ export const CALCULATORS: Record<string, CalculatorMeta> = {
     colorTo: "to-orange-600",
     keywords: ["inflation calculator", "future value calculator", "purchasing power calculator", "inflation rate calculator", "what will my money be worth", "cost of inflation calculator"],
     searchVolume: "200K/mo",
+    seoTitle: "Inflation Calculator — Future Value of Money",
+    seoDescription: "Calculate how inflation erodes your money's value over time. See future purchasing power for any currency, any number of years. Free with charts.",
   },
   "cagr": {
     slug: "cagr",
@@ -265,6 +284,8 @@ export const CALCULATORS: Record<string, CalculatorMeta> = {
     colorTo: "to-yellow-600",
     keywords: ["break even calculator", "break even point calculator", "break even analysis calculator", "business break even", "how many units to sell", "break even formula"],
     searchVolume: "100K/mo",
+    seoTitle: "Break-Even Calculator (Free + Charts)",
+    seoDescription: "Find your break-even point in seconds. Calculate units to sell and revenue needed to cover fixed costs. Free, interactive charts, no signup.",
   },
   "profit-margin": {
     slug: "profit-margin",
@@ -377,6 +398,8 @@ export const CALCULATORS: Record<string, CalculatorMeta> = {
     colorTo: "to-indigo-600",
     keywords: ["time zone converter", "timezone converter", "time zone calculator", "world clock converter", "convert time zones", "time difference calculator", "EST to IST", "PST to GMT"],
     searchVolume: "500K/mo",
+    seoTitle: "Time Zone Converter — EST/IST/PST/GMT",
+    seoDescription: "Convert any time zones instantly — 35+ zones, daylight saving aware, shareable links. Free, mobile-friendly. EST to IST, PST to GMT and more.",
   },
   "gpa": {
     slug: "gpa",

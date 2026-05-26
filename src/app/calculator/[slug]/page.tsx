@@ -124,8 +124,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   // Layout adds " | thecalchub.org" template — keep this short so the
   // combined title stays under 60 chars (Bing/Google SERP cap).
-  const pageTitle = `Free ${calc.name}`;
-  const metaDescription = trimDescription(calc.description);
+  // Prefer hand-tuned seoTitle/seoDescription when present (used for
+  // high-impression pages where we want optimized CTR copy); otherwise
+  // fall back to the auto-generated default.
+  const pageTitle = calc.seoTitle || `Free ${calc.name}`;
+  const metaDescription = calc.seoDescription
+    ? trimDescription(calc.seoDescription)
+    : trimDescription(calc.description);
 
   return {
     title: pageTitle,
