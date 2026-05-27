@@ -31,6 +31,7 @@ export default function ScientificCalculator() {
       let parsed = expr
         .replace(/\u00d7/g, "*")
         .replace(/\u00f7/g, "/")
+        .replace(/\^/g, "**")
         .replace(/\u03c0/g, String(Math.PI))
         .replace(/e(?![xp])/g, String(Math.E));
 
@@ -67,17 +68,11 @@ export default function ScientificCalculator() {
         E: Math.E,
       };
 
-      // Replace function names with context calls
-      parsed = parsed.replace(/sin\(/g, "__sin(");
-      parsed = parsed.replace(/cos\(/g, "__cos(");
-      parsed = parsed.replace(/tan\(/g, "__tan(");
-      parsed = parsed.replace(/asin\(/g, "__asin(");
-      parsed = parsed.replace(/acos\(/g, "__acos(");
-      parsed = parsed.replace(/atan\(/g, "__atan(");
-      parsed = parsed.replace(/log\(/g, "__log(");
-      parsed = parsed.replace(/ln\(/g, "__ln(");
-      parsed = parsed.replace(/sqrt\(/g, "__sqrt(");
-      parsed = parsed.replace(/abs\(/g, "__abs(");
+      // Replace function names with context calls in a single pass.
+      // Longer names (asin, acos, atan) MUST come first in the alternation —
+      // otherwise `sin(` would match inside `asin(` and break the inverse trig
+      // functions.
+      parsed = parsed.replace(/(asin|acos|atan|sin|cos|tan|log|ln|sqrt|abs)\(/g, "__$1(");
 
       // Use Function constructor with context
       const fnBody = Object.keys(context)
