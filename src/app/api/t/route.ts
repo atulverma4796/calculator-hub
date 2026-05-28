@@ -118,6 +118,10 @@ const DATACENTER_PATTERNS = [
   /\boracle\s*(cloud|corp)\b/i,
   /\bdigital\s*ocean\b/i,
   /\byour-server\.de\b/i,
+  /\balibaba\b/i, // Alibaba Cloud (US/Singapore/Hangzhou)
+  /\baliyun\b/i,  // Alibaba Cloud (China brand)
+  /\btencent\b/i, // Tencent Cloud
+  /\bhuawei\s*cloud\b/i,
 ];
 
 const DATACENTER_ASNS = new Set([
@@ -134,6 +138,11 @@ const DATACENTER_ASNS = new Set([
   "AS8075",  // Microsoft Azure
   "AS13335", // Cloudflare
   "AS31898", // Oracle Cloud
+  "AS45102", // Alibaba (US) Technology — Singapore/international
+  "AS37963", // Alibaba Hangzhou
+  "AS134963", // Alibaba
+  "AS132203", // Tencent
+  "AS45090", // Tencent
 ]);
 
 function isDatacenterIp(geo: GeoLookup | null): boolean {
@@ -191,17 +200,23 @@ export async function POST(req: NextRequest) {
     const ispLine = geo?.isp || geo?.org || "Unknown";
     const flags = botSignals(geo, device, browserTimezone, referrer);
 
-    // Send email for every visit — bots AND humans. The owner wants to
-    // see all traffic so they know who/what is hitting the site. Bot
-    // detection is still computed and surfaced in the email body so the
-    // owner can tell at a glance whether it's a real user or a crawler,
-    // but no visits are suppressed.
+    // Suppress email for likely-bots to keep the inbox usable. A visit is
+    // "likely bot" only on HARD signals (datacenter IP, automated UA, or a
+    // platform fingerprint leak) — soft signals like a timezone mismatch or
+    // missing referrer do NOT suppress, since real users (VPNs, privacy
+    // settings) trip those too. Datacenter scrapers rotating IPs/UAs were
+    // flooding the inbox; this filters them out while real visitors still
+    // generate a beacon email.
     const isLikelyBot = flags.some(
       (f) =>
         f === "hosting/datacenter IP" ||
         f === "automated user-agent" ||
         f.startsWith("platform mismatch"),
     );
+
+    if (isLikelyBot) {
+      return NextResponse.json({ success: true, suppressed: "bot" });
+    }
 
     const transporter = nodemailer.createTransport({
       service: "gmail",
