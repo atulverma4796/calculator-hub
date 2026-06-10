@@ -50,15 +50,30 @@ export default function BodyFatCalculator() {
 
     let bodyFat: number;
     if (gender === "male") {
-      // US Navy Method: Male
+      // US Navy Method (Hodgdon-Beckett), cm form:
+      //   %BF = 495 / (1.0324 − 0.19077·log10(waist − neck) + 0.15456·log10(height)) − 450
+      // The earlier constants (86.010, 70.041, 36.76) are the *inch* form
+      // of the same formula. Because the inputs are already converted to
+      // cm above, the inch constants understate fat by ~3-5pp — wrong
+      // result. Cm form here matches the official US Navy circular and
+      // every reference implementation (Wikipedia, CalculatorSoup, etc).
       const diff = w - n;
       if (diff <= 0) return null;
-      bodyFat = 86.010 * Math.log10(diff) - 70.041 * Math.log10(h) + 36.76;
+      bodyFat =
+        495 /
+          (1.0324 - 0.19077 * Math.log10(diff) + 0.15456 * Math.log10(h)) -
+        450;
     } else {
-      // US Navy Method: Female
+      // US Navy Method (Hodgdon-Beckett), cm form, female:
+      //   %BF = 495 / (1.29579 − 0.35004·log10(waist + hip − neck) + 0.22100·log10(height)) − 450
       const sum = w + hp - n;
       if (sum <= 0) return null;
-      bodyFat = 163.205 * Math.log10(sum) - 97.684 * Math.log10(h) - 78.387;
+      bodyFat =
+        495 /
+          (1.29579 -
+            0.35004 * Math.log10(sum) +
+            0.22100 * Math.log10(h)) -
+        450;
     }
 
     bodyFat = Math.max(0, Math.min(60, bodyFat));

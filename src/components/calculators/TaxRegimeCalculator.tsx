@@ -48,35 +48,53 @@ function calcNewRegime(taxableIncome: number): number {
   let remaining = taxableIncome;
   // 0 - 4L: nil
   remaining -= 400000;
-  if (remaining <= 0) return 0;
   // 4 - 8L: 5%
   const slab1 = Math.min(remaining, 400000);
   tax += slab1 * 0.05;
   remaining -= slab1;
-  if (remaining <= 0) return tax + tax * 0.04;
-  // 8 - 12L: 10%
-  const slab2 = Math.min(remaining, 400000);
-  tax += slab2 * 0.10;
-  remaining -= slab2;
-  if (remaining <= 0) return tax + tax * 0.04;
-  // 12 - 16L: 15%
-  const slab3 = Math.min(remaining, 400000);
-  tax += slab3 * 0.15;
-  remaining -= slab3;
-  if (remaining <= 0) return tax + tax * 0.04;
-  // 16 - 20L: 20%
-  const slab4 = Math.min(remaining, 400000);
-  tax += slab4 * 0.20;
-  remaining -= slab4;
-  if (remaining <= 0) return tax + tax * 0.04;
-  // 20 - 24L: 25%
-  const slab5 = Math.min(remaining, 400000);
-  tax += slab5 * 0.25;
-  remaining -= slab5;
-  if (remaining <= 0) return tax + tax * 0.04;
-  // 24L+: 30%
-  tax += remaining * 0.30;
-  return tax + tax * 0.04; // 4% Health & Education Cess
+  let totalTax = remaining <= 0 ? tax : tax;
+  if (remaining > 0) {
+    // 8 - 12L: 10%
+    const slab2 = Math.min(remaining, 400000);
+    tax += slab2 * 0.10;
+    remaining -= slab2;
+    totalTax = tax;
+  }
+  if (remaining > 0) {
+    // 12 - 16L: 15%
+    const slab3 = Math.min(remaining, 400000);
+    tax += slab3 * 0.15;
+    remaining -= slab3;
+    totalTax = tax;
+  }
+  if (remaining > 0) {
+    // 16 - 20L: 20%
+    const slab4 = Math.min(remaining, 400000);
+    tax += slab4 * 0.20;
+    remaining -= slab4;
+    totalTax = tax;
+  }
+  if (remaining > 0) {
+    // 20 - 24L: 25%
+    const slab5 = Math.min(remaining, 400000);
+    tax += slab5 * 0.25;
+    remaining -= slab5;
+    totalTax = tax;
+  }
+  if (remaining > 0) {
+    // 24L+: 30%
+    tax += remaining * 0.30;
+    totalTax = tax;
+  }
+  // Section 87A marginal relief: tax cannot exceed (income − 12L) when
+  // income marginally crosses the rebate threshold. Without this, a
+  // ₹12,00,001 earner would owe ~₹61K vs ₹0 for ₹12,00,000 earner —
+  // the cliff the relief was introduced to smooth (Budget 2025).
+  const excessOverThreshold = taxableIncome - 1200000;
+  if (totalTax > excessOverThreshold) {
+    totalTax = excessOverThreshold;
+  }
+  return totalTax + totalTax * 0.04; // 4% Health & Education Cess
 }
 
 export default function TaxRegimeCalculator() {

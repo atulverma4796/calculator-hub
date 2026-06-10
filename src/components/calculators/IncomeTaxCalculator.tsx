@@ -91,6 +91,12 @@ const TAX_REGIMES = {
 
 type RegimeKey = keyof typeof TAX_REGIMES;
 
+const VALID_REGIME_KEYS = new Set<string>(Object.keys(TAX_REGIMES));
+
+function isRegimeKey(v: string): v is RegimeKey {
+  return VALID_REGIME_KEYS.has(v);
+}
+
 function getDefaultRegime(code: string): RegimeKey {
   if (code === "INR") return "india_new";
   if (code === "GBP") return "uk";
@@ -103,7 +109,15 @@ export default function IncomeTaxCalculator() {
   const { getString, getNumber, hasParams } = useInitialParams();
   const [currency, setCurrency] = useState<CurrencyConfig>(getCurrencyConfig("USD"));
   const [income, setIncome] = useState(getNumber("income", 55000));
-  const [regime, setRegime] = useState<RegimeKey>(getString("regime", "us") as RegimeKey);
+  // Validate ?regime= against the keys we actually support — an
+  // attacker (or a stale shared link) can supply any string, and
+  // before this guard a value like ?regime=xyz crashed the page at
+  // `TAX_REGIMES[regime].brackets` because the cast lied about the
+  // type. Fall back to "us" when the value isn't recognised.
+  const [regime, setRegime] = useState<RegimeKey>(() => {
+    const raw = getString("regime", "us");
+    return isRegimeKey(raw) ? raw : "us";
+  });
 
   useEffect(() => {
     if (!hasParams) {
@@ -141,15 +155,29 @@ export default function IncomeTaxCalculator() {
       }
     }
 
-    // India FY 2025-26 — apply Section 87A rebate + 4% cess.
-    // - New Regime: rebate ₹60K when income ≤ ₹12L (makes income up to ₹12L tax-free)
-    // - Old Regime: rebate ₹12,500 when income ≤ ₹5L (makes income up to ₹5L tax-free)
+    // India FY 2025-26 — apply Section 87A rebate (with marginal relief) + 4% cess.
+    // - New Regime: rebate ₹60K when income ≤ ₹12L. For income marginally
+    //   above ₹12L, marginal relief caps tax at (income − ₹12L) so a
+    //   person earning ₹12,00,001 doesn't suddenly owe ₹60K+. Without
+    //   this, the slab boundary creates a vertical-cliff tax jump that
+    //   makes the calculator disagree with the official Budget 2025
+    //   illustrations.
+    // - Old Regime: rebate ₹12,500 when income ≤ ₹5L. No marginal
+    //   relief — Section 87A under the old regime has historically
+    //   been a hard cutoff, matching ITR utility behavior.
     let rebate = 0;
     let cess = 0;
+    let marginalRelief = 0;
     if (regime === "india_new") {
       if (income <= 1200000) {
         rebate = Math.min(tax, 60000);
         tax = tax - rebate;
+      } else {
+        const excessOverThreshold = income - 1200000;
+        if (tax > excessOverThreshold) {
+          marginalRelief = tax - excessOverThreshold;
+          tax = excessOverThreshold;
+        }
       }
       cess = tax * 0.04;
       tax = tax + cess;
@@ -161,6 +189,7 @@ export default function IncomeTaxCalculator() {
       cess = tax * 0.04;
       tax = tax + cess;
     }
+    void marginalRelief;
 
     const effectiveRate = income > 0 ? (tax / income) * 100 : 0;
     const afterTax = income - tax;

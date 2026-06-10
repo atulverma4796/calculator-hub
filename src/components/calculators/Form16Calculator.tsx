@@ -34,23 +34,32 @@ function calcNewRegime(taxableIncome: number): number {
   let tax = 0;
   let remaining = taxableIncome;
   remaining -= 400000; // 0-4L: nil
-  if (remaining <= 0) return 0;
-  tax += Math.min(remaining, 400000) * 0.05; // 4-8L
+  tax += Math.min(Math.max(remaining, 0), 400000) * 0.05; // 4-8L
   remaining -= 400000;
-  if (remaining <= 0) return tax + tax * 0.04;
-  tax += Math.min(remaining, 400000) * 0.10; // 8-12L
-  remaining -= 400000;
-  if (remaining <= 0) return tax + tax * 0.04;
-  tax += Math.min(remaining, 400000) * 0.15; // 12-16L
-  remaining -= 400000;
-  if (remaining <= 0) return tax + tax * 0.04;
-  tax += Math.min(remaining, 400000) * 0.20; // 16-20L
-  remaining -= 400000;
-  if (remaining <= 0) return tax + tax * 0.04;
-  tax += Math.min(remaining, 400000) * 0.25; // 20-24L
-  remaining -= 400000;
-  if (remaining <= 0) return tax + tax * 0.04;
-  tax += remaining * 0.30; // 24L+
+  if (remaining > 0) {
+    tax += Math.min(remaining, 400000) * 0.10; // 8-12L
+    remaining -= 400000;
+  }
+  if (remaining > 0) {
+    tax += Math.min(remaining, 400000) * 0.15; // 12-16L
+    remaining -= 400000;
+  }
+  if (remaining > 0) {
+    tax += Math.min(remaining, 400000) * 0.20; // 16-20L
+    remaining -= 400000;
+  }
+  if (remaining > 0) {
+    tax += Math.min(remaining, 400000) * 0.25; // 20-24L
+    remaining -= 400000;
+  }
+  if (remaining > 0) {
+    tax += remaining * 0.30; // 24L+
+  }
+  // Section 87A marginal relief: tax cannot exceed (income − 12L).
+  // Without this, a ₹12,00,001 earner would owe ~₹61K vs ₹0 for a
+  // ₹12,00,000 earner — the cliff the relief was introduced to smooth.
+  const excessOverThreshold = taxableIncome - 1200000;
+  if (tax > excessOverThreshold) tax = excessOverThreshold;
   return tax + tax * 0.04;
 }
 

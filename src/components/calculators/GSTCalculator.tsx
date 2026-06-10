@@ -44,7 +44,12 @@ interface TaxSystem {
 function getTaxSystem(code: string): TaxSystem {
   switch (code) {
     case "INR":
-      return { name: "GST", rates: [5, 12, 18, 28], hasSplit: true, splitLabels: ["CGST", "SGST"], defaultRate: 18 };
+      // GST 2.0 (effective September 2025): the 12% and 28% slabs were
+      // collapsed into the 5%/18% core rates, and a new 40% "sin/luxury"
+      // slab was introduced for tobacco, gambling, premium vehicles, etc.
+      // Keeping the pre-Sep-2025 slabs here would give Indian users the
+      // wrong tax for every transaction since GST 2.0 took effect.
+      return { name: "GST", rates: [0, 5, 18, 40], hasSplit: true, splitLabels: ["CGST", "SGST"], defaultRate: 18 };
     case "GBP":
       return { name: "VAT", rates: [0, 5, 20], hasSplit: false, defaultRate: 20 };
     case "EUR": case "PLN":

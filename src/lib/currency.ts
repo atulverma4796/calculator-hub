@@ -307,12 +307,16 @@ export function getCurrencyConfig(code: string): CurrencyConfig {
 
 export function formatAmount(amount: number, config: CurrencyConfig): string {
   try {
-    // Use maximumFractionDigits: 0 for large amounts, 2 for small amounts
-    const fractionDigits = Math.abs(amount) < 10 ? 2 : 0;
+    // Show 0–2 fraction digits: whole numbers stay clean ("$10,000"),
+    // amounts with cents preserve them ("$42.50"). The earlier rule of
+    // "drop cents whenever |amount| ≥ 10" silently rounded financial
+    // outputs — a $42.50 EMI displayed as $43, which is wrong in the
+    // calculator's most common scenarios (loans, interest, salaries).
     return new Intl.NumberFormat(config.locale, {
       style: "currency",
       currency: config.code,
-      maximumFractionDigits: fractionDigits,
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 2,
     }).format(amount);
   } catch {
     return `${config.symbol}${amount.toLocaleString()}`;
